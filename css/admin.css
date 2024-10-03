@@ -1,0 +1,486 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*,
+::after,
+::before {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.875rem;
+    opacity: 1;
+    overflow-y: scroll;
+    margin: 0;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+li {
+    list-style: none;
+}
+
+h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.275rem;
+    color: var(--bs-emphasis-color);
+}
+
+.btn {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Layout for admin dashboard skeleton */
+
+.wrapper {
+    align-items: stretch;
+    display: flex;
+    width: 100%;
+}
+
+#sidebar {
+    max-width: 264px;
+    min-width: 264px;
+    background: var(--bs-success);
+    transition: all 0.35s ease-in-out;
+}
+
+.front-page-content {
+    margin: 10px 250px;
+  }
+
+  .form-control[readonly],
+  .form-control[disabled] {
+    background-color: #e9ecef;
+    opacity: 1;
+    color: grey;
+  }
+
+.main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-width: 0;
+    overflow: hidden;
+    transition: all 0.35s ease-in-out;
+    width: 100%;
+    background: var(--bs-secondary-bg-subtle);
+}
+
+/* Sidebar Elements Style */
+
+.sidebar-logo {
+    padding: 1.15rem;
+}
+
+.sidebar-logo a {
+    color: #e9ecef;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.sidebar-nav {
+    flex-grow: 1;
+    list-style: none;
+    margin-bottom: 0;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.sidebar-header {
+    color: #e9ecef;
+    font-size: .75rem;
+    padding: 1.5rem 1.5rem .375rem;
+}
+
+a.sidebar-link {
+    padding: .625rem 1.625rem;
+    color: #e9ecef;
+    position: relative;
+    display: block;
+    font-size: 0.875rem;
+}
+
+.sidebar-link[data-bs-toggle="collapse"]::after {
+    border: solid;
+    border-width: 0 .075rem .075rem 0;
+    content: "";
+    display: inline-block;
+    padding: 2px;
+    position: absolute;
+    right: 1.5rem;
+    top: 1.4rem;
+    transform: rotate(-135deg);
+    transition: all .2s ease-out;
+}
+
+.sidebar-link[data-bs-toggle="collapse"].collapsed::after {
+    transform: rotate(45deg);
+    transition: all .2s ease-out;
+}
+
+.avatar {
+    height: 40px;
+    width: 40px;
+}
+
+.navbar-expand .navbar-nav {
+    margin-left: auto;
+}
+
+.content {
+    flex: 1;
+    max-width: 100vw;
+    width: 100vw;
+}
+
+@media (min-width:768px) {
+    .content {
+        max-width: auto;
+        width: auto;
+    }
+}
+
+
+
+.illustration {
+    background-color: var(--bs-primary-bg-subtle);
+    color: var(--bs-emphasis-color);
+}
+
+.illustration-img {
+    max-width: 150px;
+    width: 100%;
+}
+
+/* Sidebar Toggle */
+
+#sidebar.collapsed {
+    margin-left: -264px;
+}
+
+/* Footer and Nav */
+
+@media (max-width:767.98px) {
+
+    .js-sidebar {
+        margin-left: -264px;
+    }
+
+    #sidebar.collapsed {
+        margin-left: 0;
+    }
+
+    .navbar,
+    footer {
+        width: 100vw;
+    }
+}
+
+/* Theme Toggler */
+
+.theme-toggle {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-65%);
+    text-align: center;
+    z-index: 10;
+    right: 0;
+    left: auto;
+    border: none;
+    background-color: var(--bs-body-color);
+}
+
+html[data-bs-theme="light"] .theme-toggle .fa-moon,
+html[data-bs-theme="dark"] .theme-toggle .fa-sun {
+    cursor: pointer;
+    padding: 10px;
+    display: block;
+    font-size: 1.25rem;
+    color: #FFF;
+}
+
+html[data-bs-theme="dark"] .theme-toggle .fa-moon {
+    display: none;
+}
+
+html[data-bs-theme="light"] .theme-toggle .fa-sun {
+    display: none;
+}
+
+.nav-link#pills-pending-tab.active {
+    background-color: #fd7e14;
+    /* Primary color */
+    border-color: #fd7e14;
+    /* Primary color */
+    font-size: 1.10rem;
+    /* Increase font size */
+    padding: 0.50rem .75rem;
+    /* Increase padding */
+}
+
+.nav-link#pills-pending-tab:not(.active) {
+    color: var(--bs-light);
+    /* Primary color */
+    background: var(--bs-secondary);
+    /* Primary color */
+}
+
+.nav-link#pills-accepted-tab.active {
+    background-color: var(--bs-success);
+    /* Success color */
+    border-color: var(--bs-success);
+    /* Success color */
+    font-size: 1.10rem;
+    /* Increase font size */
+    padding: 0.50rem .75rem;
+    /* Increase padding */
+}
+
+.nav-link#pills-accepted-tab:not(.active) {
+    color: var(--bs-light);
+    /* Outline success color */
+    background: var(--bs-secondary);
+    /* Outline success color */
+}
+
+.nav-link#pills-rejected-tab.active {
+    background-color: #dc3545;
+    /* Danger color */
+    border-color: #dc3545;
+    /* Danger color */
+    font-size: 1.10rem;
+    /* Increase font size */
+    padding: 0.50rem .75rem;
+    /* Increase padding */
+}
+
+.nav-link#pills-rejected-tab:not(.active) {
+    color: var(--bs-light);
+    /* Outline danger color */
+    background: var(--bs-secondary);
+    /* Outline danger color */
+}
+
+.nav-link#pills-archived-tab.active {
+    background-color: #adb5bd;
+    /* Danger color */
+    border-color: #adb5bd;
+    /* Danger color */
+    font-size: 1.10rem;
+    /* Increase font size */
+    padding: 0.50rem .75rem;
+    /* Increase padding */
+}
+
+.nav-link#pills-archived-tab:not(.active) {
+    color: var(--bs-light);
+    /* Outline danger color */
+    background: var(--bs-secondary);
+    /* Outline danger color */
+}
+
+/* toggle switch button  */
+:root {
+    --highlight: #FF7F7F;
+    --links: #3498db;
+}
+
+.switch {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.switch-button {
+    background: var(--highlight);
+    border: 2px solid var(--highlight);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 6px;
+    color: #FFFFFF;
+    position: relative;
+    cursor: pointer;
+    outline: 0;
+    user-select: none;
+    width: 100%;
+    max-width: 200px;
+    /* Set a maximum width */
+}
+
+.switch-input {
+    display: none;
+}
+
+.switch-button span {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.7rem;
+    text-align: center;
+    z-index: 2;
+    color: #FFFFFF;
+    transition: color 0.2s;
+}
+
+.switch-button::before {
+    content: '';
+    position: absolute;
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    z-index: 1;
+    transition: left 0.3s cubic-bezier(0.175, 0.885, 0.320, 1), padding 0.2s ease, margin 0.2s ease;
+}
+
+.switch-button:hover::before {
+    will-change: padding;
+}
+
+.switch-button:active::before {
+    padding-right: 0.4rem;
+}
+
+.switch-input:not(:checked)+.switch-button .switch-button-left {
+    color: var(--highlight);
+}
+
+.switch-input:checked+.switch-button {
+    background-color: var(--links);
+    border-color: var(--links);
+}
+
+.switch-input:checked+.switch-button .switch-button-right {
+    color: var(--links);
+}
+
+.switch-input:checked+.switch-button::before {
+    left: 50%;
+}
+
+.switch-input:checked+.switch-button:active::before {
+    margin-left: -0.4rem;
+}
+
+.switch-input[type="checkbox"]:disabled+.switch-button {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* 
+====================================================================
+                         Add Business Type
+==================================================================== 
+*/
+
+.alert-transition {
+    transition: opacity 1s ease-out;
+    margin-bottom: 0;
+  }
+
+  .fade-out {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+  }
+
+  .alert-small {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-custom {
+    border-radius: 15px;
+  }
+
+  .card-header-custom {
+    background-color: #343a40;
+    color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+
+  .btn-custom {
+    border-radius: 20px;
+  }
+
+  .table-custom {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  .table-custom th,
+  .table-custom td {
+    vertical-align: middle;
+    border: none;
+    padding: 10px;
+  }
+
+  .table-custom th {
+    font-weight: bold;
+  }
+
+  .table-custom tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa;
+  }
+
+  .modal-header-custom {
+    background-color: #343a40;
+    color: white;
+  }
+
+  .modal-footer-custom {
+    background-color: #f8f9fa;
+  }
+
+  .actions-col {
+    width: 100px;
+  }
+
+
+
+/* 
+============================================================================
+                              Responsive adjustments 
+============================================================================
+*/
+@media (max-width: 1200px) {
+    .front-page-content {
+        margin: 10px 50px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .switch-button {
+        font-size: 0.8rem;
+        max-width: 150px;
+    }
+
+    .switch-button span {
+        padding: 0.2rem 0.5rem;
+    }
+
+    .front-page-content {
+        margin: 10px 50px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .switch-button {
+        font-size: 0.7rem;
+        max-width: 120px;
+    }
+
+    .switch-button span {
+        padding: 0.2rem 0.3rem;
+    }
+
+    .front-page-content {
+        margin: 0 !important;
+    }
+}
