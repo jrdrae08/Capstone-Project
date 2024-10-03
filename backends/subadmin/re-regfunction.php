@@ -18,6 +18,14 @@ try {
     $updatedData = json_decode($_POST['updatedData'] ?? '', true);
 
     if ($applicationID && $updatedData) {
+      // Validate expiration date
+      $currentDate = new DateTime();
+      $expirationDate = DateTime::createFromFormat('Y-m-d', $updatedData['bexdate']);
+
+      if ($expirationDate < $currentDate) {
+        respond('error', 'Business Permit Expiration Date cannot be in the past.');
+      }
+
       // Handle JSON data update
       $stmt = $pdo->prepare("UPDATE businessapplicationform SET PermitExpDate = STR_TO_DATE(:permitExpDate, '%Y-%m-%d') WHERE ApplicationID = :applicationID");
       $stmt->execute([
