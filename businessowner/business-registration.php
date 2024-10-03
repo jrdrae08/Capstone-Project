@@ -1,6 +1,5 @@
 <?php
 include "../backends/admin/fetch_business_types.php";
-session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">

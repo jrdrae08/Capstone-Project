@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_SESSION['user_id'] = $admin['id'];
       $_SESSION['role'] = 'admin';
       $_SESSION['username'] = $admin['username'];
-      $_SESSION['message'] = 'Successfully logged in!';
       $_SESSION['message_type'] = 'success';
       header("Location: ../admin/dashboard.php");
       exit;

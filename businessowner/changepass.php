@@ -9,6 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
 
+    // Password validation regex
+    $password_pattern = '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/';
+
     if (empty($new_password) || empty($confirm_password)) {
         $_SESSION['message'] = 'All fields are required.';
         $_SESSION['message_type'] = 'danger';
@@ -18,6 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($new_password !== $confirm_password) {
         $_SESSION['message'] = 'Passwords do not match.';
+        $_SESSION['message_type'] = 'danger';
+        header("Location: changepass.php");
+        exit;
+    }
+
+    if (!preg_match($password_pattern, $new_password)) {
+        $_SESSION['message'] = 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.';
         $_SESSION['message_type'] = 'danger';
         header("Location: changepass.php");
         exit;
@@ -46,7 +56,6 @@ if (isset($_GET['message']) && $_GET['message'] == 'success') {
     unset($_SESSION['message_type']);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -92,6 +101,7 @@ if (isset($_GET['message']) && $_GET['message'] == 'success') {
                                 </div>
                             <?php endif; ?>
                             <form action="changepass.php" method="POST">
+                                Password Should be at least 8 characters long and must contain at least one uppercase letter, one lowercase letter, one number, and one special character.
                                 <div class="form-floating mt-4">
                                     <input type="password" class="form-control shadow border-secondary" id="floatingPassword" name="new_password" placeholder="Password" autocomplete="off" required>
                                     <label for="floatingPassword">New Password</label>

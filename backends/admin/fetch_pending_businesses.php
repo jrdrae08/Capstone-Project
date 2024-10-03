@@ -10,11 +10,13 @@ function getPendingBusinesses($pdo)
                                   i.BusinessEmail AS BusinessEmail, i.BusinessContactNumber AS BusinessContactNumber,
                                   b.RegistrantFirstName, b.RegistrantMiddleName, b.RegistrantLastName, 
                                   b.ContactNumber AS RegistrantContact, b.Email AS RegistrantEmail, 
-                                  b.BusinessPermitImage, DATE_FORMAT(b.PermitExpDate, '%Y-%m-%d') AS PermitExpDate
+                                  b.BusinessPermitImage, DATE_FORMAT(b.PermitExpDate, '%Y-%m-%d') AS PermitExpDate,
+                                  b.IsRead
                             FROM businessapplicationform b
                             JOIN businessinformationform i ON b.ApplicationID = i.ApplicationID
                             JOIN businesstype t ON i.BusinessTypeID = t.BusinessTypeID
-                            WHERE b.Status = 'Pending'");
+                            WHERE b.Status = 'Pending'
+                            ORDER BY b.CreatedAt DESC"); // Order by CreatedAt in descending order
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   } catch (PDOException $e) {

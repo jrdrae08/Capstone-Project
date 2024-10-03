@@ -156,6 +156,7 @@ session_start();
           console.log('Stored ApplicationID:', result.applicationID);
           console.log('Stored RefNum:', formData.get('refNum'));
 
+
           setTimeout(() => {
             window.location.href = result.redirect;
           }, 3000); // Adjust the delay as needed

@@ -1,5 +1,6 @@
 <?php
 // Start the session
+//businessregfunction.php
 session_start();
 
 // Include the database connection file
@@ -116,8 +117,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $refNum = 'REF-' . strtoupper(uniqid());
 
       // Insert into businessapplicationform
-      $stmt1 = $pdo->prepare("INSERT INTO businessapplicationform (RegistrantFirstName, RegistrantMiddleName, RegistrantLastName, ContactNumber, Email, BusinessPermitImage, PermitExpDate, RefNum)
-                                  VALUES (:fname, :mname, :lname, :contact, :email, :permit, :pexdate, :refnum)");
+      $stmt1 = $pdo->prepare("INSERT INTO businessapplicationform (RegistrantFirstName, RegistrantMiddleName, RegistrantLastName, ContactNumber, Email, BusinessPermitImage, PermitExpDate, RefNum, IsRead)
+                                  VALUES (:fname, :mname, :lname, :contact, :email, :permit, :pexdate, :refnum, FALSE)");
       $stmt1->execute([
         ':fname' => $fname,
         ':mname' => $mname,

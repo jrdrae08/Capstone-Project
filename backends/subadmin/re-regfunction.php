@@ -27,7 +27,7 @@ try {
       }
 
       // Handle JSON data update
-      $stmt = $pdo->prepare("UPDATE businessapplicationform SET PermitExpDate = STR_TO_DATE(:permitExpDate, '%Y-%m-%d') WHERE ApplicationID = :applicationID");
+      $stmt = $pdo->prepare("UPDATE businessapplicationform SET PermitExpDate = STR_TO_DATE(:permitExpDate, '%Y-%m-%d'), Status = 'Pending', IsReject = 0 WHERE ApplicationID = :applicationID");
       $stmt->execute([
         ':permitExpDate' => $updatedData['bexdate'],
         ':applicationID' => $applicationID
@@ -53,7 +53,7 @@ try {
             respond('error', 'Failed to move uploaded file.');
           }
         } else {
-          respond('error', 'Invalid file.');
+          respond('error', 'Invalid file. Only JPG, JPEG, PNG, and GIF files are allowed.');
         }
       }
 

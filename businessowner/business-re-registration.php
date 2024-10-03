@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,6 +84,7 @@ session_start();
                                 </div>
 
                                 <!-- Notification Message -->
+                                <?php session_start(); ?>
                                 <?php if (isset($_SESSION['message'])) : ?>
                                     <div class="alert alert-<?php echo htmlspecialchars($_SESSION['type']); ?> alert-dismissible fade show" role="alert">
                                         <?php echo htmlspecialchars($_SESSION['message']); ?>
@@ -148,7 +146,7 @@ session_start();
 
                                         <div class="col-lg-12 mt-2">
                                             <div class="form-floating">
-                                                <input type="file" class="form-control shadow" name="businessPermitImage" id="businessPermitImage" accept="image/*" required>
+                                                <input type="file" class="form-control shadow" name="businessPermitImage" id="businessPermitImage" accept="image/jpeg, image/jpg, image/png, image/gif" required>
                                                 <label for="businessPermitImage">Business Permit Image</label>
                                             </div>
                                         </div>
@@ -161,7 +159,6 @@ session_start();
                                         </div>
 
                                         <p class="note-text text-secondary m-0">Please make sure the date is the same as the date on business permit</p>
-
 
                                         <div class="col-lg-12 d-flex justify-content-end my-3">
                                             <div class="d-grid col-6">
@@ -228,7 +225,6 @@ session_start();
                                                     <div class="d-grid col-6 mx-auto">
                                                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmUpdateModal">UPDATE</button>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -282,6 +278,11 @@ session_start();
                     fieldsToDisable.forEach(fieldId => {
                         document.getElementById(fieldId).disabled = true;
                     });
+
+                    // Clear session storage after using the data
+                    sessionStorage.removeItem('formData');
+                    sessionStorage.removeItem('applicationID');
+                    sessionStorage.removeItem('refNum');
                 }
 
                 const confirmationModal = new bootstrap.Modal(document.getElementById('confirmUpdateModal'));
@@ -292,6 +293,14 @@ session_start();
                 });
 
                 document.getElementById('confirmUpdateButton').addEventListener('click', async () => {
+                    const fileInput = document.getElementById('businessPermitImage');
+
+                    // Check if a file is attached
+                    if (fileInput.files.length === 0) {
+                        notyf.error('Please attach a business permit image.');
+                        return;
+                    }
+
                     confirmationModal.hide();
 
                     const updatedData = {
@@ -300,13 +309,34 @@ session_start();
                         bexdate: document.getElementById('exdate').value,
                     };
 
-                    const fileInput = document.getElementById('businessPermitImage');
                     const fileData = new FormData();
                     fileData.append('applicationID', applicationID);
                     fileData.append('updatedData', JSON.stringify(updatedData));
 
-                    if (fileInput.files.length > 0) {
-                        fileData.append('businessPermitImage', fileInput.files[0]);
+                    const file = fileInput.files[0];
+                    const allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
+
+                    // Validate file size (limit to 5MB)
+                    if (file.size > 5000000) {
+                        notyf.error('Sorry, your file is too large. Maximum allowed size is 5MB.');
+                        return;
+                    }
+
+                    // Validate file type
+                    if (!allowedFileTypes.includes(file.type)) {
+                        notyf.error('Invalid file type. Only JPG, JPEG, PNG, and GIF files are allowed.');
+                        return;
+                    }
+
+                    fileData.append('businessPermitImage', file);
+
+                    // Validate expiration date
+                    const currentDate = new Date();
+                    const expirationDate = new Date(document.getElementById('exdate').value);
+
+                    if (expirationDate < currentDate) {
+                        notyf.error('Business Permit Expiration Date cannot be in the past.');
+                        return;
                     }
 
                     try {
@@ -319,6 +349,9 @@ session_start();
 
                         if (result.status === 'success') {
                             notyf.success('Data updated successfully');
+                            setTimeout(() => {
+                                window.location.href = '../../businessowner/success.php';
+                            }, 3000);
                         } else {
                             notyf.error(result.message);
                         }

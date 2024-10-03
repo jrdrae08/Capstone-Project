@@ -260,18 +260,20 @@ $totalArchived = getTotalArchived($pdo);
                                                         const paginatedBusinesses = pendingBusinesses.slice(start, end);
 
                                                         paginatedBusinesses.forEach(business => {
+                                                            const status = business.IsRead == 0 ? 'New' : 'Read';
                                                             const row = document.createElement('tr');
                                                             row.innerHTML = `
                 <td>${business['Date Registered']}</td>
                 <td>${business['BusinessType']}</td>
                 <td>${business['BusinessName']}</td>
                 <td>
-                    <button class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#viewbusinessinfo" data-business='${JSON.stringify(business)}'>
+                    <button class="btn btn-primary m-1 view-details" data-bs-toggle="modal" data-bs-target="#viewbusinessinfo" data-application-id="${business.ApplicationID}" data-business='${JSON.stringify(business)}'>
                         <i class="bi bi-eye"></i>
                     </button>
                     <button class="btn btn-success m-1" data-application-id="${business['ApplicationID']}"><i class="bi bi-check-lg"></i></button>
                     <button class="btn btn-danger m-1" data-application-id="${business['ApplicationID']}"><i class="bi bi-x-lg"></i></button>
                 </td>
+                <td class="status">${status}</td>
             `;
                                                             table.appendChild(row);
                                                         });
@@ -312,14 +314,34 @@ $totalArchived = getTotalArchived($pdo);
                                                                 confirmationMessagePending.innerText = 'Are you sure you want to approve this business?';
                                                                 rejectReasonsDiv.style.display = 'none';
                                                                 confirmButtonPending.disabled = false; // Enable confirm button for approval
+                                                                confirmationModalPending.show();
                                                             } else if (button.classList.contains('btn-danger')) {
                                                                 actionType = 'reject';
                                                                 confirmationMessagePending.innerText = 'Are you sure you want to reject this business?';
                                                                 rejectReasonsDiv.style.display = 'block';
                                                                 confirmButtonPending.disabled = true; // Disable confirm button initially for rejection
+                                                                confirmationModalPending.show();
+                                                            } else if (button.classList.contains('view-details')) {
+                                                                // Update read status
+                                                                $.ajax({
+                                                                    url: '../../backends/admin/update_read_status.php',
+                                                                    method: 'POST',
+                                                                    data: {
+                                                                        applicationID: applicationId
+                                                                    },
+                                                                    success: function(response) {
+                                                                        console.log('AJAX success response:', response); // Debugging line
+                                                                        if (response.success) {
+                                                                            button.closest('tr').querySelector('.status').textContent = 'Read';
+                                                                        } else {
+                                                                            console.error('Failed to update read status:', response.message);
+                                                                        }
+                                                                    },
+                                                                    error: function(error) {
+                                                                        console.error('Error updating read status:', error);
+                                                                    }
+                                                                });
                                                             }
-
-                                                            confirmationModalPending.show();
                                                         });
 
                                                         // Add event listeners to checkboxes to update confirm button state
@@ -392,6 +414,8 @@ $totalArchived = getTotalArchived($pdo);
                                                     });
                                                 });
                                             </script>
+
+
 
                                         </div>
 
