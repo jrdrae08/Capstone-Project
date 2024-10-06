@@ -230,10 +230,12 @@ $totalInActive = getTotalInactive($pdo);
                                                 </tbody>
                                             </table>
                                             <!-- Pagination controls -->
-                                            <nav>
-                                                <ul class="pagination justify-content-center" id="pagination-pending">
-                                                </ul>
-                                            </nav>
+                                            <?php if (count($pendingBusinesses) > 10): ?>
+                                                <nav>
+                                                    <ul class="pagination justify-content-center" id="pagination-pending">
+                                                    </ul>
+                                                </nav>
+                                            <?php endif; ?>
                                             <!-- Confirmation Modal for Pending -->
                                             <div class="modal fade" id="confirmationModalPending" tabindex="-1" aria-labelledby="confirmationModalLabelPending" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
@@ -386,7 +388,11 @@ $totalInActive = getTotalInactive($pdo);
                                                     const pendingPageCount = Math.ceil(pendingBusinesses.length / rowsPerPage);
 
                                                     displayPendingBusinesses(currentPage);
-                                                    setupPagination(pendingPageCount, 'pagination-pending', displayPendingBusinesses);
+                                                    if (pendingBusinesses.length > rowsPerPage) {
+                                                        setupPagination(pendingPageCount, 'pagination-pending', displayPendingBusinesses);
+                                                    } else {
+                                                        document.getElementById('pagination-pending').style.display = 'none';
+                                                    }
 
                                                     const confirmationModalPending = new bootstrap.Modal(document.getElementById('confirmationModalPending'));
                                                     const confirmButtonPending = document.getElementById('confirmButtonPending');
@@ -461,10 +467,12 @@ $totalInActive = getTotalInactive($pdo);
                                                 </tbody>
                                             </table>
                                             <!-- Pagination controls -->
-                                            <nav>
-                                                <ul class="pagination justify-content-center" id="pagination-accepted">
-                                                </ul>
-                                            </nav>
+                                            <?php if (count($approvedBusinesses) > 10): ?>
+                                                <nav>
+                                                    <ul class="pagination justify-content-center" id="pagination-accepted">
+                                                    </ul>
+                                                </nav>
+                                            <?php endif; ?>
                                         </div>
 
                                         <!-- Confirmation Modal for Status Toggle -->
@@ -613,7 +621,11 @@ $totalInActive = getTotalInactive($pdo);
                                                 const approvedPageCount = Math.ceil(approvedBusinesses.length / rowsPerPage);
 
                                                 displayApprovedBusinesses(currentPage);
-                                                setupPagination(approvedPageCount, 'pagination-accepted', displayApprovedBusinesses);
+                                                if (approvedBusinesses.length > rowsPerPage) {
+                                                    setupPagination(approvedPageCount, 'pagination-accepted', displayApprovedBusinesses);
+                                                } else {
+                                                    document.getElementById('pagination-accepted').style.display = 'none';
+                                                }
 
                                                 const confirmationModalAccepted = new bootstrap.Modal(document.getElementById('confirmationModalAccepted'));
                                                 const confirmButtonAccepted = document.getElementById('confirmButtonAccepted');
@@ -709,10 +721,12 @@ $totalInActive = getTotalInactive($pdo);
                                                 </tbody>
                                             </table>
                                             <!-- Pagination controls -->
-                                            <nav>
-                                                <ul class="pagination justify-content-center" id="pagination-rejected">
-                                                </ul>
-                                            </nav>
+                                            <?php if (count($rejectedBusinesses) > 10): ?>
+                                                <nav>
+                                                    <ul class="pagination justify-content-center" id="pagination-rejected">
+                                                    </ul>
+                                                </nav>
+                                            <?php endif; ?>
                                         </div>
 
                                         <script>
@@ -733,15 +747,15 @@ $totalInActive = getTotalInactive($pdo);
                                                     paginatedBusinesses.forEach(business => {
                                                         const row = document.createElement('tr');
                                                         row.innerHTML = `
-                                                            <td>${business['Date Registered']}</td>
-                                                            <td>${business['BusinessType']}</td>
-                                                            <td>${business['BusinessName']}</td>
-                                                            <td>
-                                                                <button class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#viewbusinessinfo" data-business='${JSON.stringify(business)}'>
-                                                                    <i class="bi bi-eye"></i>
-                                                                </button>
-                                                            </td>
-                                                        `;
+                <td>${business['Date Registered']}</td>
+                <td>${business['BusinessType']}</td>
+                <td>${business['BusinessName']}</td>
+                <td>
+                    <button class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#viewbusinessinfo" data-business='${JSON.stringify(business)}'>
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </td>
+            `;
                                                         table.appendChild(row);
                                                     });
                                                 }
@@ -770,7 +784,11 @@ $totalInActive = getTotalInactive($pdo);
                                                 const rejectedPageCount = Math.ceil(rejectedBusinesses.length / rowsPerPage);
 
                                                 displayRejectedBusinesses(currentPage);
-                                                setupPagination(rejectedPageCount, 'pagination-rejected', displayRejectedBusinesses);
+                                                if (rejectedBusinesses.length > rowsPerPage) {
+                                                    setupPagination(rejectedPageCount, 'pagination-rejected', displayRejectedBusinesses);
+                                                } else {
+                                                    document.getElementById('pagination-rejected').style.display = 'none';
+                                                }
                                             });
                                         </script>
 
@@ -830,10 +848,12 @@ $totalInActive = getTotalInactive($pdo);
                                                 </tbody>
                                             </table>
                                             <!-- Pagination controls -->
-                                            <nav>
-                                                <ul class="pagination justify-content-center" id="pagination-archived">
-                                                </ul>
-                                            </nav>
+                                            <?php if (count($archivedBusinesses) > 10): ?>
+                                                <nav>
+                                                    <ul class="pagination justify-content-center" id="pagination-archived">
+                                                    </ul>
+                                                </nav>
+                                            <?php endif; ?>
                                         </div>
 
                                         <script>
@@ -905,7 +925,11 @@ $totalInActive = getTotalInactive($pdo);
                                                 const archivedPageCount = Math.ceil(archivedBusinesses.length / rowsPerPage);
 
                                                 displayArchivedBusinesses(currentPage);
-                                                setupPagination(archivedPageCount, 'pagination-archived', displayArchivedBusinesses);
+                                                if (archivedBusinesses.length > rowsPerPage) {
+                                                    setupPagination(archivedPageCount, 'pagination-archived', displayArchivedBusinesses);
+                                                } else {
+                                                    document.getElementById('pagination-archived').style.display = 'none';
+                                                }
 
                                                 const returnModal = new bootstrap.Modal(document.getElementById('returnConfirmationModal'));
                                                 const confirmReturnBtn = document.getElementById('confirmReturnBtn');
