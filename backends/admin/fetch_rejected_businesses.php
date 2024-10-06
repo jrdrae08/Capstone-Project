@@ -16,7 +16,8 @@ function getRejectedBusinesses($pdo)
                             JOIN businessinformationform i ON b.ApplicationID = i.ApplicationID
                             JOIN businesstype t ON i.BusinessTypeID = t.BusinessTypeID
                             LEFT JOIN account a ON b.ApplicationID = a.ApplicationID
-                            WHERE b.Status = 'Rejected' AND b.IsReject = 1");
+                            WHERE b.Status = 'Rejected' AND b.IsReject = 1
+                            ORDER BY b.CreatedAt DESC");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   } catch (PDOException $e) {
