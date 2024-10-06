@@ -17,6 +17,7 @@ function getArchivedBusinesses($pdo)
       JOIN businesstype t ON i.BusinessTypeID = t.BusinessTypeID
       JOIN account a ON b.ApplicationID = a.ApplicationID
       WHERE a.BusinessArchive = 1
+      ORDER BY b.CreatedAt DESC
     ");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
