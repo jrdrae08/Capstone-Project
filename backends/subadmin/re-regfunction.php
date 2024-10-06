@@ -27,7 +27,7 @@ try {
       }
 
       // Handle JSON data update
-      $stmt = $pdo->prepare("UPDATE businessapplicationform SET PermitExpDate = STR_TO_DATE(:permitExpDate, '%Y-%m-%d'), Status = 'Pending', IsReject = 0 WHERE ApplicationID = :applicationID");
+      $stmt = $pdo->prepare("UPDATE businessapplicationform SET PermitExpDate = STR_TO_DATE(:permitExpDate, '%Y-%m-%d'), Status = 'Pending', IsReject = 0, IsRead = 0 WHERE ApplicationID = :applicationID");
       $stmt->execute([
         ':permitExpDate' => $updatedData['bexdate'],
         ':applicationID' => $applicationID
@@ -44,7 +44,7 @@ try {
         $check = getimagesize($_FILES["businessPermitImage"]["tmp_name"]);
         if ($check !== false && $_FILES["businessPermitImage"]["size"] <= 5000000 && in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
           if (move_uploaded_file($_FILES["businessPermitImage"]["tmp_name"], $target_file)) {
-            $stmt = $pdo->prepare("UPDATE businessapplicationform SET BusinessPermitImage = :businessPermitImage WHERE ApplicationID = :applicationID");
+            $stmt = $pdo->prepare("UPDATE businessapplicationform SET BusinessPermitImage = :businessPermitImage, IsRead = 0 WHERE ApplicationID = :applicationID");
             $stmt->execute([
               ':businessPermitImage' => $image_name,
               ':applicationID' => $applicationID

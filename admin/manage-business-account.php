@@ -14,6 +14,8 @@ include "../backends/admin/fetch_rejected_businesses.php";
 include "../backends/admin/fetch_archived_businesses.php";
 include "../backends/admin/fetch_total_accepted.php";
 include "../backends/admin/fetch_total_archived.php";
+include "../backends/admin/fetch_active_account.php";
+include "../backends/admin/fetch_inactive_account.php";
 
 $pendingBusinesses = getPendingBusinesses($pdo);
 $approvedBusinesses = getApprovedBusinesses($pdo);
@@ -21,6 +23,8 @@ $rejectedBusinesses = getRejectedBusinesses($pdo);
 $archivedBusinesses = getArchivedBusinesses($pdo);
 $totalAccepted = getTotalAccepted($pdo);
 $totalArchived = getTotalArchived($pdo);
+$totalActive = getTotalActive($pdo);
+$totalInActive = getTotalInactive($pdo);
 ?>
 
 <!DOCTYPE html>
@@ -66,8 +70,8 @@ $totalArchived = getTotalArchived($pdo);
                                             <div class="p-3 m-1">
                                                 <h4 class="text-center text-dark">Status</h4>
                                                 <ul>
-                                                    <li>Active: 23</li>
-                                                    <li>Inactive: 6</li>
+                                                    <li>Active: <span id="totalActive"><?php echo $totalActive; ?></span></li>
+                                                    <li>Inactive: <span id="totalInActive"><?php echo $totalInActive; ?></span></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -110,11 +114,33 @@ $totalArchived = getTotalArchived($pdo);
                                     .catch(error => console.error('Error fetching total accepted:', error));
                             }
 
+                            function fetchTotalActive() {
+                                fetch('../backends/admin/fetch_active_account.php')
+                                    .then(response => response.text())
+                                    .then(data => {
+                                        document.getElementById('totalActive').innerText = data;
+                                    })
+                                    .catch(error => console.error('Error fetching total active:', error));
+                            }
+
+                            function fetchTotalInactive() {
+                                fetch('../backends/admin/fetch_inactive_account.php')
+                                    .then(response => response.text())
+                                    .then(data => {
+                                        document.getElementById('totalInactive').innerText = data;
+                                    })
+                                    .catch(error => console.error('Error fetching total inactive:', error));
+                            }
+
                             window.onload = function() {
                                 fetchTotalPending();
                                 fetchTotalAccepted();
+                                fetchTotalActive();
+                                fetchTotalInactive();
                                 setInterval(fetchTotalPending, 3000); // Refresh total pending every 60 seconds
                                 setInterval(fetchTotalAccepted, 3000); // Refresh total accepted every 60 seconds
+                                setInterval(fetchTotalActive, 3000); // Refresh total active every 60 seconds
+                                setInterval(fetchTotalInactive, 3000); // Refresh total inactive every 60 seconds
                             };
                         </script>
 

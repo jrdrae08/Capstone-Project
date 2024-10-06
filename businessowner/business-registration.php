@@ -1,5 +1,6 @@
 <?php
 include "../backends/admin/fetch_business_types.php";
+session_start()
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -242,35 +243,6 @@ include "../backends/admin/fetch_business_types.php";
                 </div>
             </div>
         </form>
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const applicationID = sessionStorage.getItem('applicationID');
-                console.log('Stored ApplicationID:', applicationID);
-
-                // Existing code to populate form fields
-                const formData = JSON.parse(sessionStorage.getItem('formData'));
-
-                if (formData) {
-                    document.getElementById('fname').value = formData.RegistrantFirstName;
-                    document.getElementById('lname').value = formData.RegistrantLastName;
-                    document.getElementById('mname').value = formData.RegistrantMiddleName || '';
-                    document.getElementById('contactNumber').value = formData.ContactNumber;
-                    document.getElementById('email').value = formData.Email;
-                    document.getElementById('exdate').value = formData.PermitExpDate;
-                    document.getElementById('bcnum').value = formData.PlateNum; // Assuming PlateNum is used as Business Control Number
-
-                    // Populate business information fields if available
-                    if (formData.BusinessName) {
-                        document.getElementById('floatingSelectGrid').value = formData.BusinessTypeID;
-                        document.getElementById('bname').value = formData.BusinessName;
-                        document.getElementById('badd').value = formData.BusinessAddress;
-                        document.getElementById('bemail').value = formData.BusinessEmail;
-                        document.getElementById('businessContactNumber').value = formData.BusinessContactNumber;
-                        document.getElementById('floatingTextarea').value = formData.BusinessDescription;
-                    }
-                }
-            });
-        </script>
     </main>
 
 

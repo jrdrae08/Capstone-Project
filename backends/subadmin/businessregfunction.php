@@ -89,12 +89,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   // Check for duplicate email if IsReject is 0
-  $stmt = $pdo->prepare("SELECT COUNT(*) FROM businessapplicationform WHERE Email = :email AND IsReject = 0");
+  $stmt = $pdo->prepare("SELECT COUNT(*) FROM businessapplicationform WHERE Email = :email");
   $stmt->execute([':email' => $email]);
   $emailCount = $stmt->fetchColumn();
 
   if ($emailCount > 0) {
-    array_push($errors, "Email already exists for a non-rejected application.");
+    array_push($errors, "Email already exists");
   }
 
   // Check for duplicate business name if IsReject is 0
@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $bnameCount = $stmt->fetchColumn();
 
   if ($bnameCount > 0) {
-    array_push($errors, "Business Name already exists for a non-rejected application.");
+    array_push($errors, "Business Name already exists");
   }
 
   if (empty($errors)) {

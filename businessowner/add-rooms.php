@@ -45,21 +45,22 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
                                     <h4>Add Room</h4>
                                 </div>
                                 <div class="card-body">
-                                    <form method="POST" action="../../backends/subadmin/save_room_info.php" enctype="multipart/form-data">
+                                    <form method="POST" action="../../backends/subadmin/save_room_info.php" enctype="multipart/form-data" onsubmit="return validateForm()">
+                                        <input type="hidden" id="session-images" value='<?php echo json_encode($_SESSION['temp_images'] ?? []); ?>'>
                                         <div class="row">
                                             <h5 class="fw-bold mb-4">Room Information</h5>
                                             <div class="col-lg-5 col-sm-12 ">
                                                 <div class="row d-flex justify-content-center align-items-center">
                                                     <div class="col-lg-5 col-md-6 col-sm-12">
                                                         <div class="form-floating mb-3">
-                                                            <input type="text" id="roomname" name="roomname" class="form-control shadow" placeholder="">
+                                                            <input type="text" id="roomname" name="roomname" class="form-control shadow" placeholder="" required>
                                                             <label for="roomname">Room name</label>
                                                             <span id="error-roomname" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-5 col-md-6 col-sm-12">
                                                         <div class="form-floating mb-3">
-                                                            <input type="number" id="roomprice" name="roomprice" class="form-control shadow" placeholder="">
+                                                            <input type="number" id="roomprice" name="roomprice" class="form-control shadow" placeholder="" required>
                                                             <label for="roomprice">Price</label>
                                                             <span id="error-roomprice" class="text-danger"></span>
                                                             <span class="badge text-secondary"></span>
@@ -67,21 +68,21 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
                                                     </div>
                                                     <div class="col-lg-5 col-md-6 col-sm-12">
                                                         <div class="form-floating mb-3">
-                                                            <input type="number" id="adultmax" name="adultmax" class="form-control shadow" placeholder="">
+                                                            <input type="number" id="adultmax" name="adultmax" class="form-control shadow" placeholder="" required>
                                                             <label for="adultmax">Adult (Max.)</label>
                                                             <span id="error-adultmax" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-5 col-md-6 col-sm-12">
                                                         <div class="form-floating mb-3">
-                                                            <input type="number" id="childrenmax" name="childrenmax" class="form-control shadow" placeholder="">
+                                                            <input type="number" id="childrenmax" name="childrenmax" class="form-control shadow" placeholder="" required>
                                                             <label for="childrenmax">Children (Max.)</label>
                                                             <span id="error-childrenmax" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-10 mb-3">
                                                         <div class="form-floating">
-                                                            <textarea id="roomdesc" name="roomdesc" class="form-control shadow" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                                                            <textarea id="roomdesc" name="roomdesc" class="form-control shadow" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" required></textarea>
                                                             <label for="roomdesc">Room Descriptions</label>
                                                             <span id="error-roomdesc" class="text-danger"></span>
                                                         </div>
@@ -181,9 +182,10 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
                                         <div class="d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-success px-4 me-2">SAVE</button>
+                                            <button type="button" class="btn btn-success px-4 me-2" data-bs-toggle="modal" data-bs-target="#confirmationModal">SAVE</button>
                                             <a href="../businessowner/manage-rooms.php" class="btn btn-secondary">CANCEL</a>
                                         </div>
                                     </form>
@@ -269,6 +271,105 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
                 // Clear session storage after rendering the form
                 <?php unset($_SESSION['errors']);
                 unset($_SESSION['form_data']); ?>
+            });
+        </script>
+
+        <script>
+            function validateForm() {
+                const imageInputs = [
+                    document.getElementById('room-image-input-1'),
+                    document.getElementById('room-image-input-2'),
+                    document.getElementById('room-image-input-3'),
+                    document.getElementById('room-image-input-4'),
+                    document.getElementById('room-image-input-5'),
+                    document.getElementById('room-image-input-6')
+                ];
+
+                const sessionImages = JSON.parse(document.getElementById('session-images').value);
+                const isAnyImageSelected = imageInputs.some(input => input && input.files.length > 0) || Object.keys(sessionImages).length > 0;
+
+                if (!isAnyImageSelected) {
+                    const notyf = new Notyf({
+                        duration: 30000,
+                        position: {
+                            x: 'right',
+                            y: 'top'
+                        }
+                    });
+
+                    notyf.error('Please upload at least one image.');
+                    return false;
+                }
+
+                return true;
+            }
+        </script>
+
+        <script>
+            // Function to handle image preview
+            function uploadImage(inputId, imgId) {
+                const input = document.getElementById(inputId);
+                const img = document.getElementById(imgId);
+
+                if (input.files && input.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        img.src = e.target.result;
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            // Function to load images from session
+            function loadImagesFromSession() {
+                const sessionImages = <?php echo json_encode($_SESSION['temp_images'] ?? []); ?>;
+                for (let i = 1; i <= 6; i++) {
+                    const imgId = `room-image-${i}`;
+                    const img = document.getElementById(imgId);
+                    if (sessionImages[`image${i}`]) {
+                        img.src = sessionImages[`image${i}`];
+                    }
+                }
+            }
+
+            // Load images on page load
+            window.onload = loadImagesFromSession;
+        </script>
+
+        <!-- Confirmation Modal -->
+        <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmationModalLabel">Confirm Save</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to save the room details?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="confirmSaveBtn">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const confirmSaveBtn = document.getElementById('confirmSaveBtn');
+                const roomForm = document.querySelector('form');
+
+                confirmSaveBtn.addEventListener('click', function() {
+                    // Perform validation before form submission
+                    if (validateForm()) {
+                        roomForm.submit(); // Submit the form programmatically
+                    }
+                    // Close the modal (optional, if not automatically closed)
+                    const modalElement = document.querySelector('#confirmationModal');
+                    const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                    modalInstance.hide();
+                });
             });
         </script>
 

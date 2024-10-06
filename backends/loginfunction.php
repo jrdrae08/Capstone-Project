@@ -47,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['role'] = $account['role'];
         $_SESSION['username'] = $account['Email'];
         $_SESSION['business_info_id'] = $account['BusinessInfoID'];
-        $_SESSION['message'] = 'Successfully logged in!';
         $_SESSION['message_type'] = 'success';
 
         // Check if first login is required
