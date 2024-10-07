@@ -1,0 +1,204 @@
+{
+  "barangays": [
+    {
+      "barangay_code": "1",
+      "barangay_name": "Amonoy",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "2",
+      "barangay_name": "Bakia",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "3",
+      "barangay_name": "Balanac",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "4",
+      "barangay_name": "Balayong",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "5",
+      "barangay_name": "Banilad",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "6",
+      "barangay_name": "Banti",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "7",
+      "barangay_name": "Bitaoy",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "8",
+      "barangay_name": "Botocan",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "9",
+      "barangay_name": "Bukal",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "10",
+      "barangay_name": "Burgos",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "11",
+      "barangay_name": "Burol",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "12",
+      "barangay_name": "Coralao",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "13",
+      "barangay_name": "Gagalot",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "14",
+      "barangay_name": "Ibabang Banga",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "15",
+      "barangay_name": "Ibabang Bayucain",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "16",
+      "barangay_name": "Ilayang Banga",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "17",
+      "barangay_name": "Ilayang Bayucain",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "18",
+      "barangay_name": "Isabang",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "19",
+      "barangay_name": "Malinao",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "20",
+      "barangay_name": "May-It",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "21",
+      "barangay_name": "Munting Kawayan",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "22",
+      "barangay_name": "Olla",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "23",
+      "barangay_name": "Oobi",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "24",
+      "barangay_name": "Origuel (Poblacion)",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "25",
+      "barangay_name": "Panalaban",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "26",
+      "barangay_name": "Pangil",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "27",
+      "barangay_name": "Panglan",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "28",
+      "barangay_name": "Piit",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "29",
+      "barangay_name": "Pook",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "30",
+      "barangay_name": "Rizal",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "31",
+      "barangay_name": "San Francisco (Poblacion)",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "32",
+      "barangay_name": "San Isidro",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "33",
+      "barangay_name": "San Miguel (Poblacion)",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "34",
+      "barangay_name": "San Roque",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "35",
+      "barangay_name": "Santa Catalina (Poblacion)",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "36",
+      "barangay_name": "Suba",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "37",
+      "barangay_name": "Talortor",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "38",
+      "barangay_name": "Tanawan",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "39",
+      "barangay_name": "Taytay",
+      "city_name": "Majayjay"
+    },
+    {
+      "barangay_code": "40",
+      "barangay_name": "Villa Nogales",
+      "city_name": "Majayjay"
+    }
+  ]
+}
