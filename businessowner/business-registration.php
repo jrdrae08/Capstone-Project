@@ -196,13 +196,42 @@ session_start()
                                                 </div>
                                             </div>
 
-                                            <div class="col-lg-12 ">
+
+                                            <div class="col-lg-12">
                                                 <div class="form-floating mt-3">
-                                                    <input type="text" class="form-control shadow" name="badd" placeholder="" autocomplete="off" value="<?php echo isset($_SESSION['form_data']['badd']) ? htmlspecialchars($_SESSION['form_data']['badd']) : ''; ?>" required>
-                                                    <label>Business Address</label>
-                                                    <p class="note-text text-secondary m-0">(Ex. Street, Baranggay, Municipality/City, Province)</p>
+                                                    <input type="hidden" name="full_address" value="">
+                                                    <input type="text" class="form-control shadow" name="street" placeholder="" autocomplete="off"
+                                                        value="<?php echo isset($_SESSION['form_data']['street']) ? htmlspecialchars($_SESSION['form_data']['street']) : ''; ?>" required>
+                                                    <label>Street</label>
+                                                    <p class="note-text text-secondary m-0">(Ex. Street, Barangay, Municipality/City, Province)</p>
                                                 </div>
                                             </div>
+
+                                            <div class="col-lg-12">
+                                                <div class="form-floating mt-3">
+                                                    <select class="form-select shadow" id="barangay" name="barangay" required>
+                                                        <option value="" disabled selected>Select Barangay</option>
+                                                    </select>
+                                                    <input type="hidden" id="barangayname" name="barangayname" value="<?php echo isset($_SESSION['form_data']['barangay']) ? htmlspecialchars($_SESSION['form_data']['barangay']) : ''; ?>">
+                                                    <label for="barangay">Barangay</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12">
+                                                <div class="form-floating mt-3">
+                                                    <input type="text" class="form-control shadow" name="city" placeholder="" autocomplete="off" value="Majayjay" readonly>
+                                                    <label>City</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12">
+                                                <div class="form-floating mt-3">
+                                                    <input type="text" class="form-control shadow" name="province" placeholder="" autocomplete="off" value="Laguna" readonly>
+                                                    <label>Province</label>
+                                                </div>
+                                            </div>
+
+
 
                                             <div class="col-lg-12">
                                                 <div class="form-floating my-3">
@@ -335,7 +364,6 @@ session_start()
             const bexdate = document.getElementById('exdate').value.trim();
             const btype = document.querySelector('[name="btype"]').value;
             const bname = document.querySelector('[name="bname"]').value.trim();
-            const badd = document.querySelector('[name="badd"]').value.trim();
             const bemail = document.querySelector('[name="bemail"]').value.trim();
             const bcontact = document.getElementById('businessContactNumber').value.trim();
             const bdesc = document.querySelector('[name="bdesc"]').value.trim();
@@ -346,7 +374,7 @@ session_start()
             }
 
             const section1Valid = fname && lname && contact.length === 13 && isValidEmail(email) && permit > 0 && bexdate;
-            const section2Valid = btype && bname && badd && bcontact.length === 13 && bdesc && (bemail === '' || isValidEmail(bemail));
+            const section2Valid = btype && bname && bcontact.length === 13 && bdesc && (bemail === '' || isValidEmail(bemail));
 
             if (section1Valid) {
                 document.getElementById('nextButton').removeAttribute('disabled');
@@ -363,13 +391,46 @@ session_start()
 
         document.getElementById('contactNumber').addEventListener('input', handleContactInput);
         document.getElementById('businessContactNumber').addEventListener('input', handleContactInput);
-        document.querySelectorAll('#fname, #lname, #contactNumber, #email, #permit, #exdate, [name="btype"], [name="bname"], [name="badd"], [name="bemail"], #businessContactNumber, [name="bdesc"]').forEach(element => {
+        document.querySelectorAll('#fname, #lname, #contactNumber, #email, #permit, #exdate, [name="btype"], [name="bname"], [name="bemail"], #businessContactNumber, [name="bdesc"]').forEach(element => {
             element.addEventListener('input', validateFields);
             element.addEventListener('change', validateFields);
         });
 
         document.addEventListener('DOMContentLoaded', validateFields);
     </script>
+
+    <!-- script to populate barangay dropdown -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const barangaySelect = document.getElementById('barangay');
+            const barangayNameInput = document.getElementById('barangayname');
+
+            // Fetch barangays from the JSON file
+            fetch('../../backends/subadmin/barangay-list.json')
+                .then(response => response.json())
+                .then(data => {
+                    data.barangays.forEach(barangay => {
+                        const option = document.createElement('option');
+                        option.value = barangay.barangay_name;
+                        option.textContent = barangay.barangay_name;
+                        barangaySelect.appendChild(option);
+                    });
+
+                    // Set the selected barangay from the session
+                    const selectedBarangay = "<?php echo isset($_SESSION['form_data']['barangay']) ? htmlspecialchars($_SESSION['form_data']['barangay']) : ''; ?>";
+                    if (selectedBarangay) {
+                        barangaySelect.value = selectedBarangay;
+                        barangayNameInput.value = selectedBarangay;
+                    }
+                });
+
+            // When a barangay is selected, store the value in the hidden input field
+            barangaySelect.addEventListener('change', function() {
+                barangayNameInput.value = this.value;
+            });
+        });
+    </script>
+
 
 </body>
 
