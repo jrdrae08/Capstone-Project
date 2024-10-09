@@ -1,3 +1,33 @@
+<?php
+// Include the database connection
+include '../includes/db.php';
+
+// Get the businessInfoID from the URL, defaulting to 1 if not set
+$businessInfoID = isset($_GET['businessInfoID']) ? (int) $_GET['businessInfoID'] : 1;
+
+try {
+    // Query to fetch room information based on businessInfoID
+    $stmt = $pdo->prepare("
+        SELECT roomName, roomPrice, RoomDescriptions, image1
+        FROM roominfotable
+        WHERE BusinessInfoID = :businessInfoID
+    ");
+    $stmt->execute(['businessInfoID' => $businessInfoID]);
+    $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Query to fetch business name
+    $stmt = $pdo->prepare("
+        SELECT BusinessName
+        FROM businessinformationform
+        WHERE BusinessInfoID = :businessInfoID
+    ");
+    $stmt->execute(['businessInfoID' => $businessInfoID]);
+    $businessInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+    $businessName = $businessInfo['BusinessName'] ?? 'Unknown Business';
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +50,6 @@
             height: 400px;
             object-fit: cover;
         }
-
     </style>
 </head>
 
@@ -57,7 +86,7 @@
         <section class="first-page" id="first-page">
             <div class="container-fluid">
                 <div class="row d-flex justify-content-center">
-                <div class="col-lg-4 py-3 ps-5 d-flex justify-content-start align-items-center">
+                    <div class="col-lg-4 py-3 ps-5 d-flex justify-content-start align-items-center">
                         <a href="../../resort/page-1.php"><i class="bi bi-arrow-left-circle fw-bold text-light fs-1 text-shadow-light"></i></a>
                     </div>
 
@@ -71,7 +100,7 @@
                             </div>
                             <div class="col text-center">
                                 <a href="../../resort/page-2.php" class="page-nav-book btn mx-2 mt-2  rounded-0 cormorant-text fw-bold text-shadow-light">BOOK NOW</a>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -99,21 +128,23 @@
                     <div class="col-xxl-8 col-xl-10 col-lg-10 col-md-11 col-md-12 ">
                         <div class="row">
                             <h1 class="text-color-1 cormorant-text fw-bold">Rooms:</h1>
-                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10 my-4 d-flex justify-content-center">
-                                <div class="card shadow custom-card-height rounded-0 overflow-hidden">
-                                    <div class="img-container">
-                                        <img src="../../resort/wallpaper2.jpg" class="card-img-top rounded-0" alt="...">
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="price-overlay shadow bg-light rounded-5">
-                                            <h5 class="p-3 text-center dm-sans-text fw-bold text-secondary">Price: <span class="text-danger">&#8369 2,125</span>/Night</h5>
+                            <?php foreach ($rooms as $room): ?>
+                                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10 my-4 d-flex justify-content-center">
+                                    <div class="card shadow custom-card-height rounded-0 overflow-hidden">
+                                        <div class="img-container">
+                                            <img src="../../businessowner/roomImages/<?php echo htmlspecialchars($businessName . '/' . $room['roomName'] . '/' . $room['image1']); ?>" class="card-img-top rounded-0" alt="...">
                                         </div>
-                                        <h3 class="card-title text-color-1 fw-bold cormorant-text">Villa Sophia</h3>
-                                        <p class="card-text dm-sans-text text-secondary">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="../../resort/page-3.php" class="btn btn-book fw-bold  dm-sans-text rounded-0 py-3 px-4">BOOK NOW</a>
+                                        <div class="card-body">
+                                            <div class="price-overlay shadow bg-light rounded-5">
+                                                <h5 class="p-3 text-center dm-sans-text fw-bold text-secondary">Price: <span class="text-danger">&#8369 <?php echo htmlspecialchars($room['roomPrice']); ?></span>/Night</h5>
+                                            </div>
+                                            <h3 class="card-title text-color-1 fw-bold cormorant-text"><?php echo htmlspecialchars($room['roomName']); ?></h3>
+                                            <p class="card-text dm-sans-text text-secondary"><?php echo htmlspecialchars($room['RoomDescriptions']); ?></p>
+                                            <a href="../../resort/page-3.php" class="btn btn-book fw-bold dm-sans-text rounded-0 py-3 px-4">BOOK NOW</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            <?php endforeach; ?>
 
                             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10 my-4 d-flex justify-content-center">
                                 <div class="card shadow custom-card-height rounded-0">

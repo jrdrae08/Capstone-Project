@@ -19,6 +19,7 @@ try {
     echo "Error: " . $e->getMessage();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -114,7 +115,7 @@ try {
                             <h3 class="title-text-2 cormorant-text text-shadow-light text-center"><?php echo htmlspecialchars($business['Quotation']); ?></h3>
                         </div>
                         <div class="col-lg-12 mt-3 d-flex justify-content-center align-items-center">
-                            <a href="page-2.php" class="btn btn-book-2 mx-2 fs-4 rounded-0 cormorant-text fw-bold text-center mb-5">BOOK NOW</a>
+                            <a href="page-2.php?businessInfoID=<?php echo $businessInfoID; ?>" class="btn btn-book-2 mx-2 fs-4 rounded-0 cormorant-text fw-bold text-center mb-5">BOOK NOW</a>
                         </div>
                     </div>
                 </div>
