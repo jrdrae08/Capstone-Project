@@ -132,7 +132,7 @@ try {
                                 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10 my-4 d-flex justify-content-center">
                                     <div class="card shadow custom-card-height rounded-0 overflow-hidden">
                                         <div class="img-container">
-                                            <img src="../../businessowner/roomImages/<?php echo htmlspecialchars($businessName . '/' . $room['roomName'] . '/' . $room['image1']); ?>" class="card-img-top rounded-0" alt="...">
+                                            <img src="../../resort/cabin.webp" class="card-img-top rounded-0" alt="...">
                                         </div>
                                         <div class="card-body">
                                             <div class="price-overlay shadow bg-light rounded-5">
