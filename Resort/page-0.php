@@ -1,5 +1,13 @@
 <?php
 include '../backends/subadmin/fetch_alldestination_category.php';
+
+// Check if businessInfoID is set in the URL
+if (isset($_GET['businessInfoID'])) {
+    // Unset the businessInfoID parameter
+    $url = strtok($_SERVER["REQUEST_URI"], '?'); // Get the URL without query parameters
+    header("Location: $url"); // Redirect to the URL without businessInfoID
+    exit(); // Ensure the script stops executing after the redirect
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -140,7 +140,7 @@ try {
                                             </div>
                                             <h3 class="card-title text-color-1 fw-bold cormorant-text"><?php echo htmlspecialchars($room['roomName']); ?></h3>
                                             <p class="card-text dm-sans-text text-secondary"><?php echo htmlspecialchars($room['RoomDescriptions']); ?></p>
-                                            <a href="../../resort/page-3.php?roomID=<?php echo $room['roomID']; ?>" class="btn btn-book fw-bold dm-sans-text rounded-0 py-3 px-4">BOOK NOW</a>
+                                            <a href="../../resort/page-3.php?roomID=<?php echo $room['roomID']; ?>&businessInfoID=<?php echo $businessInfoID; ?>" class="btn btn-book fw-bold dm-sans-text rounded-0 py-3 px-4">BOOK NOW</a>
                                         </div>
                                     </div>
                                 </div>

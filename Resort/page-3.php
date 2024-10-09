@@ -3,6 +3,7 @@
 include '../includes/db.php';
 
 // Get the roomID from the URL, defaulting to 1 if not set
+$businessInfoID = isset($_GET['businessInfoID']) ? (int) $_GET['businessInfoID'] : 1;
 $roomID = isset($_GET['roomID']) ? (int) $_GET['roomID'] : 1;
 
 try {
@@ -84,7 +85,9 @@ try {
             <div class="container-fluid">
                 <div class="row d-flex justify-content-around">
                     <div class="col-lg-4 py-3 ps-5 d-flex justify-content-start align-items-center">
-                        <a href="../../resort/page-2.php"><i class="bi bi-arrow-left-circle fw-bold text-light fs-1 text-shadow-light"></i></a>
+                        <a href="../../resort/page-2.php?businessInfoID=<?php echo $businessInfoID; ?>">
+                            <i class="bi bi-arrow-left-circle fw-bold text-light fs-1 text-shadow-light"></i>
+                        </a>
                     </div>
 
                     <div class="col-lg-5 py-3 ms-auto">
