@@ -88,7 +88,7 @@ try {
             <div class="container-fluid">
                 <div class="row d-flex justify-content-around">
                     <div class="col-lg-4 py-3 ps-5 d-flex justify-content-start align-items-center">
-                        <a href="../../resort/page-0.php"><i class="bi bi-arrow-left-circle fw-bold text-light fs-1 text-shadow-light"></i></a>
+                        <a href="../../resort/page-0.php?businessInfoID=<?php echo $businessInfoID; ?>"><i class="bi bi-arrow-left-circle fw-bold text-light fs-1 text-shadow-light"></i></a>
                     </div>
 
                     <div class="col-lg-5 py-3 ms-auto">

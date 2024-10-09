@@ -1,3 +1,33 @@
+<?php
+// Include the database connection
+include '../includes/db.php';
+
+// Get the roomID from the URL, defaulting to 1 if not set
+$roomID = isset($_GET['roomID']) ? (int) $_GET['roomID'] : 1;
+
+try {
+    // Query to fetch room information based on roomID
+    $stmt = $pdo->prepare("
+        SELECT roomID, roomName, roomPrice, RoomDescriptions, image1, image2, image3, image4, image5, image6, BusinessInfoID
+        FROM roominfotable
+        WHERE roomID = :roomID
+    ");
+    $stmt->execute(['roomID' => $roomID]);
+    $room = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Query to fetch business information based on BusinessInfoID
+    $stmt = $pdo->prepare("
+        SELECT BusinessName, BusinessAddress, BusinessEmail, BusinessContactNumber
+        FROM businessinformationform
+        WHERE BusinessInfoID = :businessInfoID
+    ");
+    $stmt->execute(['businessInfoID' => $room['BusinessInfoID']]);
+    $businessInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,7 +103,7 @@
                 </div>
 
                 <div class="page-title-container">
-                    <h1 class="page-title text-light text-center cormorant-text fw-bold ">Villa Sophia</h1>
+                    <h1 class="page-title text-light text-center cormorant-text fw-bold "><?php echo htmlspecialchars($room['roomName']); ?></h1>
                 </div>
             </div>
         </section>
@@ -97,12 +127,12 @@
                 <div class="row room-page-info d-flex justify-content-center">
                     <div class="col-xl-5 col-lg-6 col-md-8 my-3">
                         <div class="m-3">
-                            <h5 class="text-dark dm-sans-text fw-bold">For only<span class="text-danger "> &#8369 2,125</span> /Night</h5>
-                            <h1 class="text-color-1 cormorant-text fw-bold">Villa Sophia</h1>
-                            <p class="text-secondary dm-sans-text">Possible pains and asperities, things done by will, winning by following, encountering repudiation, desires mixed with cleverness, restraining actions, it turns off life, resisting the goals set, existing passions! All accusations carry honor, delighting with passion in living life, open to an opportunity, presenting errors in the action, resisting to share, escaping with great importance, subtracting himself by mistake, but almost remaining able to bear pain together. Anyone resists coming back to share what is known? Coming back to find fault, following in an animated state, there is greatness beyond suffering, one gives in pains, desiring life beyond wishes of the moment, labor, and ending desires. </p>
+                            <h5 class="text-dark dm-sans-text fw-bold">For only<span class="text-danger "> &#8369 <?php echo htmlspecialchars($room['roomPrice']); ?></span> /Night</h5>
+                            <h1 class="text-color-1 cormorant-text fw-bold"><?php echo htmlspecialchars($room['roomName']); ?></h1>
+                            <p class="text-secondary dm-sans-text"><?php echo htmlspecialchars($room['RoomDescriptions']); ?></p>
                         </div>
                         <div class="image-content d-flex justify-content-center">
-                            <img src="../../resort/hilarion2.jpg" class="img-fluid" alt="">
+                            <img src="<?php echo htmlspecialchars($room['image1']); ?>" class="img-fluid" alt="">
                         </div>
                         <div class="m-3 my-5">
                             <h1 class="text-color-1 cormorant-text fw-bold">Amenities</h1>
@@ -131,21 +161,13 @@
                                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
                                 </div>
                                 <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img src="../../resort/Hilarion.jpg" class="img-fluid d-block w-100" alt="...">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="../../resort/hilarion2.jpg" class="img-fluid d-block w-100" alt="...">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="../../resort/hilarion3.jpg" class="img-fluid d-block w-100" alt="...">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="../../resort/maxresdefault.jpg" class="img-fluid d-block w-100" alt="...">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="resort-sea-2.jpg" class="img-fluid d-block w-100" alt="...">
-                                    </div>
+                                    <?php for ($i = 2; $i <= 6; $i++): ?>
+                                        <?php if (!empty($room["image$i"])): ?>
+                                            <div class="carousel-item <?php echo $i == 2 ? 'active' : ''; ?>">
+                                                <img src="<?php echo htmlspecialchars($room["image$i"]); ?>" class="img-fluid d-block w-100" alt="...">
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php endfor; ?>
                                 </div>
                                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -230,7 +252,7 @@
                                     </div>
 
                                     <div class="col-lg-12 d-grid my-4">
-                                        <h5 class="text-light dm-sans-text fw-bold">Price:<span class="text-danger"> &#8369 2,125</span> /night</h5>
+                                        <h5 class="text-light dm-sans-text fw-bold">Price:<span class="text-danger"> &#8369 <?php echo htmlspecialchars($room['roomPrice']); ?></span> /night</h5>
                                         <button class="btn btn-success shadow dm-sans-text fw-bold">BOOK NOW!</button>
                                     </div>
                                 </div>
@@ -240,9 +262,9 @@
                         <div class="resort-quick-information mt-5">
                             <h3 class="cormorant-text fw-bold text-color-1">Resort Information</h3>
                             <div class="text-dark ms-5">
-                                <h5 class="">Email:</h5>
-                                <h5>Contact Number:</h5>
-                                <h5>Location Address:</h5>
+                                <h5>Email: <?php echo htmlspecialchars($businessInfo['BusinessEmail']); ?></h5>
+                                <h5>Contact Number: <?php echo htmlspecialchars($businessInfo['BusinessContactNumber']); ?></h5>
+                                <h5>Location Address: <?php echo htmlspecialchars($businessInfo['BusinessAddress']); ?></h5>
                             </div>
                         </div>
                     </div>

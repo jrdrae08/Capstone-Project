@@ -8,7 +8,7 @@ $businessInfoID = isset($_GET['businessInfoID']) ? (int) $_GET['businessInfoID']
 try {
     // Query to fetch room information based on businessInfoID
     $stmt = $pdo->prepare("
-        SELECT roomName, roomPrice, RoomDescriptions, image1
+        SELECT roomID, roomName, roomPrice, RoomDescriptions, image1
         FROM roominfotable
         WHERE BusinessInfoID = :businessInfoID
     ");
@@ -87,7 +87,7 @@ try {
             <div class="container-fluid">
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-4 py-3 ps-5 d-flex justify-content-start align-items-center">
-                        <a href="../../resort/page-1.php"><i class="bi bi-arrow-left-circle fw-bold text-light fs-1 text-shadow-light"></i></a>
+                        <a href="../../resort/page-1.php?businessInfoID=<?php echo $businessInfoID; ?>"><i class="bi bi-arrow-left-circle fw-bold text-light fs-1 text-shadow-light"></i></a>
                     </div>
 
                     <div class="col-lg-5 py-3 ms-auto">
@@ -140,7 +140,7 @@ try {
                                             </div>
                                             <h3 class="card-title text-color-1 fw-bold cormorant-text"><?php echo htmlspecialchars($room['roomName']); ?></h3>
                                             <p class="card-text dm-sans-text text-secondary"><?php echo htmlspecialchars($room['RoomDescriptions']); ?></p>
-                                            <a href="../../resort/page-3.php" class="btn btn-book fw-bold dm-sans-text rounded-0 py-3 px-4">BOOK NOW</a>
+                                            <a href="../../resort/page-3.php?roomID=<?php echo $room['roomID']; ?>" class="btn btn-book fw-bold dm-sans-text rounded-0 py-3 px-4">BOOK NOW</a>
                                         </div>
                                     </div>
                                 </div>
