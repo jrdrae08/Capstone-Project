@@ -1,0 +1,637 @@
+@import url('https://fonts.googleapis.com/css2?family=Montaga&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Serif+Old+Uyghur&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montaga&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Serif+Old+Uyghur&family=Playball&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.navbar {
+    background-color: rgba(255, 255, 255, 0);
+    /* Semi-transparent background color */
+    backdrop-filter: blur(0.75rem);
+    /* Blur effect */
+}
+
+.cormorant-text {
+    font-family: "Cormorant", serif;
+    font-optical-sizing: auto;
+    font-weight: 1000;
+    font-style: normal;
+}
+
+.dm-sans-text {
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 250;
+    font-style: normal;
+}
+
+.montaga-regular {
+    font-family: "Montaga", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.playball-regular {
+    font-family: "Playball", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    overflow-x: hidden;
+    position: relative;
+    /* width: 100%;
+    height: 100vh; */
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url('../../resort/resort-sea-2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+}
+
+/* body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+} */
+
+.content {
+    position: relative;
+    z-index: 1;
+    color: white;
+}
+
+.btn-visit {
+    /* background-color: #198754; */
+    background-color: #5A7D2C;
+    border: none;
+
+}
+
+.btn-visit:hover {
+    color: white;
+    /* background-color:  #3dac78; */
+    background-color: #5A7D2C;
+}
+
+.btn-nav {
+    margin: 0 20px;
+    width: 135px;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 20px;
+    /* background-color:  #3dac78; */
+    background-color: #5A7D2C;
+}
+
+.btn-nav:hover {
+    margin: 0 20px;
+    width: 135px;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 20px;
+    /* background-color:  #3dac78; */
+    background-color: #4e6d25;
+}
+
+.btn-login {
+    margin-left: 100px;
+    width: 135px;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 50px 0px 0px 50px;
+}
+
+
+.text-nav {
+    font-size: 20px;
+    padding: 8px 0;
+}
+
+/*** 
+====================================================================
+	Header Page
+====================================================================
+ ***/
+
+.home-header {
+    margin: 225px 0;
+}
+
+.page-nav-book {
+    color: #ffffff;
+    border: 0.2rem solid white;
+}
+
+.page-nav-book:hover {
+    color: #198754;
+    border-color: #95ffce;
+}
+
+.page-nav {
+    position: relative;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 35px;
+}
+
+.page-nav::after {
+    content: " ";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    /* Set your desired border thickness */
+    background-color: rgb(255, 255, 255);
+    /* Set your desired border color */
+    transition: width 0.4s ease, left 0.4s ease;
+    border-radius: 0.9rem;
+    transform-origin: center;
+}
+
+.page-nav:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.page-nav.active::after {
+    width: 100%;
+    /* Keep the line under the active link */
+    left: 0;
+}
+
+.page-nav:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.first-page-title {
+    margin-top: 200px;
+}
+
+.title-text-1 {
+    font-size: 120px;
+}
+
+.title-text-2 {
+    font-size: 40px;
+}
+
+.text-shadow-light {
+    text-shadow: 1px 1px 5px rgb(0, 0, 0);
+}
+
+.page-images {
+    margin-top: 175px;
+    max-width: 300px;
+    /* Ensures image never exceeds its container */
+    height: auto;
+    /* Maintains aspect ratio */
+}
+
+
+.text-color-1 {
+    /* color: #3dac78; */
+    color: #5A7D2C;
+}
+
+.text-color-2 {
+    color: #74c69d;
+}
+
+.text-color-3 {
+    color: #95d5b2;
+}
+
+.text-color-4 {
+    color: #b7e4c7;
+}
+
+.text-color-5 {
+    /* color: #d8f3dc; */
+    color: #fff8d8;
+}
+
+.bg-color-1 {
+    /* background-color:  #3dac78; */
+    background-color: #5A7D2C;
+}
+
+.bg-color-2 {
+    background-color: #74c69d;
+}
+
+.bg-color-3 {
+    background-color: #95d5b2;
+}
+
+.bg-color-4 {
+    background-color: #b7e4c7;
+}
+
+.bg-color-5 {
+    /* background-color:  #d8f3dc; */
+    background-color: #ffffff;
+}
+
+.bg-color-6 {
+    background-color: rgb(205, 218, 187);
+}
+
+/*** 
+====================================================================
+	 Page 0
+====================================================================
+ ***/
+
+
+.nav-link.active {
+    background-color: #74c69d !important;
+    background-color: #456122 !important;
+    border-color: rgb(205, 218, 187) !important;
+    border: #fff8d8 solid;
+    border-radius: 3rem;
+    padding: 10px 40px;
+}
+
+.nav-link:not(.active) {
+    color: var(--bs-light);
+    padding: 7px 30px;
+}
+
+.tab-content .tab-pane .col .card {
+    transition: transform 0.2s ease;
+    background: none;
+}
+
+.tab-content .tab-pane .col .card:hover {
+    transform: scale(1.05);
+}
+
+.custom-card-height-0 {
+    max-height: 320px;
+}
+
+.card-title-1 {
+    font-size: 25px;
+}
+
+.card-text-1 {
+    font-size: 15px;
+}
+
+.card-text-0 {
+    margin: 13px;
+}
+
+
+.destination-page {
+    padding: 70px 125px;
+}
+
+.card {
+    transition: transform 1s ease;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+@media (max-width: 998px) {
+    .destination-page {
+        padding: 70px 10px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .destination-page {
+        padding: 70px 10px !important;
+    }
+}
+
+/*** 
+====================================================================
+	 Page 2
+====================================================================
+ ***/
+
+.card-img-top {
+    height: 250px;
+}
+
+.price-overlay {
+    transform: translateY(-80%);
+}
+
+.custom-card-height {
+    width: 27rem;
+    height: auto;
+}
+
+.custom-card-height .card-body {
+    margin: 0 30px 30px 30px;
+}
+
+.room-image {
+    width: 700px;
+    height: auto;
+}
+
+.page-title-container {
+    padding: 175px 0;
+}
+
+.page-0-title-container {
+    padding: 125px 0;
+}
+
+.page-title {
+    text-shadow: 1px 1px 5px rgb(0, 0, 0);
+    color: #3dac78;
+}
+
+.room-lists {
+    padding: 150px 0;
+}
+
+.page-title {
+    font-size: 100px;
+}
+
+
+.btn-book {
+    font-size: 15px;
+    background-color: #ffffff;
+    /* Default button color */
+    border: rgb(223, 223, 223) 0.15rem solid;
+}
+
+.btn-book-1 {
+    font-size: 15px;
+    /* Default button color */
+    color: #ffffff;
+    border: rgb(223, 223, 223) 0.15rem solid;
+}
+
+.btn-book-2 {
+    font-size: 15px;
+    /* Default button color */
+    color: #666464;
+    background-color: rgb(255, 255, 255);
+}
+
+.btn-book-2:hover {
+    color: #ffffff;
+    text-shadow: none !important;
+    background-color: #5A7D2C;
+    /* Color after hovering */
+}
+
+.btn-book-1:hover,
+.btn-book:hover {
+    color: #ffffff;
+    background-color: #5A7D2C;
+    /* Color after hovering */
+}
+
+.card {
+    position: relative;
+    overflow: hidden;
+    /* Prevents the image from overflowing */
+}
+
+.card-img-top {
+    transition: transform 1s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.2);
+    /* Zooms the image */
+}
+
+
+
+
+/*** 
+====================================================================
+	 Page 3
+====================================================================
+ ***/
+
+.room-page-info {
+    margin: 150px 0 0 0;
+}
+
+.image-content {
+    margin: 0 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-content img {
+    transition: transform 1s ease;
+    /* Ensure transition applies in both hover and non-hover states */
+}
+
+.image-content:hover img {
+    transform: scale(1.2);
+    /* Zooms the image when hovering */
+}
+
+.custom-img img {
+    height: 400px;
+    object-fit: cover;
+}
+
+/* Customize the sliding animation */
+.carousel-item {
+    transition: transform 1s ease-in-out;
+    /* 1 second sliding animation */
+}
+
+.custom-carousel {
+    margin: 20px;
+}
+
+.custom-carousel img {
+    height: 400px;
+    /* Set desired height */
+    object-fit: cover;
+    /* This will ensure the images cover the container */
+}
+
+@media (max-width: 768px) {
+    .custom-carousel img {
+        height: 200px !important;
+    }
+
+    .custom-card-body {
+        margin: 30px 0 !important;
+    }
+
+    .room-lists {
+        padding: 100px 0 !important;
+    }
+}
+
+
+/*** 
+====================================================================
+	Footer Page
+====================================================================
+ ***/
+
+.text-muted {
+    text-decoration: none;
+
+}
+
+/*** 
+====================================================================
+	 RESPONSIVENESS
+====================================================================
+ ***/
+
+@media (max-width: 1080px) {
+    .first-page-title {
+        margin-top: 50px !important;
+    }
+
+    .page-nav {
+        font-size: 30px;
+    }
+
+    .navbar-brand {
+        margin-left: 0 !important;
+    }
+
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .navbar-nav .nav-item {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+        color: #198754;
+    }
+
+    .navbar-nav .nav-link {
+        display: block;
+        width: 100%;
+        margin: 0 !important;
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .navbar-nav .btn-login {
+        display: block;
+        width: 100%;
+        margin-left: 0 !important;
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+}
+
+@media (max-width: 767px) {
+
+    .col {
+        flex: 0 0 50%;
+        /* On smaller screens, each image takes up half the width */
+        max-width: 50%;
+    }
+
+    .page-images {
+        margin-top: 75px;
+        max-width: 250px;
+        /* Ensures image never exceeds its container */
+        height: auto;
+        /* Maintains aspect ratio */
+    }
+
+    .room-image {
+        margin-top: 75px;
+        max-width: 250px;
+        /* Ensures image never exceeds its container */
+        height: auto;
+        /* Maintains aspect ratio */
+    }
+
+    .title-text-1 {
+        font-size: 50px;
+    }
+
+    .title-text-2 {
+        font-size: 20px;
+    }
+
+    .page-nav {
+        font-size: 25px;
+    }
+
+    .first-page-title {
+        margin-top: 50px !important;
+    }
+
+
+    .navbar-brand {
+        margin-left: 0 !important;
+    }
+
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .navbar-nav .nav-item {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+        color: #198754;
+    }
+
+    .navbar-nav .nav-link {
+        display: block;
+        width: 100%;
+        margin: 0 !important;
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .navbar-nav .btn-login {
+        display: block;
+        width: 100%;
+        margin-left: 0 !important;
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .home-header {
+        margin: 0 !important;
+    }
+
+    .custom-card-height {
+        width: 22rem !important;
+        height: auto !important;
+    }
+
+    .custom-card-height-0 {
+        max-height: auto !important;
+    }
+}

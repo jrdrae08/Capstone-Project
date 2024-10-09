@@ -222,20 +222,6 @@ include '../backends/subadmin/fetch_features_category.php';
                                                         <h5 class="card-title text-center fs-6 fw-bold"><?php echo htmlspecialchars($business['BusinessName']); ?></h5>
                                                         <p class="desc-text"><?php echo htmlspecialchars($business['Quotation']); ?></p>
                                                         <div class="row d-flex justify-content-evenly align-items-center">
-                                                            <?php
-                                                            // Fetch features for the current business
-                                                            $currentBusinessFeatures = $featuresData[$business['BusinessInfoID']] ?? [];
-                                                            if (!empty($currentBusinessFeatures)): ?>
-                                                                <?php foreach ($currentBusinessFeatures as $feature): ?>
-                                                                    <div class="col d-flex justify-content-evenly align-items-center">
-                                                                        <h5 class="desc-text fw-bold"><?php echo htmlspecialchars($feature['FeatureName']); ?></h5>
-                                                                    </div>
-                                                                <?php endforeach; ?>
-                                                            <?php else: ?>
-                                                                <div class="col d-flex justify-content-evenly align-items-center">
-                                                                    <h5 class="desc-text fw-bold">No features available</h5>
-                                                                </div>
-                                                            <?php endif; ?>
                                                         </div>
                                                     </div>
                                                 </div>
