@@ -185,121 +185,138 @@ if (isset($_GET['businessInfoID'])) {
 
                     <div class="tab-pane fade" id="pills-resort" role="tabpanel" aria-labelledby="pills-resort-tab" tabindex="0">
                         <div class="row destination-lists mx-2">
-                            <?php foreach ($resortBusinesses as $business): ?>
-                                <div class="col-md-6 col-12">
-                                    <a href="page-1.php?businessInfoID=<?php echo urlencode($business['BusinessInfoID']); ?>" class="text-decoration-none">
-                                        <div class="card mb-3 shadow d-flex justify-content-center">
-                                            <div class="row g-0 h-100 w-100">
-                                                <div class="col-xl-7 col-lg-12 col-md-12 col-12">
-                                                    <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
-                                                </div>
-                                                <div class="col-xl-5 col-lg-12 col-md-12 col-12">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title card-title-1 cormorant-text text-color-1"><?php echo htmlspecialchars($business['BusinessName']); ?></h5>
-                                                        <p class="card-text-1 dm-sans-text"><?php echo htmlspecialchars($business['Quotation']); ?></p>
-                                                        <p class="card-text dm-sans-text">
-                                                            <small class="text-body-secondary">
-                                                                <?php
-                                                                $currentBusinessFeatures = $featuresData[$business['BusinessInfoID']] ?? [];
-                                                                if (!empty($currentBusinessFeatures)):
-                                                                    foreach ($currentBusinessFeatures as $feature):
-                                                                        echo htmlspecialchars($feature['FeatureName']) . ' ';
-                                                                    endforeach;
-                                                                else:
-                                                                    echo 'No features available';
-                                                                endif;
-                                                                ?>
-                                                            </small>
-                                                        </p>
+                            <?php if (empty($resortBusinesses)): ?>
+                                <div class="col-12">
+                                    <p class="text-center text-muted">No available destination</p>
+                                </div>
+                            <?php else: ?>
+                                <?php foreach ($resortBusinesses as $business): ?>
+                                    <div class="col-md-6 col-12">
+                                        <a href="page-1.php?businessInfoID=<?php echo urlencode($business['BusinessInfoID']); ?>" class="text-decoration-none">
+                                            <div class="card mb-3 shadow d-flex justify-content-center">
+                                                <div class="row g-0 h-100 w-100">
+                                                    <div class="col-xl-7 col-lg-12 col-md-12 col-12">
+                                                        <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
+                                                    </div>
+                                                    <div class="col-xl-5 col-lg-12 col-md-12 col-12">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title card-title-1 cormorant-text text-color-1"><?php echo htmlspecialchars($business['BusinessName']); ?></h5>
+                                                            <p class="card-text-1 dm-sans-text"><?php echo htmlspecialchars($business['Quotation']); ?></p>
+                                                            <p class="card-text dm-sans-text">
+                                                                <small class="text-body-secondary">
+                                                                    <?php
+                                                                    $currentBusinessFeatures = $featuresData[$business['BusinessInfoID']] ?? [];
+                                                                    if (!empty($currentBusinessFeatures)):
+                                                                        foreach ($currentBusinessFeatures as $feature):
+                                                                            echo htmlspecialchars($feature['FeatureName']) . ' ';
+                                                                        endforeach;
+                                                                    else:
+                                                                        echo 'No features available';
+                                                                    endif;
+                                                                    ?>
+                                                                </small>
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            <?php endforeach; ?>
+                                        </a>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
                     </div>
 
                     <div class="tab-pane fade" id="pills-farms" role="tabpanel" aria-labelledby="pills-farms-tab" tabindex="0">
                         <div class="row destination-lists mx-2">
-                            <?php foreach ($farmBusinesses as $business): ?>
-                                <div class="col-md-6 col-12">
-                                    <a href="page-1.php?businessInfoID=<?php echo urlencode($business['BusinessInfoID']); ?>" class="text-decoration-none">
-                                        <div class="card mb-3 shadow d-flex justify-content-center">
-                                            <div class="row g-0 h-100 w-100">
-                                                <div class="col-xl-7 col-lg-12 col-md-12 col-12">
-                                                    <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
-                                                </div>
-                                                <div class="col-xl-5 col-lg-12 col-md-12 col-12">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title card-title-1 cormorant-text text-color-1"><?php echo htmlspecialchars($business['BusinessName']); ?></h5>
-                                                        <p class="card-text-1 dm-sans-text"><?php echo htmlspecialchars($business['Quotation']); ?></p>
-                                                        <p class="card-text dm-sans-text">
-                                                            <small class="text-body-secondary">
-                                                                <?php
-                                                                $currentBusinessFeatures = $featuresData[$business['BusinessInfoID']] ?? [];
-                                                                if (!empty($currentBusinessFeatures)):
-                                                                    foreach ($currentBusinessFeatures as $feature):
-                                                                        echo htmlspecialchars($feature['FeatureName']) . ' ';
-                                                                    endforeach;
-                                                                else:
-                                                                    echo 'No features available';
-                                                                endif;
-                                                                ?>
-                                                            </small>
-                                                        </p>
+                            <?php if (empty($farmBusinesses)): ?>
+                                <div class="col-12">
+                                    <p class="text-center text-muted">No available destination</p>
+                                </div>
+                            <?php else: ?>
+                                <?php foreach ($farmBusinesses as $business): ?>
+                                    <div class="col-md-6 col-12">
+                                        <a href="page-1.php?businessInfoID=<?php echo urlencode($business['BusinessInfoID']); ?>" class="text-decoration-none">
+                                            <div class="card mb-3 shadow d-flex justify-content-center">
+                                                <div class="row g-0 h-100 w-100">
+                                                    <div class="col-xl-7 col-lg-12 col-md-12 col-12">
+                                                        <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
+                                                    </div>
+                                                    <div class="col-xl-5 col-lg-12 col-md-12 col-12">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title card-title-1 cormorant-text text-color-1"><?php echo htmlspecialchars($business['BusinessName']); ?></h5>
+                                                            <p class="card-text-1 dm-sans-text"><?php echo htmlspecialchars($business['Quotation']); ?></p>
+                                                            <p class="card-text dm-sans-text">
+                                                                <small class="text-body-secondary">
+                                                                    <?php
+                                                                    $currentBusinessFeatures = $featuresData[$business['BusinessInfoID']] ?? [];
+                                                                    if (!empty($currentBusinessFeatures)):
+                                                                        foreach ($currentBusinessFeatures as $feature):
+                                                                            echo htmlspecialchars($feature['FeatureName']) . ' ';
+                                                                        endforeach;
+                                                                    else:
+                                                                        echo 'No features available';
+                                                                    endif;
+                                                                    ?>
+                                                                </small>
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            <?php endforeach; ?>
+                                        </a>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
                     </div>
 
                     <div class="tab-pane fade" id="pills-falls" role="tabpanel" aria-labelledby="pills-falls-tab" tabindex="0">
                         <div class="row destination-lists mx-2">
-                            <?php foreach ($fallsBusinesses as $business): ?>
-                                <div class="col-md-6 col-12">
-                                    <a href="page-1.php?businessInfoID=<?php echo urlencode($business['BusinessInfoID']); ?>" class="text-decoration-none">
-                                        <div class="card mb-3 shadow d-flex justify-content-center">
-                                            <div class="row g-0 h-100 w-100">
-                                                <div class="col-xl-7 col-lg-12 col-md-12 col-12">
-                                                    <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
-                                                </div>
-                                                <div class="col-xl-5 col-lg-12 col-md-12 col-12">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title card-title-1 cormorant-text text-color-1"><?php echo htmlspecialchars($business['BusinessName']); ?></h5>
-                                                        <p class="card-text-1 dm-sans-text"><?php echo htmlspecialchars($business['Quotation']); ?></p>
-                                                        <p class="card-text dm-sans-text">
-                                                            <small class="text-body-secondary">
-                                                                <?php
-                                                                $currentBusinessFeatures = $featuresData[$business['BusinessInfoID']] ?? [];
-                                                                if (!empty($currentBusinessFeatures)):
-                                                                    foreach ($currentBusinessFeatures as $feature):
-                                                                        echo htmlspecialchars($feature['FeatureName']) . ' ';
-                                                                    endforeach;
-                                                                else:
-                                                                    echo 'No features available';
-                                                                endif;
-                                                                ?>
-                                                            </small>
-                                                        </p>
+                            <?php if (empty($fallsBusinesses)): ?>
+                                <div class="col-12">
+                                    <p class="text-center text-muted">No available destination</p>
+                                </div>
+                            <?php else: ?>
+                                <?php foreach ($fallsBusinesses as $business): ?>
+                                    <div class="col-md-6 col-12">
+                                        <a href="page-1.php?businessInfoID=<?php echo urlencode($business['BusinessInfoID']); ?>" class="text-decoration-none">
+                                            <div class="card mb-3 shadow d-flex justify-content-center">
+                                                <div class="row g-0 h-100 w-100">
+                                                    <div class="col-xl-7 col-lg-12 col-md-12 col-12">
+                                                        <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
+                                                    </div>
+                                                    <div class="col-xl-5 col-lg-12 col-md-12 col-12">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title card-title-1 cormorant-text text-color-1"><?php echo htmlspecialchars($business['BusinessName']); ?></h5>
+                                                            <p class="card-text-1 dm-sans-text"><?php echo htmlspecialchars($business['Quotation']); ?></p>
+                                                            <p class="card-text dm-sans-text">
+                                                                <small class="text-body-secondary">
+                                                                    <?php
+                                                                    $currentBusinessFeatures = $featuresData[$business['BusinessInfoID']] ?? [];
+                                                                    if (!empty($currentBusinessFeatures)):
+                                                                        foreach ($currentBusinessFeatures as $feature):
+                                                                            echo htmlspecialchars($feature['FeatureName']) . ' ';
+                                                                        endforeach;
+                                                                    else:
+                                                                        echo 'No features available';
+                                                                    endif;
+                                                                    ?>
+                                                                </small>
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            <?php endforeach; ?>
+                                        </a>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
+
+
                     </div>
-
-
                 </div>
-            </div>
         </section>
 
 
