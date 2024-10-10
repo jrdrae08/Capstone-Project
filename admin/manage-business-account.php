@@ -296,11 +296,22 @@ $totalInActive = getTotalInactive($pdo);
                                                         const paginatedBusinesses = pendingBusinesses.slice(start, end);
 
                                                         paginatedBusinesses.forEach(business => {
-                                                            const status = business.IsRead == 0 ? 'New' : ' ';
+                                                            let status = '';
+                                                            // Check if isReapply is 1 and IsRead is 0
+                                                            if (business.isReapply == 1) {
+                                                                status = 'Reapply';
+                                                            } else if (business.IsRead == 0) {
+                                                                status = 'New';
+                                                            } else {
+                                                                status = 'Read';
+                                                            }
+
+                                                            console.log("Status assigned: ", status); // Debugging
+
                                                             const row = document.createElement('tr');
 
-                                                            // Apply a custom highlight class if the status is "New"
-                                                            if (status === 'New') {
+                                                            // Apply a custom highlight class if the status is "New" or "Reapply"
+                                                            if (status === 'New' || status === 'Reapply') {
                                                                 row.classList.add('highlight-new');
                                                             }
 
@@ -323,6 +334,7 @@ $totalInActive = getTotalInactive($pdo);
                                                         // Reattach event listeners for the new elements
                                                         attachEventListeners();
                                                     }
+
 
                                                     function setupPagination(pageCount, paginationId, pageFunction) {
                                                         const pagination = document.getElementById(paginationId);

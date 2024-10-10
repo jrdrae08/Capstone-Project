@@ -27,7 +27,7 @@ try {
       }
 
       // Handle JSON data update
-      $stmt = $pdo->prepare("UPDATE businessapplicationform SET PermitExpDate = STR_TO_DATE(:permitExpDate, '%Y-%m-%d'), Status = 'Pending', IsReject = 0, IsRead = 0 WHERE ApplicationID = :applicationID");
+      $stmt = $pdo->prepare("UPDATE businessapplicationform SET PermitExpDate = STR_TO_DATE(:permitExpDate, '%Y-%m-%d'), Status = 'Pending', IsReject = 0, IsRead = 0, isReapply = 1 WHERE ApplicationID = :applicationID");
       $stmt->execute([
         ':permitExpDate' => $updatedData['bexdate'],
         ':applicationID' => $applicationID
