@@ -148,7 +148,7 @@ try {
                             <img src="<?php echo htmlspecialchars($room['image1']); ?>" class="img-fluid" alt="">
                         </div>
                         <div class="m-3 my-5">
-                            <h1 class="text-color-1 cormorant-text fw-bold">Amenities</h1>
+                            <h1 class="text-color-1 cormorant-text fw-bold">Features</h1>
                             <h5>
                                 <ul class="text-dark mb-5">
                                     <li class="dm-sans-text">Wi-fi</li>

@@ -1,5 +1,6 @@
 <?php
 include '../backends/subadmin/fetch_alldestination_category.php';
+include '../backends/subadmin/fetch_features_category.php';
 
 // Check if businessInfoID is set in the URL
 if (isset($_GET['businessInfoID'])) {
@@ -137,6 +138,20 @@ if (isset($_GET['businessInfoID'])) {
                                                     <div class="card-body">
                                                         <h5 class="card-title card-title-1 cormorant-text text-color-1"><?php echo htmlspecialchars($business['BusinessName']); ?></h5>
                                                         <p class="card-text-1 dm-sans-text"><?php echo htmlspecialchars($business['Quotation']); ?></p>
+                                                        <p class="card-text dm-sans-text">
+                                                            <small class="text-body-secondary">
+                                                                <?php
+                                                                $currentBusinessFeatures = $featuresData[$business['BusinessInfoID']] ?? [];
+                                                                if (!empty($currentBusinessFeatures)):
+                                                                    foreach ($currentBusinessFeatures as $feature):
+                                                                        echo htmlspecialchars($feature['FeatureName']) . ' ';
+                                                                    endforeach;
+                                                                else:
+                                                                    echo 'No features available';
+                                                                endif;
+                                                                ?>
+                                                            </small>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>

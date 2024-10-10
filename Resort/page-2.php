@@ -159,49 +159,6 @@ try {
                                     </div>
                                 </div>
                             <?php endforeach; ?>
-
-                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10 my-4 d-flex justify-content-center">
-                                <div class="card shadow custom-card-height rounded-0">
-                                    <img src="../../resort/cabin.webp" class="card-img-top rounded-0" alt="...">
-                                    <div class="card-body">
-                                        <div class="price-overlay shadow bg-light rounded-5">
-                                            <h5 class="p-3 text-center dm-sans-text fw-bold text-secondary">Price: <span class="text-danger">&#8369 2,975</span>/Night</h5>
-                                        </div>
-                                        <h3 class="card-title text-color-1 fw-bold cormorant-text">Villa Julita</h3>
-                                        <p class="card-text text-secondary dm-sans-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="../../resort/page-3.php" class="btn btn-book fw-bold dm-sans-text rounded-0 py-3 px-4">BOOK NOW</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10 my-4 d-flex justify-content-center">
-                                <div class="card shadow custom-card-height rounded-0">
-                                    <img src="../../resort/resort-sea-2.jpg" class="card-img-top rounded-0" alt="...">
-                                    <div class="card-body">
-                                        <div class="price-overlay shadow bg-light rounded-5">
-                                            <h5 class="p-3 text-center text-secondary fw-bold dm-sans-text">Price: <span class="text-danger">&#8369 2,975</span>/Night</h5>
-                                        </div>
-                                        <h3 class="card-title text-color-1 fw-bold cormorant-text">Villa Lucia</h3>
-                                        <p class="card-text text-secondary  dm-sans-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="../../resort/page-3.php" class="btn btn-book fw-bold dm-sans-text rounded-0 py-3 px-4">BOOK NOW</a>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10 my-4 d-flex justify-content-center">
-                                <div class="card shadow custom-card-height rounded-0">
-                                    <img src="../../resort/resort-sea-2.jpg" class="card-img-top rounded-0" alt="...">
-                                    <div class="card-body">
-                                        <div class="price-overlay shadow bg-light rounded-5">
-                                            <h5 class="p-3 text-center text-secondary fw-bold dm-sans-text">Price: <span class="text-danger">&#8369 4,675</span>/Night</h5>
-                                        </div>
-                                        <h3 class="card-title text-color-1 fw-bold cormorant-text">Villa Antonina</h3>
-                                        <p class="card-text text-secondary">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="../../resort/page-3.php" class="btn btn-book dm-sans-text fw-bold rounded-0 py-3 px-4">BOOK NOW</a>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
