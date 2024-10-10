@@ -1,5 +1,6 @@
 <?php
 session_start();
+include '../backends/subadmin/fetch_manage_rooms.php';
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
     header('Location: ../login.php');
@@ -40,40 +41,47 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
                             <a href="../businessowner/add-rooms.php" class="btn btn-success"><i class="bi bi-plus-circle pe-2"></i>Add Room</a>
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#archiveroom"><i class="bi bi-archive pe-2"></i></i>Archives</button>
                         </div>
+
                         <div class="col-lg-10">
-                            <div class="card shadow-lg rounded">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <img src="/image/bg.png" class="img-fluid rounded" alt="room first image">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="col-md-12">
-                                                <h5>Room Name</h5>
+                            <?php if (!empty($rooms)): ?>
+                                <?php foreach ($rooms as $room): ?>
+                                    <div class="card shadow-lg rounded">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <img src="<?php echo htmlspecialchars($room['image1']); ?>" class="img-fluid rounded" alt="room first image" style="object-fit: cover; height: 290px; width: 100%;">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="col-md-12">
+                                                        <h5><?php echo htmlspecialchars($room['roomName']); ?></h5>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <p><strong>Features</strong></p>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <p><strong>Facilities</strong></p>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <p><strong>Guests</strong></p>
+                                                        <p>Adult: <?php echo htmlspecialchars($room['adultMax']); ?></p>
+                                                        <p>Children: <?php echo htmlspecialchars($room['ChildrenMax']); ?></p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 gap-3 vstack d-flex justify-content-center mx-auto">
+                                                    <h4 class="text-center"><strong>₱ <?php echo htmlspecialchars(number_format($room['roomPrice'], 2)); ?></strong></h4>
+                                                    <a href="../businessowner/update-rooms.php?roomID=<?php echo htmlspecialchars($room['roomID']); ?>" class="btn btn-warning shadow"><i class="bi bi-pencil-square"></i>Update</a>
+                                                </div>
                                             </div>
-                                            <div class="col-md-12">
-                                                <p><strong>Features</strong></p>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <p><strong>Facilities</strong></p>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <p><strong>Guests</strong></p>
-                                                <p>Adult</p>
-                                                <p>Children</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2 gap-3 vstack d-flex justify-content-center mx-auto">
-                                            <h4 class="text-center"><strong> ₱ 2,000</strong></h4>
-                                            <a href="../businessowner/update-rooms.php" class="btn btn-warning shadow"><i class="bi bi-pencil-square"></i>Update</a>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <p>No rooms available.</p>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
-            </main> 
+            </main>
 
             <!-- MODAL -->
             <!-- Archive rooms -->
