@@ -109,13 +109,13 @@ if (isset($_GET['businessInfoID'])) {
                             <button class="nav-link dm-sans-text active" id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all" type="button" role="tab" aria-controls="pills-all" aria-selected="true">All</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link dm-sans-text" id="pills-falls-tab" data-bs-toggle="pill" data-bs-target="#pills-falls" type="button" role="tab" aria-controls="pills-falls" aria-selected="false">Falls</button>
+                            <button class="nav-link dm-sans-text" id="pills-resort-tab" data-bs-toggle="pill" data-bs-target="#pills-resort" type="button" role="tab" aria-controls="pills-resort" aria-selected="false">Resort</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link dm-sans-text" id="pills-farms-tab" data-bs-toggle="pill" data-bs-target="#pills-farms" type="button" role="tab" aria-controls="pills-farms" aria-selected="false">Farms</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link dm-sans-text" id="pills-resort-tab" data-bs-toggle="pill" data-bs-target="#pills-resort" type="button" role="tab" aria-controls="pills-resort" aria-selected="false">Resort</button>
+                            <button class="nav-link dm-sans-text" id="pills-falls-tab" data-bs-toggle="pill" data-bs-target="#pills-falls" type="button" role="tab" aria-controls="pills-falls" aria-selected="false">Falls</button>
                         </li>
                     </ul>
                 </div>
