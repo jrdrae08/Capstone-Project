@@ -48,6 +48,22 @@ $totalInActive = getTotalInactive($pdo);
             /* Highlight color */
         }
     </style>
+
+    <script>
+        function checkForUpdates() {
+            fetch('../backends/check_for_updates.php')
+                .then(response => response.text())
+                .then(data => {
+                    if (data === 'true') {
+                        location.reload();
+                    }
+                })
+                .catch(error => console.error('Error checking for updates:', error));
+        }
+
+        // Check for updates every 1 second (1000 milliseconds)
+        setInterval(checkForUpdates, 1000);
+    </script>
 </head>
 
 <body>
