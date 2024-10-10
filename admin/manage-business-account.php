@@ -42,6 +42,12 @@ $totalInActive = getTotalInactive($pdo);
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <link rel="stylesheet" href="../css/admin.css">
 
+    <style>
+        .highlight-new {
+            background-color: #F2F2F2ff;
+            /* Highlight color */
+        }
+    </style>
 </head>
 
 <body>
@@ -217,18 +223,20 @@ $totalInActive = getTotalInactive($pdo);
                                     <!-- pending business -->
                                     <div class="tab-content" id="pills-tabContent">
                                         <div class="tab-pane fade " id="pills-pending" role="tabpanel" aria-labelledby="pills-pending-tab" tabindex="0">
-                                            <table class="table table-striped">
+                                            <table class="table">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Date Registered</th>
                                                         <th scope="col">Type of Business</th>
                                                         <th scope="col">Business Name</th>
                                                         <th scope="col">Actions</th>
+                                                        <th scope="col"> </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="pendingBusinessesTable">
                                                 </tbody>
                                             </table>
+
                                             <!-- Pagination controls -->
                                             <?php if (count($pendingBusinesses) > 10): ?>
                                                 <nav>
@@ -288,21 +296,27 @@ $totalInActive = getTotalInactive($pdo);
                                                         const paginatedBusinesses = pendingBusinesses.slice(start, end);
 
                                                         paginatedBusinesses.forEach(business => {
-                                                            const status = business.IsRead == 0 ? 'New' : 'Read';
+                                                            const status = business.IsRead == 0 ? 'New' : ' ';
                                                             const row = document.createElement('tr');
+
+                                                            // Apply a custom highlight class if the status is "New"
+                                                            if (status === 'New') {
+                                                                row.classList.add('highlight-new');
+                                                            }
+
                                                             row.innerHTML = `
-                <td>${business['Date Registered']}</td>
-                <td>${business['BusinessType']}</td>
-                <td>${business['BusinessName']}</td>
-                <td>
-                    <button class="btn btn-primary m-1 view-details" data-bs-toggle="modal" data-bs-target="#viewbusinessinfo" data-application-id="${business.ApplicationID}" data-business='${JSON.stringify(business)}'>
-                        <i class="bi bi-eye"></i>
-                    </button>
-                    <button class="btn btn-success m-1" data-application-id="${business['ApplicationID']}"><i class="bi bi-check-lg"></i></button>
-                    <button class="btn btn-danger m-1" data-application-id="${business['ApplicationID']}"><i class="bi bi-x-lg"></i></button>
-                </td>
-                <td class="status">${status}</td>
-            `;
+            <td>${business['Date Registered']}</td>
+            <td>${business['BusinessType']}</td>
+            <td>${business['BusinessName']}</td>
+            <td>
+                <button class="btn btn-primary m-1 view-details" data-bs-toggle="modal" data-bs-target="#viewbusinessinfo" data-application-id="${business.ApplicationID}" data-business='${JSON.stringify(business)}'>
+                    <i class="bi bi-eye"></i>
+                </button>
+                <button class="btn btn-success m-1" data-application-id="${business['ApplicationID']}"><i class="bi bi-check-lg"></i></button>
+                <button class="btn btn-danger m-1" data-application-id="${business['ApplicationID']}"><i class="bi bi-x-lg"></i></button>
+            </td>
+            <td class="status">${status}</td>
+        `;
                                                             table.appendChild(row);
                                                         });
 
