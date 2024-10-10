@@ -47,7 +47,17 @@ try {
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,800">
     <link rel="stylesheet" href="../../resort/new-resort-ui.css">
     <style>
-
+        body {
+            overflow-x: hidden;
+            position: relative;
+            /* width: 100%;
+            height: 100vh; */
+            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url('../../businessowner/businessmediacategory/<?php echo htmlspecialchars($room['image1']); ?>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
     </style>
 </head>
 
@@ -265,7 +275,6 @@ try {
                         <div class="resort-quick-information mt-5">
                             <h3 class="cormorant-text fw-bold text-color-1">Resort Information</h3>
                             <div class="text-dark ms-5">
-                                <h5>Email: <?php echo htmlspecialchars($businessInfo['BusinessEmail']); ?></h5>
                                 <h5>Contact Number: <?php echo htmlspecialchars($businessInfo['BusinessContactNumber']); ?></h5>
                                 <h5>Location Address: <?php echo htmlspecialchars($businessInfo['BusinessAddress']); ?></h5>
                             </div>

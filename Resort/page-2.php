@@ -15,15 +15,17 @@ try {
     $stmt->execute(['businessInfoID' => $businessInfoID]);
     $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Query to fetch business name
+    // Query to fetch business name and thumbnail
     $stmt = $pdo->prepare("
-        SELECT BusinessName
-        FROM businessinformationform
-        WHERE BusinessInfoID = :businessInfoID
+        SELECT bif.BusinessName, bm.Thumbnail
+        FROM businessinformationform bif
+        JOIN business_media bm ON bif.BusinessInfoID = bm.BusinessInfoID
+        WHERE bif.BusinessInfoID = :businessInfoID
     ");
     $stmt->execute(['businessInfoID' => $businessInfoID]);
     $businessInfo = $stmt->fetch(PDO::FETCH_ASSOC);
     $businessName = $businessInfo['BusinessName'] ?? 'Unknown Business';
+    $thumbnail = $businessInfo['Thumbnail'] ?? 'default-thumbnail.jpg'; // Provide a default thumbnail if not available
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
 }
@@ -49,6 +51,18 @@ try {
         .custom-img img {
             height: 400px;
             object-fit: cover;
+        }
+
+        body {
+            overflow-x: hidden;
+            position: relative;
+            /* width: 100%;
+            height: 100vh; */
+            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url('../../businessowner/businessmediacategory/<?php echo htmlspecialchars($thumbnail); ?>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
         }
     </style>
 </head>
