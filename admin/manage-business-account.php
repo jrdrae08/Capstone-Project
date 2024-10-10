@@ -303,15 +303,14 @@ $totalInActive = getTotalInactive($pdo);
                                                             } else if (business.IsRead == 0) {
                                                                 status = 'New';
                                                             } else {
-                                                                status = 'Read';
+                                                                status = ' ';
                                                             }
 
                                                             console.log("Status assigned: ", status); // Debugging
 
                                                             const row = document.createElement('tr');
-
                                                             // Apply a custom highlight class if the status is "New" or "Reapply"
-                                                            if (status === 'New' || status === 'Reapply') {
+                                                            if ((status === 'New' || status === 'Reapply') && business.IsRead == 0) {
                                                                 row.classList.add('highlight-new');
                                                             }
 
