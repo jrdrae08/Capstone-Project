@@ -1,7 +1,7 @@
 <?php
 include '../backends/subadmin/fetch_alldestination_category.php';
+include '../backends/subadmin/fetch_resortdestination_category.php';
 include '../backends/subadmin/fetch_features_category.php';
-
 // Check if businessInfoID is set in the URL
 if (isset($_GET['businessInfoID'])) {
     // Unset the businessInfoID parameter
@@ -121,6 +121,7 @@ if (isset($_GET['businessInfoID'])) {
                 </div>
             </div>
         </section>
+
         <section class="destination-page bg-color-5 shadow">
             <div class="container-fluid">
                 <div class="tab-content">
@@ -178,95 +179,127 @@ if (isset($_GET['businessInfoID'])) {
                                     </div>
                                 </a>
                             </div> -->
-
-
-
-                            <div class="tab-pane fade" id="pills-farms" role="tabpanel" aria-labelledby="pills-farms-tab" tabindex="0">
-                                <div class="row destination-lists mx-2">
-                                    <div class="col-md-6 col-12">
-                                        <a href="../../resort/page-1.php" class="text-decoration-none">
-                                            <div class="card mb-3 shadow d-flex justify-content-center">
-                                                <div class="row g-0 h-100 w-100">
-                                                    <div class="col-xl-7 col-lg-12 col-md-12 col-12">
-                                                        <img src="../../resort/hilarion2.jpg" class="img-fluid rounded-start" alt="Hilarion's Farm and Resort" style="object-fit: cover; height: 290px; width: 100%;">
-                                                    </div>
-                                                    <div class="col-xl-5 col-lg-12 col-md-12 col-12">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title card-title-1  cormorant-text text-color-1">Hilarion's Farm and Resort</h5>
-                                                            <p class="card-text-1 dm-sans-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                            <p class="card-text dm-sans-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-
-                                    <div class="col-md-6 col-12">
-                                        <a href="../../resort/page-1.php" class="text-decoration-none">
-                                            <div class="card mb-3 shadow d-flex justify-content-center">
-                                                <div class="row g-0 h-100 w-100">
-                                                    <div class="col-xl-7 col-lg-12 col-md-12 col-12">
-                                                        <img src="../../resort/hilarion2.jpg" class="img-fluid rounded-start" alt="Hilarion's Farm and Resort" style="object-fit: cover; height: 290px; width: 100%;">
-                                                    </div>
-                                                    <div class="col-xl-5 col-lg-12 col-md-12 col-12">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title card-title-1  cormorant-text text-color-1">Hilarion's Farm and Resort</h5>
-                                                            <p class="card-text-1 dm-sans-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                            <p class="card-text dm-sans-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-
-                                    <div class="col-md-6 col-12">
-                                        <a href="../../resort/page-1.php" class="text-decoration-none">
-                                            <div class="card mb-3 shadow d-flex justify-content-center">
-                                                <div class="row g-0 h-100 w-100">
-                                                    <div class="col-xl-7 col-lg-12 col-md-12 col-12">
-                                                        <img src="../../resort/hilarion2.jpg" class="img-fluid rounded-start" alt="Hilarion's Farm and Resort" style="object-fit: cover; height: 290px; width: 100%;">
-                                                    </div>
-                                                    <div class="col-xl-5 col-lg-12 col-md-12 col-12">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title card-title-1  cormorant-text text-color-1">Hilarion's Farm and Resort</h5>
-                                                            <p class="card-text-1 dm-sans-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                            <p class="card-text dm-sans-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tab-pane fade" id="pills-resort" role="tabpanel" aria-labelledby="pills-resort-tab" tabindex="0">
-                                <div class="row destination-lists mx-2">
-                                    <div class="col-md-6 col-12">
-                                        <a href="../../resort/page-1.php" class="text-decoration-none">
-                                            <div class="card mb-3 shadow d-flex justify-content-center">
-                                                <div class="row g-0 h-100 w-100">
-                                                    <div class="col-xl-7 col-lg-12 col-md-12 col-12">
-                                                        <img src="../../resort/hilarion2.jpg" class="img-fluid rounded-start" alt="Hilarion's Farm and Resort" style="object-fit: cover; height: 290px; width: 100%;">
-                                                    </div>
-                                                    <div class="col-xl-5 col-lg-12 col-md-12 col-12">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title card-title-1  cormorant-text text-color-1">Hilarion's Farm and Resort</h5>
-                                                            <p class="card-text-1 dm-sans-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                            <p class="card-text dm-sans-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
+
+
+                    <div class="tab-pane fade" id="pills-resort" role="tabpanel" aria-labelledby="pills-resort-tab" tabindex="0">
+                        <div class="row destination-lists mx-2">
+                            <?php foreach ($resortBusinesses as $business): ?>
+                                <div class="col-md-6 col-12">
+                                    <a href="page-1.php?businessInfoID=<?php echo urlencode($business['BusinessInfoID']); ?>" class="text-decoration-none">
+                                        <div class="card mb-3 shadow d-flex justify-content-center">
+                                            <div class="row g-0 h-100 w-100">
+                                                <div class="col-xl-7 col-lg-12 col-md-12 col-12">
+                                                    <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
+                                                </div>
+                                                <div class="col-xl-5 col-lg-12 col-md-12 col-12">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title card-title-1 cormorant-text text-color-1"><?php echo htmlspecialchars($business['BusinessName']); ?></h5>
+                                                        <p class="card-text-1 dm-sans-text"><?php echo htmlspecialchars($business['Quotation']); ?></p>
+                                                        <p class="card-text dm-sans-text">
+                                                            <small class="text-body-secondary">
+                                                                <?php
+                                                                $currentBusinessFeatures = $featuresData[$business['BusinessInfoID']] ?? [];
+                                                                if (!empty($currentBusinessFeatures)):
+                                                                    foreach ($currentBusinessFeatures as $feature):
+                                                                        echo htmlspecialchars($feature['FeatureName']) . ' ';
+                                                                    endforeach;
+                                                                else:
+                                                                    echo 'No features available';
+                                                                endif;
+                                                                ?>
+                                                            </small>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-farms" role="tabpanel" aria-labelledby="pills-farms-tab" tabindex="0">
+                        <div class="row destination-lists mx-2">
+                            <?php foreach ($farmBusinesses as $business): ?>
+                                <div class="col-md-6 col-12">
+                                    <a href="page-1.php?businessInfoID=<?php echo urlencode($business['BusinessInfoID']); ?>" class="text-decoration-none">
+                                        <div class="card mb-3 shadow d-flex justify-content-center">
+                                            <div class="row g-0 h-100 w-100">
+                                                <div class="col-xl-7 col-lg-12 col-md-12 col-12">
+                                                    <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
+                                                </div>
+                                                <div class="col-xl-5 col-lg-12 col-md-12 col-12">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title card-title-1 cormorant-text text-color-1"><?php echo htmlspecialchars($business['BusinessName']); ?></h5>
+                                                        <p class="card-text-1 dm-sans-text"><?php echo htmlspecialchars($business['Quotation']); ?></p>
+                                                        <p class="card-text dm-sans-text">
+                                                            <small class="text-body-secondary">
+                                                                <?php
+                                                                $currentBusinessFeatures = $featuresData[$business['BusinessInfoID']] ?? [];
+                                                                if (!empty($currentBusinessFeatures)):
+                                                                    foreach ($currentBusinessFeatures as $feature):
+                                                                        echo htmlspecialchars($feature['FeatureName']) . ' ';
+                                                                    endforeach;
+                                                                else:
+                                                                    echo 'No features available';
+                                                                endif;
+                                                                ?>
+                                                            </small>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-falls" role="tabpanel" aria-labelledby="pills-falls-tab" tabindex="0">
+                        <div class="row destination-lists mx-2">
+                            <?php foreach ($fallsBusinesses as $business): ?>
+                                <div class="col-md-6 col-12">
+                                    <a href="page-1.php?businessInfoID=<?php echo urlencode($business['BusinessInfoID']); ?>" class="text-decoration-none">
+                                        <div class="card mb-3 shadow d-flex justify-content-center">
+                                            <div class="row g-0 h-100 w-100">
+                                                <div class="col-xl-7 col-lg-12 col-md-12 col-12">
+                                                    <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
+                                                </div>
+                                                <div class="col-xl-5 col-lg-12 col-md-12 col-12">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title card-title-1 cormorant-text text-color-1"><?php echo htmlspecialchars($business['BusinessName']); ?></h5>
+                                                        <p class="card-text-1 dm-sans-text"><?php echo htmlspecialchars($business['Quotation']); ?></p>
+                                                        <p class="card-text dm-sans-text">
+                                                            <small class="text-body-secondary">
+                                                                <?php
+                                                                $currentBusinessFeatures = $featuresData[$business['BusinessInfoID']] ?? [];
+                                                                if (!empty($currentBusinessFeatures)):
+                                                                    foreach ($currentBusinessFeatures as $feature):
+                                                                        echo htmlspecialchars($feature['FeatureName']) . ' ';
+                                                                    endforeach;
+                                                                else:
+                                                                    echo 'No features available';
+                                                                endif;
+                                                                ?>
+                                                            </small>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
         </section>
 
 
