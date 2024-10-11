@@ -1,8 +1,8 @@
 <?php
-// Include the database connection
+// page-3.php
 include '../includes/db.php';
 
-// Get the roomID from the URL, defaulting to 1 if not set
+// Get the roomID and businessInfoID from the URL, defaulting to 1 if not set
 $businessInfoID = isset($_GET['businessInfoID']) ? (int) $_GET['businessInfoID'] : 1;
 $roomID = isset($_GET['roomID']) ? (int) $_GET['roomID'] : 1;
 
@@ -24,10 +24,20 @@ try {
     ");
     $stmt->execute(['businessInfoID' => $room['BusinessInfoID']]);
     $businessInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Query to fetch rooms based on businessInfoID
+    $stmt = $pdo->prepare("
+        SELECT roomID, roomName, roomPrice, RoomDescriptions, image1
+        FROM roominfotable
+        WHERE BusinessInfoID = :businessInfoID
+    ");
+    $stmt->execute(['businessInfoID' => $businessInfoID]);
+    $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -286,64 +296,27 @@ try {
                             <h1 class="text-dark cormorant-text display-3 fw-bold mt-5">Related Rooms</h1>
                         </div>
                         <div class="row">
-                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10 my-4 d-flex justify-content-center">
-                                <div class="card shadow custom-card-height rounded-0 overflow-hidden">
-                                    <div class="img-container">
-                                        <img src="../../resort/wallpaper2.jpg" class="card-img-top rounded-0" alt="...">
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="price-overlay shadow bg-light rounded-5">
-                                            <h5 class="p-3 text-center text-secondary">Price: <span class="text-danger">&#8369 2500</span>/Night</h5>
+
+                            <?php foreach ($rooms as $room): ?>
+                                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10 my-4 d-flex justify-content-center">
+                                    <div class="card shadow custom-card-height rounded-0 overflow-hidden">
+                                        <div class="img-container">
+                                            <img src="<?php echo htmlspecialchars($room['image1']); ?>" class="card-img-top rounded-0" alt="Room Image">
                                         </div>
-                                        <h3 class="card-title text-color-1 fw-bold cormorant-text">Kubo ni John Angel</h3>
-                                        <p class="card-text text-secondary">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="../../resort/page-3.php" class="btn btn-book fw-bold rounded-0 py-3 px-4">BOOK NOW</a>
+                                        <div class="card-body">
+                                            <div class="price-overlay shadow bg-light rounded-5">
+                                                <h5 class="p-3 text-center dm-sans-text fw-bold text-secondary">Price: <span class="text-danger">&#8369 <?php echo htmlspecialchars($room['roomPrice']); ?></span>/Night</h5>
+                                            </div>
+                                            <h3 class="card-title text-color-1 fw-bold cormorant-text"><?php echo htmlspecialchars($room['roomName']); ?></h3>
+                                            <p class="card-text dm-sans-text text-secondary"><?php echo htmlspecialchars($room['RoomDescriptions']); ?></p>
+                                            <a href="../../resort/page-3.php?roomID=<?php echo $room['roomID']; ?>&businessInfoID=<?php echo $businessInfoID; ?>" class="btn btn-book fw-bold dm-sans-text rounded-0 py-3 px-4">BOOK NOW</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10 my-4 d-flex justify-content-center">
-                                <div class="card shadow custom-card-height rounded-0">
-                                    <img src="../../resort/cabin.webp" class="card-img-top rounded-0" alt="...">
-                                    <div class="card-body">
-                                        <div class="price-overlay shadow bg-light rounded-5">
-                                            <h5 class="p-3 text-center text-secondary">Price: <span class="text-danger">&#8369 2500</span>/Night</h5>
-                                        </div>
-                                        <h3 class="card-title text-color-1 fw-bold cormorant-text">Card title</h3>
-                                        <p class="card-text text-secondary">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="../../resort/page-3.php" class="btn btn-book fw-bold rounded-0 py-3 px-4">BOOK NOW</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10 my-4 d-flex justify-content-center">
-                                <div class="card shadow custom-card-height rounded-0">
-                                    <img src="../../resort/resort-sea-2.jpg" class="card-img-top rounded-0" alt="...">
-                                    <div class="card-body">
-                                        <div class="price-overlay shadow bg-light rounded-5">
-                                            <h5 class="p-3 text-center text-secondary">Price: <span class="text-danger">&#8369 2500</span>/Night</h5>
-                                        </div>
-                                        <h3 class="card-title text-color-1 fw-bold cormorant-text">Card title</h3>
-                                        <p class="card-text text-secondary">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="../../resort/page-3.php" class="btn btn-book fw-bold rounded-0 py-3 px-4">BOOK NOW</a>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php endforeach; ?>
 
 
-                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10 my-4 d-flex justify-content-center">
-                                <div class="card shadow custom-card-height rounded-0">
-                                    <img src="../../resort/resort-sea-2.jpg" class="card-img-top rounded-0" alt="...">
-                                    <div class="card-body">
-                                        <div class="price-overlay shadow bg-light rounded-5">
-                                            <h5 class="p-3 text-center text-secondary">Price: <span class="text-danger">&#8369 2500</span>/Night</h5>
-                                        </div>
-                                        <h3 class="card-title text-color-1 fw-bold cormorant-text">Card title</h3>
-                                        <p class="card-text text-secondary">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="../../resort/page-3.php" class="btn btn-book fw-bold rounded-0 py-3 px-4">BOOK NOW</a>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
