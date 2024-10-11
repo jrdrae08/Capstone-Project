@@ -25,18 +25,19 @@ try {
     $stmt->execute(['businessInfoID' => $room['BusinessInfoID']]);
     $businessInfo = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Query to fetch rooms based on businessInfoID
+    // Query to fetch rooms based on businessInfoID and filter out the room with the specific roomID
     $stmt = $pdo->prepare("
         SELECT roomID, roomName, roomPrice, RoomDescriptions, image1
         FROM roominfotable
-        WHERE BusinessInfoID = :businessInfoID
+        WHERE BusinessInfoID = :businessInfoID AND roomID != :roomID
     ");
-    $stmt->execute(['businessInfoID' => $businessInfoID]);
+    $stmt->execute(['businessInfoID' => $businessInfoID, 'roomID' => $roomID]);
     $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
 }
 ?>
+
 
 
 <!DOCTYPE html>
