@@ -185,7 +185,7 @@ try {
                                 <div class="carousel-inner">
                                     <?php
                                     $images = [];
-                                    for ($i = 2; $i <= 6; $i++) {
+                                    for ($i = 1; $i <= 6; $i++) {
                                         if (!empty($room["image$i"])) {
                                             $images[] = $room["image$i"];
                                         }
