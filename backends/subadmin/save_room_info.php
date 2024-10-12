@@ -30,8 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors[] = ['field' => 'adultmax', 'message' => 'AdultMax should be greater than 0.'];
   }
 
-  if ($adultMax <= 0) {
-    $errors[] = ['field' => 'adultmax', 'message' => 'AdultMax should be greater than 0.'];
+  if ($childrenMax <= 0) {
+    $errors[] = ['field' => 'childrenMax', 'message' => 'ChildrenMax should be greater than 0.'];
   }
 
   if (str_word_count($roomDesc) < 50) {
