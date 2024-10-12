@@ -133,47 +133,64 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
 
                                             <div class="col-lg-7 col-sm-12 d-flex justify-content-evenly align-items-center">
                                                 <div class="row">
-                                                    <div class="col-lg-4 col-md-6 mb-3 text-center">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="bi bi-plus-circle fs-3" id="add-image-icon"></i>
+                                                        <span class="ms-2">Click this button to add image (maximum of 6)</span>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-6 mb-3 text-center image-input-section" style="display: none;">
+                                                        <div class="d-flex justify-content-end">
+                                                            <i class="bi bi-x-circle remove-image-icon"></i>
+                                                        </div>
                                                         <p>Image 1</p>
                                                         <input name="image1" type="file" id="room-image-input-1" style="display: none;" accept="image/*" onchange="uploadImage('room-image-input-1', 'room-image-1')" value="">
                                                         <label for="room-image-input-1" class="image-container">
                                                             <img src="../img/general-img/insert.png" class="rounded img-fluid shadow border" alt="Room Image" id="room-image-1">
                                                         </label>
                                                     </div>
-
-                                                    <div class="col-lg-4 col-md-6 mb-3 text-center">
+                                                    <div class="col-lg-4 col-md-6 mb-3 text-center image-input-section" style="display: none;">
+                                                        <div class="d-flex justify-content-end">
+                                                            <i class="bi bi-x-circle remove-image-icon"></i>
+                                                        </div>
                                                         <p>Image 2</p>
                                                         <input name="image2" type="file" id="room-image-input-2" style="display: none;" accept="image/*" onchange="uploadImage('room-image-input-2', 'room-image-2')" value="">
                                                         <label for="room-image-input-2" class="image-container">
                                                             <img src="../img/general-img/insert.png" class="rounded img-fluid shadow border" alt="Room Image" id="room-image-2">
                                                         </label>
                                                     </div>
-
-                                                    <div class="col-lg-4 col-md-6 col-md-6 mb-3 text-center">
+                                                    <div class="col-lg-4 col-md-6 mb-3 text-center image-input-section" style="display: none;">
+                                                        <div class="d-flex justify-content-end">
+                                                            <i class="bi bi-x-circle remove-image-icon"></i>
+                                                        </div>
                                                         <p>Image 3</p>
                                                         <input name="image3" type="file" id="room-image-input-3" style="display: none;" accept="image/*" onchange="uploadImage('room-image-input-3', 'room-image-3')" value="">
                                                         <label for="room-image-input-3" class="image-container">
                                                             <img src="../img/general-img/insert.png" class="rounded img-fluid shadow border" alt="Room Image" id="room-image-3">
                                                         </label>
                                                     </div>
-
-                                                    <div class="col-lg-4 col-md-6 mb-3 text-center">
+                                                    <div class="col-lg-4 col-md-6 mb-3 text-center image-input-section" style="display: none;">
+                                                        <div class="d-flex justify-content-end">
+                                                            <i class="bi bi-x-circle remove-image-icon"></i>
+                                                        </div>
                                                         <p>Image 4</p>
                                                         <input name="image4" type="file" id="room-image-input-4" style="display: none;" accept="image/*" onchange="uploadImage('room-image-input-4', 'room-image-4')" value="">
                                                         <label for="room-image-input-4" class="image-container">
                                                             <img src="../img/general-img/insert.png" class="rounded img-fluid shadow border" alt="Room Image" id="room-image-4">
                                                         </label>
                                                     </div>
-
-                                                    <div class="col-lg-4 col-md-6 mb-3 text-center">
+                                                    <div class="col-lg-4 col-md-6 mb-3 text-center image-input-section" style="display: none;">
+                                                        <div class="d-flex justify-content-end">
+                                                            <i class="bi bi-x-circle remove-image-icon"></i>
+                                                        </div>
                                                         <p>Image 5</p>
                                                         <input name="image5" type="file" id="room-image-input-5" style="display: none;" accept="image/*" onchange="uploadImage('room-image-input-5', 'room-image-5')" value="">
                                                         <label for="room-image-input-5" class="image-container">
                                                             <img src="../img/general-img/insert.png" class="rounded img-fluid shadow border" alt="Room Image" id="room-image-5">
                                                         </label>
                                                     </div>
-
-                                                    <div class="col-lg-4 col-md-6 mb-3 text-center">
+                                                    <div class="col-lg-4 col-md-6 mb-3 text-center image-input-section" style="display: none;">
+                                                        <div class="d-flex justify-content-end">
+                                                            <i class="bi bi-x-circle remove-image-icon"></i>
+                                                        </div>
                                                         <p>Image 6</p>
                                                         <input name="image6" type="file" id="room-image-input-6" style="display: none;" accept="image/*" onchange="uploadImage('room-image-input-6', 'room-image-6')" value="">
                                                         <label for="room-image-input-6" class="image-container">
@@ -210,6 +227,29 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
         <script src="../js/businessowner.js"></script>
 
         <script>
+            //adding image and removing image
+            document.addEventListener('DOMContentLoaded', function() {
+                const addImageIcon = document.getElementById('add-image-icon');
+                const imageInputSections = document.querySelectorAll('.image-input-section');
+                const removeImageIcons = document.querySelectorAll('.remove-image-icon');
+
+                let currentIndex = 0;
+
+                addImageIcon.addEventListener('click', function() {
+                    if (currentIndex < imageInputSections.length) {
+                        imageInputSections[currentIndex].style.display = 'block';
+                        currentIndex++;
+                    }
+                });
+
+                removeImageIcons.forEach((icon, index) => {
+                    icon.addEventListener('click', function() {
+                        imageInputSections[index].style.display = 'none';
+                        currentIndex--;
+                    });
+                });
+            });
+            //ending adding image and removing image
             document.addEventListener('DOMContentLoaded', () => {
                 const notyf = new Notyf({
                     duration: 30000,

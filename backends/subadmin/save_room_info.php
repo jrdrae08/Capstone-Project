@@ -26,6 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors[] = ['field' => 'roomprice', 'message' => 'Price should be greater than 0.'];
   }
 
+  if ($adultMax <= 0) {
+    $errors[] = ['field' => 'adultmax', 'message' => 'AdultMax should be greater than 0.'];
+  }
+
+  if ($adultMax <= 0) {
+    $errors[] = ['field' => 'adultmax', 'message' => 'AdultMax should be greater than 0.'];
+  }
+
   if (str_word_count($roomDesc) < 50) {
     $errors[] = ['field' => 'roomdesc', 'message' => 'Room description should be at least 50 words.'];
   }

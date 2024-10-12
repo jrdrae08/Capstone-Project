@@ -183,13 +183,27 @@ try {
                                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
                                 </div>
                                 <div class="carousel-inner">
-                                    <?php for ($i = 2; $i <= 6; $i++): ?>
-                                        <?php if (!empty($room["image$i"])): ?>
-                                            <div class="carousel-item <?php echo $i == 2 ? 'active' : ''; ?>">
-                                                <img src="<?php echo htmlspecialchars($room["image$i"]); ?>" class="img-fluid d-block w-100" alt="...">
-                                            </div>
-                                        <?php endif; ?>
-                                    <?php endfor; ?>
+                                    <?php
+                                    $images = [];
+                                    for ($i = 2; $i <= 6; $i++) {
+                                        if (!empty($room["image$i"])) {
+                                            $images[] = $room["image$i"];
+                                        }
+                                    }
+
+                                    // If there is only one image, duplicate it to ensure the carousel works
+                                    if (count($images) == 1) {
+                                        $images[] = $images[0];
+                                    }
+
+                                    foreach ($images as $index => $image) {
+                                    ?>
+                                        <div class="carousel-item <?php echo $index == 0 ? 'active' : ''; ?>">
+                                            <img src="<?php echo htmlspecialchars($image); ?>" class="img-fluid d-block w-100" alt="...">
+                                        </div>
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
                                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
