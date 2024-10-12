@@ -37,39 +37,48 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
                 <div class="container-fluid">
                     <div class="row justify-content-center align-items-center g-2">
 
-                        <div class="col-lg-10 mb-4 d-flex justify-content-between">
+                        <div class="col-lg-8 col-11 mb-4 d-flex justify-content-between">
                             <a href="../businessowner/add-rooms.php" class="btn btn-success"><i class="bi bi-plus-circle pe-2"></i>Add Room</a>
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#archiveroom"><i class="bi bi-archive pe-2"></i></i>Archives</button>
                         </div>
 
-                        <div class="col-lg-10">
+                        <div class="col-xl-8 col-lg-8 col-md-8">
                             <?php if (!empty($rooms)): ?>
                                 <?php foreach ($rooms as $room): ?>
                                     <div class="card shadow-lg rounded">
                                         <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <img src="<?php echo htmlspecialchars($room['image1']); ?>" class="img-fluid rounded" alt="room first image" style="object-fit: cover; height: 290px; width: 100%;">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col-xxl-7 col-xl-12 col-lg-10 col-sm-12">
+                                                    <img src="<?php echo htmlspecialchars($room['image1']); ?>" class="img-fluid img-thumbnail rounded" alt="room first image" style="object-fit: cover; height: 350px; width: 100%;">
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <div class="col-md-12">
-                                                        <h5><?php echo htmlspecialchars($room['roomName']); ?></h5>
+                                                <div class="col-xxl-5 col-xl-8 col-lg-10 col-sm-12">
+                                                    <div>
+                                                        <h4 class="text-center mt-2"><strong>₱ <?php echo htmlspecialchars(number_format($room['roomPrice'], 2)); ?></strong></h4>
                                                     </div>
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-12 d-flex justify-content-center">
+                                                        <h2 class="text-color-1 cormorant-text"><?php echo htmlspecialchars($room['roomName']); ?></h2>
+                                                    </div>
+                                                    <div class="col-md-12 d-flex justify-content-center">
+                                                        <p class="mx-3" style="text-align:justify;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde, sed? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id, voluptas?</p>
+                                                    </div>
+                                                    <div class="col-md-12 d-flex justify-content-center">
                                                         <p><strong>Features</strong></p>
                                                     </div>
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-12 d-flex justify-content-center">
                                                         <p><strong>Facilities</strong></p>
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <p><strong>Guests</strong></p>
-                                                        <p>Adult: <?php echo htmlspecialchars($room['adultMax']); ?></p>
-                                                        <p>Children: <?php echo htmlspecialchars($room['ChildrenMax']); ?></p>
+                                                        <div class="d-flex justify-content-center">
+                                                            <p><strong>Guests</strong></p>
+                                                        </div>
+                                                        <div class="d-flex justify-content-evenly">
+                                                            <p>Max Adult: <?php echo htmlspecialchars($room['adultMax']); ?></p>
+                                                            <p>Max Children: <?php echo htmlspecialchars($room['ChildrenMax']); ?></p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-2 gap-3 vstack d-flex justify-content-center mx-auto">
-                                                    <h4 class="text-center"><strong>₱ <?php echo htmlspecialchars(number_format($room['roomPrice'], 2)); ?></strong></h4>
-                                                    <a href="../businessowner/update-rooms.php?roomID=<?php echo htmlspecialchars($room['roomID']); ?>" class="btn btn-warning shadow"><i class="bi bi-pencil-square"></i>Update</a>
+                                                    <div class="col-md-12 d-flex justify-content-center">
+                                                        <a href="../businessowner/update-rooms.php?roomID=<?php echo htmlspecialchars($room['roomID']); ?>" class="btn btn-warning shadow"><i class="bi bi-pencil-square"></i>Update</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

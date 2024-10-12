@@ -246,7 +246,7 @@ $totalInActive = getTotalInactive($pdo);
                                                         <th scope="col">Type of Business</th>
                                                         <th scope="col">Business Name</th>
                                                         <th scope="col">Actions</th>
-                                                        <th scope="col"> </th>
+                                                        <th scope="col">Remarks</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="pendingBusinessesTable">
