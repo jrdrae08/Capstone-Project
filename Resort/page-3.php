@@ -288,7 +288,7 @@ try {
                                     </div>
 
                                     <div class="col-lg-12 d-grid my-4">
-                                        <h5 class="text-light dm-sans-text fw-bold">Price:<span class="text-ligth"> &#8369 <?php echo number_format(htmlspecialchars($room['roomPrice']),2, ',', ','); ?></span> /night</h5>
+                                        <h5 class="text-light dm-sans-text fw-bold">Price:<span class="text-ligth"> &#8369 <?php echo number_format(htmlspecialchars($room['roomPrice']), 2, '.', ','); ?></span> /night</h5>
                                         <button class="btn btn-success shadow dm-sans-text fw-bold">BOOK NOW!</button>
                                     </div>
                                 </div>

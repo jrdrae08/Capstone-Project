@@ -156,7 +156,7 @@ $errors = $_SESSION['errors'] ?? [];
 
                                         </div>
                                         <div class="d-flex justify-content-end">
-                                            <button type="button" class="btn btn-success px-4 me-2" data-bs-toggle="modal" data-bs-target="#confirmationModal">SAVE</button>
+                                            <button type="button" class="btn btn-success px-4 me-2" id="save-button" data-bs-toggle="modal" data-bs-target="#confirmationModal" disabled>SAVE</button>
                                             <a href="../businessowner/manage-rooms.php" class="btn btn-secondary">CANCEL</a>
                                         </div>
                                     </form>
@@ -229,7 +229,7 @@ $errors = $_SESSION['errors'] ?? [];
                 });
             });
         </script>
-        
+
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 // Check if there are errors or form data in session storage
@@ -391,6 +391,49 @@ $errors = $_SESSION['errors'] ?? [];
                         currentIndex--;
                     });
                 });
+            });
+        </script>
+
+        <script>
+            //validation for form before submitting it
+            document.addEventListener('DOMContentLoaded', function() {
+                const saveButton = document.getElementById('save-button');
+                const formFields = document.querySelectorAll('input[required], textarea[required]');
+                const imageInputs = [
+                    document.getElementById('room-image-input-1'),
+                    document.getElementById('room-image-input-2'),
+                    document.getElementById('room-image-input-3'),
+                    document.getElementById('room-image-input-4'),
+                    document.getElementById('room-image-input-5'),
+                    document.getElementById('room-image-input-6')
+                ];
+
+                function validateForm() {
+                    let allFieldsFilled = true;
+                    formFields.forEach(field => {
+                        if (!field.value.trim()) {
+                            allFieldsFilled = false;
+                        }
+                    });
+
+                    const isAnyImageSelected = imageInputs.some(input => input && input.files.length > 0);
+
+                    if (allFieldsFilled && isAnyImageSelected) {
+                        saveButton.removeAttribute('disabled');
+                    } else {
+                        saveButton.setAttribute('disabled', 'true');
+                    }
+                }
+
+                formFields.forEach(field => {
+                    field.addEventListener('input', validateForm);
+                });
+
+                imageInputs.forEach(input => {
+                    input.addEventListener('change', validateForm);
+                });
+
+                validateForm(); // Initial validation check
             });
         </script>
 
