@@ -1,18 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
+
 *,
 ::after,
 ::before {
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.875rem;
-    opacity: 1;
-    overflow-y: scroll;
-    margin: 0;
-}
 
 a {
     cursor: pointer;
@@ -51,14 +45,14 @@ h4 {
 
 .front-page-content {
     margin: 10px 250px;
-  }
+}
 
-  .form-control[readonly],
-  .form-control[disabled] {
+.form-control[readonly],
+.form-control[disabled] {
     background-color: #e9ecef;
     opacity: 1;
     color: grey;
-  }
+}
 
 .main {
     display: flex;
@@ -381,66 +375,66 @@ html[data-bs-theme="light"] .theme-toggle .fa-sun {
 .alert-transition {
     transition: opacity 1s ease-out;
     margin-bottom: 0;
-  }
+}
 
-  .fade-out {
+.fade-out {
     opacity: 0;
     transition: opacity 1s ease-out;
-  }
+}
 
-  .alert-small {
+.alert-small {
     font-size: 0.875rem;
     padding: 0.5rem 1rem;
     margin-bottom: 1rem;
-  }
+}
 
-  .card-custom {
+.card-custom {
     border-radius: 15px;
-  }
+}
 
-  .card-header-custom {
+.card-header-custom {
     background-color: #343a40;
     color: white;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-  }
+}
 
-  .btn-custom {
+.btn-custom {
     border-radius: 20px;
-  }
+}
 
-  .table-custom {
+.table-custom {
     border-collapse: collapse;
     width: 100%;
-  }
+}
 
-  .table-custom th,
-  .table-custom td {
+.table-custom th,
+.table-custom td {
     vertical-align: middle;
     border: none;
     padding: 10px;
-  }
+}
 
-  .table-custom th {
+.table-custom th {
     font-weight: bold;
-  }
+}
 
-  .table-custom tbody tr:nth-of-type(odd) {
+.table-custom tbody tr:nth-of-type(odd) {
     background-color: #f8f9fa;
-  }
+}
 
-  .modal-header-custom {
+.modal-header-custom {
     background-color: #343a40;
     color: white;
-  }
+}
 
-  .modal-footer-custom {
+.modal-footer-custom {
     background-color: #f8f9fa;
-  }
+}
 
-  .actions-col {
+.actions-col {
     width: 100px;
-  }
+}
 
 
 
@@ -449,11 +443,19 @@ html[data-bs-theme="light"] .theme-toggle .fa-sun {
                               Responsive adjustments 
 ============================================================================
 */
-@media (max-width: 1200px) {
+@media (max-width: 1600px) {
     .front-page-content {
-        margin: 10px 50px !important;
+        margin: 10px 60px !important;
     }
 }
+
+@media (max-width: 998px) {
+    .front-page-content {
+        margin: 0 !important;
+    }
+}
+
+
 
 @media (max-width: 768px) {
     .switch-button {
@@ -466,7 +468,7 @@ html[data-bs-theme="light"] .theme-toggle .fa-sun {
     }
 
     .front-page-content {
-        margin: 10px 50px !important;
+        margin: 10px 10px !important;
     }
 }
 

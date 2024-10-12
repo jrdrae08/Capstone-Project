@@ -56,7 +56,7 @@ if (isset($_GET['businessInfoID'])) {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link text-light btn btn-nav btn-success shadow" href="#">HOME</a>
+                            <a class="nav-link text-light btn btn-nav btn-success shadow" href="../homepage/homepage.php">HOME</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light btn btn-nav btn-success shadow" href="#service">SERVICES</a>
@@ -74,27 +74,6 @@ if (isset($_GET['businessInfoID'])) {
 
         <section class="first-page" id="first-page">
             <div class="container-fluid">
-                <div class="row d-flex justify-content-center">
-                    <!-- <div class="col-lg-4 py-3 ps-5 d-flex justify-content-start align-items-center">
-                        <a href="../page-1.php"><i class="bi bi-arrow-left-circle fw-bold text-light fs-1 text-shadow-light"></i></a>
-                    </div>
-
-                    <div class="col-lg-5 py-3 ms-auto">
-                        <div class="row">
-                            <div class="col text-center">
-                                <a href="../page-2.php" class="page-nav active mx-2 text-light rounded-0 cormorant-text fw-bold text-shadow-light">Accommodations</a>
-                            </div>
-                            <div class="col text-center">
-                                <a href="" class="page-nav mx-2 text-light rounded-0 cormorant-text fw-bold text-shadow-light">Events</a>
-                            </div>
-                            <div class="col text-center">
-                                <a href="../page-2.php" class="page-nav-book btn mx-2 mt-2  rounded-0 cormorant-text fw-bold text-shadow-light">BOOK NOW</a>
-
-                            </div>
-                        </div>
-                    </div> -->
-                </div>
-
                 <div class="page-0-title-container">
                     <h1 class="page-title text-light text-center cormorant-text fw-bold ">Discover Majayjay</h1>
                 </div>
@@ -133,26 +112,28 @@ if (isset($_GET['businessInfoID'])) {
                                         <div class="card mb-3 shadow d-flex justify-content-center">
                                             <div class="row g-0 h-100 w-100">
                                                 <div class="col-xl-7 col-lg-12 col-md-12 col-12">
-                                                    <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
+                                                    <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid img-thumbnail rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
                                                 </div>
                                                 <div class="col-xl-5 col-lg-12 col-md-12 col-12">
                                                     <div class="card-body">
                                                         <h5 class="card-title card-title-1 cormorant-text text-color-1"><?php echo htmlspecialchars($business['BusinessName']); ?></h5>
                                                         <p class="card-text-1 dm-sans-text"><?php echo htmlspecialchars($business['Quotation']); ?></p>
-                                                        <p class="card-text dm-sans-text">
-                                                            <small class="text-body-secondary">
-                                                                <?php
-                                                                $currentBusinessFeatures = $featuresData[$business['BusinessInfoID']] ?? [];
-                                                                if (!empty($currentBusinessFeatures)):
-                                                                    foreach ($currentBusinessFeatures as $feature):
-                                                                        echo htmlspecialchars($feature['FeatureName']) . ' ';
-                                                                    endforeach;
-                                                                else:
-                                                                    echo 'No features available';
-                                                                endif;
-                                                                ?>
-                                                            </small>
-                                                        </p>
+                                                        <div class="features">
+                                                            <p class="card-text dm-sans-text">
+                                                                <small class="text-secondary fw-bold d-flex justify-content-center">
+                                                                    <?php
+                                                                    $currentBusinessFeatures = $featuresData[$business['BusinessInfoID']] ?? [];
+                                                                    if (!empty($currentBusinessFeatures)):
+                                                                        foreach ($currentBusinessFeatures as $feature):
+                                                                            echo htmlspecialchars($feature['FeatureName']) . ' • ';
+                                                                        endforeach;
+                                                                    else:
+                                                                        echo 'No features available';
+                                                                    endif;
+                                                                    ?>
+                                                                </small>
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -160,25 +141,6 @@ if (isset($_GET['businessInfoID'])) {
                                     </a>
                                 </div>
                             <?php endforeach; ?>
-
-                            <!-- <div class="col-md-6 col-12">
-                                <a href="../../resort/page-1.php" class="text-decoration-none">
-                                    <div class="card mb-3 shadow d-flex justify-content-center">
-                                        <div class="row g-0 h-100 w-100">
-                                            <div class="col-xl-7 col-lg-12 col-md-12 col-12">
-                                                <img src="../../resort/Falls.jpg" class="img-fluid rounded-start" alt="Hilarion's Farm and Resort" style="object-fit: cover; height: 290px; width: 100%;">
-                                            </div>
-                                            <div class="col-xl-5 col-lg-12 col-md-12 col-12">
-                                                <div class="card-body">
-                                                    <h5 class="card-title card-title-1  cormorant-text text-color-1">Taytay Falls</h5>
-                                                    <p class="card-text-1 dm-sans-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                    <p class="card-text dm-sans-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div> -->
                         </div>
                     </div>
 
@@ -196,19 +158,19 @@ if (isset($_GET['businessInfoID'])) {
                                             <div class="card mb-3 shadow d-flex justify-content-center">
                                                 <div class="row g-0 h-100 w-100">
                                                     <div class="col-xl-7 col-lg-12 col-md-12 col-12">
-                                                        <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
+                                                        <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid img-thumbnail rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
                                                     </div>
                                                     <div class="col-xl-5 col-lg-12 col-md-12 col-12">
                                                         <div class="card-body">
                                                             <h5 class="card-title card-title-1 cormorant-text text-color-1"><?php echo htmlspecialchars($business['BusinessName']); ?></h5>
                                                             <p class="card-text-1 dm-sans-text"><?php echo htmlspecialchars($business['Quotation']); ?></p>
                                                             <p class="card-text dm-sans-text">
-                                                                <small class="text-body-secondary">
+                                                                <small class="text-secondary fw-bold d-flex justify-content-center">
                                                                     <?php
                                                                     $currentBusinessFeatures = $featuresData[$business['BusinessInfoID']] ?? [];
                                                                     if (!empty($currentBusinessFeatures)):
                                                                         foreach ($currentBusinessFeatures as $feature):
-                                                                            echo htmlspecialchars($feature['FeatureName']) . ' ';
+                                                                            echo htmlspecialchars($feature['FeatureName']) . ' • ';
                                                                         endforeach;
                                                                     else:
                                                                         echo 'No features available';
@@ -240,14 +202,14 @@ if (isset($_GET['businessInfoID'])) {
                                             <div class="card mb-3 shadow d-flex justify-content-center">
                                                 <div class="row g-0 h-100 w-100">
                                                     <div class="col-xl-7 col-lg-12 col-md-12 col-12">
-                                                        <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
+                                                        <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid img-thumbnail rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
                                                     </div>
                                                     <div class="col-xl-5 col-lg-12 col-md-12 col-12">
                                                         <div class="card-body">
                                                             <h5 class="card-title card-title-1 cormorant-text text-color-1"><?php echo htmlspecialchars($business['BusinessName']); ?></h5>
                                                             <p class="card-text-1 dm-sans-text"><?php echo htmlspecialchars($business['Quotation']); ?></p>
                                                             <p class="card-text dm-sans-text">
-                                                                <small class="text-body-secondary">
+                                                                <small class="text-secondary fw-bold">
                                                                     <?php
                                                                     $currentBusinessFeatures = $featuresData[$business['BusinessInfoID']] ?? [];
                                                                     if (!empty($currentBusinessFeatures)):
@@ -284,14 +246,14 @@ if (isset($_GET['businessInfoID'])) {
                                             <div class="card mb-3 shadow d-flex justify-content-center">
                                                 <div class="row g-0 h-100 w-100">
                                                     <div class="col-xl-7 col-lg-12 col-md-12 col-12">
-                                                        <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
+                                                        <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid img-thumbnail rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
                                                     </div>
                                                     <div class="col-xl-5 col-lg-12 col-md-12 col-12">
                                                         <div class="card-body">
-                                                            <h5 class="card-title card-title-1 cormorant-text text-color-1"><?php echo htmlspecialchars($business['BusinessName']); ?></h5>
+                                                            <h5 class="card-title card-title-1 cormorant-text text-color-1 "><?php echo htmlspecialchars($business['BusinessName']); ?></h5>
                                                             <p class="card-text-1 dm-sans-text"><?php echo htmlspecialchars($business['Quotation']); ?></p>
                                                             <p class="card-text dm-sans-text">
-                                                                <small class="text-body-secondary">
+                                                                <small class="text-secondary fw-bold">
                                                                     <?php
                                                                     $currentBusinessFeatures = $featuresData[$business['BusinessInfoID']] ?? [];
                                                                     if (!empty($currentBusinessFeatures)):
@@ -435,7 +397,7 @@ if (isset($_GET['businessInfoID'])) {
         }
     }
 
-    truncateText('#truncated-text', 25);
+    truncateText('#truncated-text', 15);
 </script>
 
 </html>

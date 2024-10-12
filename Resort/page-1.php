@@ -94,7 +94,7 @@ try {
                     <div class="col-lg-5 py-3 ms-auto">
                         <div class="row">
                             <div class="col text-center">
-                                <a href="../../resort/page-2.php" class="page-nav mx-2 text-light rounded-0 cormorant-text fw-bold text-shadow-light">Accommodations</a>
+                                <a href="page-2.php?businessInfoID=<?php echo $businessInfoID; ?>" class="page-nav mx-2 text-light rounded-0 cormorant-text fw-bold text-shadow-light">Accommodations</a>
                             </div>
                             <div class="col text-center">
                                 <a href="" class="page-nav mx-2 text-light rounded-0 cormorant-text fw-bold text-shadow-light">Events</a>
@@ -112,10 +112,10 @@ try {
                             <h1 class="title-text-1 text-light cormorant-text fw-bold text-shadow-light text-center"><?php echo htmlspecialchars($business['BusinessName']); ?></h1>
                         </div>
                         <div class="col-lg-12 d-flex justify-content-center align-items-center">
-                            <h3 class="title-text-2 cormorant-text text-shadow-light text-center"><?php echo htmlspecialchars($business['Quotation']); ?></h3>
+                            <h3 class="title-text-2 dm-sans-text text-shadow-light text-center"><?php echo htmlspecialchars($business['Quotation']); ?></h3>
                         </div>
                         <div class="col-lg-12 mt-3 d-flex justify-content-center align-items-center">
-                            <a href="page-2.php?businessInfoID=<?php echo $businessInfoID; ?>" class="btn btn-book-2 mx-2 fs-4 rounded-0 cormorant-text fw-bold text-center mb-5">BOOK NOW</a>
+                            <a href="page-2.php?businessInfoID=<?php echo $businessInfoID; ?>" class="btn btn-book-2 mx-2 fs-4 rounded-0 cormorant-text fw-bold text-center mb-5">View More</a>
                         </div>
                     </div>
                 </div>

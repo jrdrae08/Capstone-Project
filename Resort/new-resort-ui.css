@@ -186,7 +186,8 @@ body {
 }
 
 .title-text-2 {
-    font-size: 40px;
+    font-size: 30px;
+    margin: 0 100px;
 }
 
 .text-shadow-light {
@@ -285,11 +286,12 @@ body {
 }
 
 .card-title-1 {
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .card-text-1 {
-    font-size: 15px;
+    font-size: 16px;
+    text-align: justify;
 }
 
 .card-text-0 {
@@ -301,7 +303,7 @@ body {
     padding: 70px 125px;
 }
 
-.card {
+.card- {
     transition: transform 1s ease;
 }
 
@@ -309,15 +311,33 @@ body {
     transform: scale(1.03);
 }
 
+
 @media (max-width: 998px) {
     .destination-page {
         padding: 70px 10px !important;
+    }
+
+    .card-text-1 {
+        font-size: 14px;
+        text-align: justify;
+    }
+
+    .img-thumbnail {
+        object-fit: cover;
+        height: 290px;
+        width: 100%;
     }
 }
 
 @media (max-width: 768px) {
     .destination-page {
         padding: 70px 10px !important;
+    }
+
+    .title-text-2 {
+        margin: 10px !important;
+        text-align: justify;
+
     }
 }
 

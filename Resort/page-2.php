@@ -132,7 +132,7 @@ try {
                     <a href="../../resort/page-1.php" class="text-decoration-none">
                         <h3 class="nav text-light text-nav mx-3 dm-sans-text">Home ></h3>
                     </a>
-                    <a href="../../resort/page-2.php" class="text-decoration-none">
+                    <a href="../../resort/page-3.php?roomID=<?php echo $room['roomID']; ?>&businessInfoID=<?php echo $businessInfoID; ?>" class="text-decoration-none">
                         <h3 class="nav text-nav text-light dm-sans-text">Accommodations</h3>
                     </a>
                 </div>
@@ -150,10 +150,10 @@ try {
                                         </div>
                                         <div class="card-body">
                                             <div class="price-overlay shadow bg-light rounded-5">
-                                                <h5 class="p-3 text-center dm-sans-text fw-bold text-secondary">Price: <span class="text-danger">&#8369 <?php echo number_format(htmlspecialchars($room['roomPrice']), 2, '.', ','); ?></span>/Night</h5>
+                                                <h5 class="p-2 text-center dm-sans-text fw-bold text-secondary">Price: <span class="text-danger">&#8369 <?php echo number_format(htmlspecialchars($room['roomPrice']), 2, '.', ','); ?></span>/Night</h5>
                                             </div>
                                             <h3 class="card-title text-color-1 fw-bold cormorant-text"><?php echo htmlspecialchars($room['roomName']); ?></h3>
-                                            <p class="card-text dm-sans-text text-secondary"><?php echo htmlspecialchars($room['RoomDescriptions']); ?></p>
+                                            <p class="card-text dm-sans-text text-secondary " style="font-size:13px; text-align: justify;"><?php echo htmlspecialchars($room['RoomDescriptions']); ?></p>
                                             <a href="../../resort/page-3.php?roomID=<?php echo $room['roomID']; ?>&businessInfoID=<?php echo $businessInfoID; ?>" class="btn btn-book fw-bold dm-sans-text rounded-0 py-3 px-4">BOOK NOW</a>
                                         </div>
                                     </div>

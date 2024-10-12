@@ -72,33 +72,6 @@ try {
 
 <body>
     <main class="content">
-        <!-- <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid my-1">
-                <a class="navbar-brand ms-5 text-light" href="#">
-                    <img src="../majayjay-logo.webp" alt="Majayjay Logo" height="50">
-                    <span>Majayjay,Laguna</span>
-                </a>
-                <button class="navbar-toggler shadow" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link text-light btn btn-nav btn-success shadow" href="#">HOME</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light btn btn-nav btn-success shadow" href="#service">SERVICES</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light btn btn-nav btn-success shadow" href="#about">ABOUT</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light btn btn-nav btn-success shadow" href="#contact">CONTACT</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav> -->
 
         <section class="first-page" id="first-page">
             <div class="container-fluid">
@@ -136,7 +109,7 @@ try {
                     <a href="" class="text-decoration-none">
                         <h3 class="nav text-nav text-light me-2 dm-sans-text">Home ></h3>
                     </a>
-                    <a href="../../resort/page-2.php" class="text-decoration-none">
+                    <a href="../../resort/page-2.php?businessInfoID=<?php echo $businessInfoID; ?>" class="text-decoration-none">
                         <h3 class="nav text-nav text-light me-2 dm-sans-text">Accommodations > </h3>
                     </a>
                     <a href="../../resort/page-3.php" class="text-decoration-none">
@@ -151,7 +124,7 @@ try {
                         <div class="m-3">
                             <h5 class="text-dark dm-sans-text fw-bold">For only<span class="text-success"> &#8369 <?php echo number_format(htmlspecialchars($room['roomPrice']), 2, '.', ','); ?></span> /Night</h5>
                             <h1 class="text-color-1 cormorant-text fw-bold"><?php echo htmlspecialchars($room['roomName']); ?></h1>
-                            <p class="text-secondary dm-sans-text"><?php echo htmlspecialchars($room['RoomDescriptions']); ?></p>
+                            <p class="text-secondary dm-sans-text" style="text-align: justify;"><?php echo htmlspecialchars($room['RoomDescriptions']); ?></p>
                         </div>
                         <div class="image-content d-flex justify-content-center">
                             <img src="<?php echo htmlspecialchars($room['image1']); ?>" class="img-fluid" alt="">
@@ -217,28 +190,37 @@ try {
                         </div>
                     </div>
 
-                    <div class="col-xxl-3 col-xl-4 col-lg-5 col-md-8 my-3">
+                    <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-8 my-3">
                         <div class="card bg-color-1 shadow">
                             <div class="card-body">
                                 <div class="row m-1 d-flex justify-content-center">
                                     <h5 class="card-title cormorant-text fs-2 text-light my-3">Your Reservation</h5>
-                                    <div class="col-lg-12">
+
+                                    <div class="col-lg-6 col-sm-6">
                                         <div class="form-floating mb-3">
                                             <input type="date" class="form-control shadow" id="floatingInput" placeholder="" required>
                                             <label for="floatingcin" class="fw-bold dm-sans-text">Check In</label>
                                         </div>
+                                    </div>
+                                    <div class="col-lg-6  col-sm-6">
                                         <div class="form-floating mb-3">
                                             <input type="date" class="form-control shadow" id="floatinginput" placeholder="" required>
                                             <label for="floatingcout" class="fw-bold dm-sans-text">Check Out</label>
                                         </div>
+                                    </div>
+                                    <div class="col-lg-6  col-sm-6">
                                         <div class="form-floating mb-3">
                                             <input type="email" class="form-control shadow" name="" placeholder=" " required>
                                             <label for="" class="dm-sans-text">Email Address</label>
                                         </div>
+                                    </div>
+                                    <div class="col-lg-6  col-sm-6">
                                         <div class="form-floating mb-3">
                                             <input type="number" class="form-control shadow" name="" placeholder=" " required>
                                             <label for="" class="dm-sans-text">Contact Number</label>
                                         </div>
+                                    </div>
+                                    <div class="col-lg-12">
                                         <div class="form-floating mb-3">
                                             <input type="number" class="form-control shadow" id="floatinginput" placeholder="" required>
                                             <label for="floatingcout" class="dm-sans-text">Total No. of Visitors</label>
