@@ -149,7 +149,7 @@ try {
                 <div class="row room-page-info d-flex justify-content-center">
                     <div class="col-xl-5 col-lg-6 col-md-8 my-3">
                         <div class="m-3">
-                            <h5 class="text-dark dm-sans-text fw-bold">For only<span class="text-danger "> &#8369 <?php echo htmlspecialchars($room['roomPrice']); ?></span> /Night</h5>
+                            <h5 class="text-dark dm-sans-text fw-bold">For only<span class="text-success"> &#8369 <?php echo number_format(htmlspecialchars($room['roomPrice']), 2, '.', ','); ?></span> /Night</h5>
                             <h1 class="text-color-1 cormorant-text fw-bold"><?php echo htmlspecialchars($room['roomName']); ?></h1>
                             <p class="text-secondary dm-sans-text"><?php echo htmlspecialchars($room['RoomDescriptions']); ?></p>
                         </div>
@@ -288,7 +288,7 @@ try {
                                     </div>
 
                                     <div class="col-lg-12 d-grid my-4">
-                                        <h5 class="text-light dm-sans-text fw-bold">Price:<span class="text-ligth"> &#8369 <?php echo htmlspecialchars($room['roomPrice']); ?></span> /night</h5>
+                                        <h5 class="text-light dm-sans-text fw-bold">Price:<span class="text-ligth"> &#8369 <?php echo number_format(htmlspecialchars($room['roomPrice']),2, ',', ','); ?></span> /night</h5>
                                         <button class="btn btn-success shadow dm-sans-text fw-bold">BOOK NOW!</button>
                                     </div>
                                 </div>

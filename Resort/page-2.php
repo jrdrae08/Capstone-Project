@@ -150,7 +150,7 @@ try {
                                         </div>
                                         <div class="card-body">
                                             <div class="price-overlay shadow bg-light rounded-5">
-                                                <h5 class="p-3 text-center dm-sans-text fw-bold text-secondary">Price: <span class="text-danger">&#8369 <?php echo htmlspecialchars($room['roomPrice']); ?></span>/Night</h5>
+                                                <h5 class="p-3 text-center dm-sans-text fw-bold text-secondary">Price: <span class="text-danger">&#8369 <?php echo number_format(htmlspecialchars($room['roomPrice']), 2, '.', ','); ?></span>/Night</h5>
                                             </div>
                                             <h3 class="card-title text-color-1 fw-bold cormorant-text"><?php echo htmlspecialchars($room['roomName']); ?></h3>
                                             <p class="card-text dm-sans-text text-secondary"><?php echo htmlspecialchars($room['RoomDescriptions']); ?></p>
