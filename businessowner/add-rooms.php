@@ -5,6 +5,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
     header('Location: ../login.php');
     exit;
 }
+$formData = $_SESSION['form_data'] ?? [];
+$errors = $_SESSION['errors'] ?? [];
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
@@ -53,38 +55,38 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
                                                 <div class="row d-flex justify-content-center align-items-center">
                                                     <div class="col-lg-5 col-md-6 col-sm-12">
                                                         <div class="form-floating mb-3">
-                                                            <input type="text" id="roomname" name="roomname" class="form-control shadow" placeholder="" required>
+                                                            <input type="text" id="roomname" name="roomname" class="form-control shadow" placeholder="" required value="<?php echo htmlspecialchars($formData['roomname'] ?? ''); ?>">
                                                             <label for="roomname">Room name</label>
-                                                            <span id="error-roomname" class="text-danger"></span>
+                                                            <span id="error-roomname" class="text-danger"><?php echo $errors['roomname'] ?? ''; ?></span>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-5 col-md-6 col-sm-12">
                                                         <div class="form-floating mb-3">
-                                                            <input type="number" id="roomprice" name="roomprice" class="form-control shadow" placeholder="" required>
+                                                            <input type="number" id="roomprice" name="roomprice" class="form-control shadow" placeholder="" required value="<?php echo htmlspecialchars($formData['roomprice'] ?? ''); ?>">
                                                             <label for="roomprice">Price</label>
-                                                            <span id="error-roomprice" class="text-danger"></span>
+                                                            <span id="error-roomprice" class="text-danger"><?php echo $errors['roomprice'] ?? ''; ?></span>
                                                             <span class="badge text-secondary"></span>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-5 col-md-6 col-sm-12">
                                                         <div class="form-floating mb-3">
-                                                            <input type="number" id="adultmax" name="adultmax" class="form-control shadow" placeholder="" required>
+                                                            <input type="number" id="adultmax" name="adultmax" class="form-control shadow" placeholder="" required value="<?php echo htmlspecialchars($formData['adultmax'] ?? ''); ?>">
                                                             <label for="adultmax">Adult (Max.)</label>
-                                                            <span id="error-adultmax" class="text-danger"></span>
+                                                            <span id="error-adultmax" class="text-danger"><?php echo $errors['adultmax'] ?? ''; ?></span>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-5 col-md-6 col-sm-12">
                                                         <div class="form-floating mb-3">
-                                                            <input type="number" id="childrenmax" name="childrenmax" class="form-control shadow" placeholder="" required>
+                                                            <input type="number" id="childrenmax" name="childrenmax" class="form-control shadow" placeholder="" required value="<?php echo htmlspecialchars($formData['childrenmax'] ?? ''); ?>">
                                                             <label for="childrenmax">Children (Max.)</label>
-                                                            <span id="error-childrenmax" class="text-danger"></span>
+                                                            <span id="error-childrenmax" class="text-danger"><?php echo $errors['childrenmax'] ?? ''; ?></span>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-10 mb-3">
                                                         <div class="form-floating">
-                                                            <textarea id="roomdesc" name="roomdesc" class="form-control shadow" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" required></textarea>
+                                                            <textarea id="roomdesc" name="roomdesc" class="form-control shadow" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" required><?php echo htmlspecialchars($formData['roomdesc'] ?? ''); ?></textarea>
                                                             <label for="roomdesc">Room Descriptions</label>
-                                                            <span id="error-roomdesc" class="text-danger"></span>
+                                                            <span id="error-roomdesc" class="text-danger"><?php echo $errors['roomdesc'] ?? ''; ?></span>
                                                         </div>
                                                     </div>
 
@@ -137,66 +139,18 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
                                                         <i class="bi bi-plus-circle fs-3" id="add-image-icon"></i>
                                                         <span class="ms-2">Click this button to add image (maximum of 6)</span>
                                                     </div>
-                                                    <div class="col-lg-4 col-md-6 mb-3 text-center image-input-section" style="display: none;">
-                                                        <div class="d-flex justify-content-end">
-                                                            <i class="bi bi-x-circle remove-image-icon"></i>
+                                                    <?php for ($i = 1; $i <= 6; $i++): ?>
+                                                        <div class="col-lg-4 col-md-6 mb-3 text-center image-input-section" style="display: <?php echo isset($images["image$i"]) ? 'block' : 'none'; ?>;">
+                                                            <div class="d-flex justify-content-end">
+                                                                <i class="bi bi-x-circle remove-image-icon"></i>
+                                                            </div>
+                                                            <p>Image <?php echo $i; ?></p>
+                                                            <input name="image<?php echo $i; ?>" type="file" id="room-image-input-<?php echo $i; ?>" style="display: none;" accept="image/*" onchange="uploadImage('room-image-input-<?php echo $i; ?>', 'room-image-<?php echo $i; ?>')" value="">
+                                                            <label for="room-image-input-<?php echo $i; ?>" class="image-container">
+                                                                <img src="<?php echo isset($images["image$i"]) ? htmlspecialchars($images["image$i"]) : '../img/general-img/insert.png'; ?>" class="rounded img-fluid shadow border" alt="Room Image" id="room-image-<?php echo $i; ?>">
+                                                            </label>
                                                         </div>
-                                                        <p>Image 1</p>
-                                                        <input name="image1" type="file" id="room-image-input-1" style="display: none;" accept="image/*" onchange="uploadImage('room-image-input-1', 'room-image-1')" value="">
-                                                        <label for="room-image-input-1" class="image-container">
-                                                            <img src="../img/general-img/insert.png" class="rounded img-fluid shadow border" alt="Room Image" id="room-image-1">
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-lg-4 col-md-6 mb-3 text-center image-input-section" style="display: none;">
-                                                        <div class="d-flex justify-content-end">
-                                                            <i class="bi bi-x-circle remove-image-icon"></i>
-                                                        </div>
-                                                        <p>Image 2</p>
-                                                        <input name="image2" type="file" id="room-image-input-2" style="display: none;" accept="image/*" onchange="uploadImage('room-image-input-2', 'room-image-2')" value="">
-                                                        <label for="room-image-input-2" class="image-container">
-                                                            <img src="../img/general-img/insert.png" class="rounded img-fluid shadow border" alt="Room Image" id="room-image-2">
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-lg-4 col-md-6 mb-3 text-center image-input-section" style="display: none;">
-                                                        <div class="d-flex justify-content-end">
-                                                            <i class="bi bi-x-circle remove-image-icon"></i>
-                                                        </div>
-                                                        <p>Image 3</p>
-                                                        <input name="image3" type="file" id="room-image-input-3" style="display: none;" accept="image/*" onchange="uploadImage('room-image-input-3', 'room-image-3')" value="">
-                                                        <label for="room-image-input-3" class="image-container">
-                                                            <img src="../img/general-img/insert.png" class="rounded img-fluid shadow border" alt="Room Image" id="room-image-3">
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-lg-4 col-md-6 mb-3 text-center image-input-section" style="display: none;">
-                                                        <div class="d-flex justify-content-end">
-                                                            <i class="bi bi-x-circle remove-image-icon"></i>
-                                                        </div>
-                                                        <p>Image 4</p>
-                                                        <input name="image4" type="file" id="room-image-input-4" style="display: none;" accept="image/*" onchange="uploadImage('room-image-input-4', 'room-image-4')" value="">
-                                                        <label for="room-image-input-4" class="image-container">
-                                                            <img src="../img/general-img/insert.png" class="rounded img-fluid shadow border" alt="Room Image" id="room-image-4">
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-lg-4 col-md-6 mb-3 text-center image-input-section" style="display: none;">
-                                                        <div class="d-flex justify-content-end">
-                                                            <i class="bi bi-x-circle remove-image-icon"></i>
-                                                        </div>
-                                                        <p>Image 5</p>
-                                                        <input name="image5" type="file" id="room-image-input-5" style="display: none;" accept="image/*" onchange="uploadImage('room-image-input-5', 'room-image-5')" value="">
-                                                        <label for="room-image-input-5" class="image-container">
-                                                            <img src="../img/general-img/insert.png" class="rounded img-fluid shadow border" alt="Room Image" id="room-image-5">
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-lg-4 col-md-6 mb-3 text-center image-input-section" style="display: none;">
-                                                        <div class="d-flex justify-content-end">
-                                                            <i class="bi bi-x-circle remove-image-icon"></i>
-                                                        </div>
-                                                        <p>Image 6</p>
-                                                        <input name="image6" type="file" id="room-image-input-6" style="display: none;" accept="image/*" onchange="uploadImage('room-image-input-6', 'room-image-6')" value="">
-                                                        <label for="room-image-input-6" class="image-container">
-                                                            <img src="../img/general-img/insert.png" class="rounded img-fluid shadow border" alt="Room Image" id="room-image-6">
-                                                        </label>
-                                                    </div>
+                                                    <?php endfor; ?>
                                                 </div>
                                             </div>
 
@@ -227,29 +181,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
         <script src="../js/businessowner.js"></script>
 
         <script>
-            //adding image and removing image
-            document.addEventListener('DOMContentLoaded', function() {
-                const addImageIcon = document.getElementById('add-image-icon');
-                const imageInputSections = document.querySelectorAll('.image-input-section');
-                const removeImageIcons = document.querySelectorAll('.remove-image-icon');
-
-                let currentIndex = 0;
-
-                addImageIcon.addEventListener('click', function() {
-                    if (currentIndex < imageInputSections.length) {
-                        imageInputSections[currentIndex].style.display = 'block';
-                        currentIndex++;
-                    }
-                });
-
-                removeImageIcons.forEach((icon, index) => {
-                    icon.addEventListener('click', function() {
-                        imageInputSections[index].style.display = 'none';
-                        currentIndex--;
-                    });
-                });
-            });
-            //ending adding image and removing image
             document.addEventListener('DOMContentLoaded', () => {
                 const notyf = new Notyf({
                     duration: 30000,
@@ -266,14 +197,39 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
                 <?php endif; ?>
 
                 <?php if (isset($_SESSION['errors'])): ?>
-                    <?php foreach ($_SESSION['errors'] as $error): ?>
+                    <?php foreach ($errors as $error): ?>
                         console.log('Error message:', '<?php echo $error['message']; ?>');
                         notyf.error('<?php echo $error['message']; ?>');
                     <?php endforeach; ?>
                     <?php unset($_SESSION['errors']); ?>
                 <?php endif; ?>
+
+                const sessionImages = JSON.parse(document.getElementById('session-images').value);
+                const imageInputSections = document.querySelectorAll('.image-input-section');
+                imageInputSections.forEach((section, index) => {
+                    if (sessionImages[`image${index + 1}`]) {
+                        section.style.display = 'block';
+                    }
+                });
+
+                document.getElementById('add-image-icon').addEventListener('click', () => {
+                    const hiddenSections = Array.from(imageInputSections).filter(section => section.style.display === 'none');
+                    if (hiddenSections.length > 0) {
+                        hiddenSections[0].style.display = 'block';
+                    }
+                });
+
+                document.querySelectorAll('.remove-image-icon').forEach((icon, index) => {
+                    icon.addEventListener('click', () => {
+                        const section = imageInputSections[index];
+                        section.style.display = 'none';
+                        section.querySelector('input[type="file"]').value = '';
+                        section.querySelector('img').src = '../img/general-img/insert.png';
+                    });
+                });
             });
         </script>
+        
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 // Check if there are errors or form data in session storage
@@ -409,6 +365,31 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
                     const modalElement = document.querySelector('#confirmationModal');
                     const modalInstance = bootstrap.Modal.getInstance(modalElement);
                     modalInstance.hide();
+                });
+            });
+        </script>
+
+        <script>
+            //adding image and removing image
+            document.addEventListener('DOMContentLoaded', function() {
+                const addImageIcon = document.getElementById('add-image-icon');
+                const imageInputSections = document.querySelectorAll('.image-input-section');
+                const removeImageIcons = document.querySelectorAll('.remove-image-icon');
+
+                let currentIndex = 0;
+
+                addImageIcon.addEventListener('click', function() {
+                    if (currentIndex < imageInputSections.length) {
+                        imageInputSections[currentIndex].style.display = 'block';
+                        currentIndex++;
+                    }
+                });
+
+                removeImageIcons.forEach((icon, index) => {
+                    icon.addEventListener('click', function() {
+                        imageInputSections[index].style.display = 'none';
+                        currentIndex--;
+                    });
                 });
             });
         </script>

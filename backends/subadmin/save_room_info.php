@@ -1,5 +1,5 @@
 <?php
-// Include the database connection
+// save_room_info.php - Save room information to the database
 include '../../includes/db.php';
 
 // Start the session at the beginning
