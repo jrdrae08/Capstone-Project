@@ -361,38 +361,27 @@
                                                          var dateStr = d.toISOString().split('T')[0];
                                                          var dateObj = new Date(dateStr);
 
-                                                         if (dateObj.getFullYear() >= 2025 ||
-                                                             (dateObj.getFullYear() === currentYear && (dateObj.getMonth() >= 10 || dateObj.getMonth() <= 0))) {
-                                                             // November, December, January 2025, and beyond
+                                                         if (dateObj < today) {
                                                              events.push({
                                                                  start: dateStr,
                                                                  end: dateStr,
                                                                  display: 'background',
-                                                                 backgroundColor: '#28a745' // Green for specified months and years
+                                                                 backgroundColor: '#d3d3d3' // Past dates
                                                              });
-                                                         } else if (isInCurrentMonth(dateStr)) {
-                                                             if (dateObj < today) {
-                                                                 events.push({
-                                                                     start: dateStr,
-                                                                     end: dateStr,
-                                                                     display: 'background',
-                                                                     backgroundColor: '#d3d3d3'
-                                                                 });
-                                                             } else if (bookedDates.includes(dateStr)) {
-                                                                 events.push({
-                                                                     start: dateStr,
-                                                                     end: dateStr,
-                                                                     display: 'background',
-                                                                     backgroundColor: '#ff9f89'
-                                                                 });
-                                                             } else {
-                                                                 events.push({
-                                                                     start: dateStr,
-                                                                     end: dateStr,
-                                                                     display: 'background',
-                                                                     backgroundColor: '#28a745'
-                                                                 });
-                                                             }
+                                                         } else if (bookedDates.includes(dateStr)) {
+                                                             events.push({
+                                                                 start: dateStr,
+                                                                 end: dateStr,
+                                                                 display: 'background',
+                                                                 backgroundColor: '#ff9f89' // Booked dates
+                                                             });
+                                                         } else {
+                                                             events.push({
+                                                                 start: dateStr,
+                                                                 end: dateStr,
+                                                                 display: 'background',
+                                                                 backgroundColor: '#28a745' // Available dates
+                                                             });
                                                          }
                                                      }
                                                      calendar.removeAllEvents();
