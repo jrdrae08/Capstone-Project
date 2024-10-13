@@ -115,7 +115,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
                                             });
 
                                             function fetchReservations() {
-                                                fetch('../../backends/subadmin/fetch_reservations.php')
+                                                fetch('../../backends/subadmin/fetch_new_reservations.php')
                                                     .then(response => response.json())
                                                     .then(data => {
                                                         if (data.status === 'success') {
