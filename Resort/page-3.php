@@ -324,11 +324,32 @@
                                      <div id="calendar"></div>
                                  </div>
                              </div>
+
+                             <style>
+                                 #calendar {
+                                     max-width: 100%;
+                                     margin: 0 auto;
+                                 }
+
+                                 .card {
+                                     margin: 20px;
+                                 }
+
+                                 @media (max-width: 768px) {
+                                     .card {
+                                         margin: 10px;
+                                     }
+
+                                     .card-body {
+                                         padding: 10px;
+                                     }
+                                 }
+                             </style>
+
                              <script>
                                  document.addEventListener('DOMContentLoaded', function() {
                                      var roomID = <?php echo $roomID; ?>;
 
-                                     // Fetch the booked dates
                                      fetch('../../backends/subadmin/fetch_booked_dates.php', {
                                              method: 'POST',
                                              headers: {
@@ -342,18 +363,51 @@
                                          .then(data => {
                                              var bookedDates = data.bookedDates;
 
-                                             // Initialize the calendar
                                              var calendarEl = document.getElementById('calendar');
                                              var calendar = new FullCalendar.Calendar(calendarEl, {
                                                  initialView: 'dayGridMonth',
-                                                 events: bookedDates.map(function(date) {
-                                                     return {
-                                                         start: date,
-                                                         end: date,
-                                                         display: 'background',
-                                                         backgroundColor: '#ff9f89'
-                                                     };
-                                                 })
+                                                 datesSet: function(info) {
+                                                     var events = [];
+                                                     var today = new Date();
+                                                     var currentMonth = today.getMonth();
+                                                     var currentYear = today.getFullYear();
+
+                                                     function isInCurrentMonth(date) {
+                                                         var dateObj = new Date(date);
+                                                         return dateObj.getMonth() === currentMonth && dateObj.getFullYear() === currentYear;
+                                                     }
+
+                                                     for (var d = new Date(info.start); d <= new Date(info.end); d.setDate(d.getDate() + 1)) {
+                                                         var dateStr = d.toISOString().split('T')[0];
+                                                         if (isInCurrentMonth(dateStr)) {
+                                                             var dateObj = new Date(dateStr);
+                                                             if (dateObj < today) {
+                                                                 events.push({
+                                                                     start: dateStr,
+                                                                     end: dateStr,
+                                                                     display: 'background',
+                                                                     backgroundColor: '#d3d3d3'
+                                                                 });
+                                                             } else if (bookedDates.includes(dateStr)) {
+                                                                 events.push({
+                                                                     start: dateStr,
+                                                                     end: dateStr,
+                                                                     display: 'background',
+                                                                     backgroundColor: '#ff9f89'
+                                                                 });
+                                                             } else {
+                                                                 events.push({
+                                                                     start: dateStr,
+                                                                     end: dateStr,
+                                                                     display: 'background',
+                                                                     backgroundColor: '#28a745'
+                                                                 });
+                                                             }
+                                                         }
+                                                     }
+                                                     calendar.removeAllEvents();
+                                                     calendar.addEventSource(events);
+                                                 }
                                              });
 
                                              calendar.render();
