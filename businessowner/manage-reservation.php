@@ -271,28 +271,101 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
+                                                        <th scope="col">Time Booked</th>
                                                         <th scope="col">Room Name</th>
-                                                        <th scope="col">Time In</th>
-                                                        <th scope="col">Time Out</th>
                                                         <th scope="col">Customer Name</th>
                                                         <th scope="col">Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Room 5</td>
-                                                        <td>01:00PM 11/26/24</td>
-                                                        <td>01:00PM 11/28/24</td>
-                                                        <td>John Angel Manalo</td>
-                                                        <th>
-
-                                                            <button class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#viewroom"><i class="bi bi-eye"></i></button>
-                                                            <button class="btn btn-success m-1"><i class="bi bi-check-lg"></i></button>
-                                                        </th>
-                                                    </tr>
+                                                <tbody id="upcoming-reservations">
+                                                    <!-- Data will be populated here by JavaScript -->
                                                 </tbody>
                                             </table>
                                         </div>
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function() {
+                                                fetchUpcomingReservations();
+                                            });
+
+                                            function fetchUpcomingReservations() {
+                                                fetch('../../backends/subadmin/fetch_upcoming_reservations.php')
+                                                    .then(response => response.json())
+                                                    .then(data => {
+                                                        if (data.status === 'success') {
+                                                            const reservations = data.data;
+                                                            const tbody = document.getElementById('upcoming-reservations');
+                                                            tbody.innerHTML = '';
+
+                                                            reservations.forEach(reservation => {
+                                                                const tr = document.createElement('tr');
+                                                                tr.innerHTML = `
+                            <td>${formatDateTime(reservation.datetime)}</td>
+                            <td>${reservation.roomName}</td>
+                            <td>${reservation.fullname}</td>
+                            <th>
+                                <button class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#viewroom" onclick="fetchReservationDetails(${reservation.revID})"><i class="bi bi-eye"></i></button>
+                                <button class="btn btn-success m-1"><i class="bi bi-check-lg"></i></button>
+                                <button class="btn btn-danger m-1"><i class="bi bi-x-lg"></i></button>
+                            </th>
+                        `;
+                                                                tbody.appendChild(tr);
+                                                            });
+                                                        } else {
+                                                            console.error(data.message);
+                                                        }
+                                                    })
+                                                    .catch(error => console.error('Error fetching reservations:', error));
+                                            }
+
+                                            function fetchReservationDetails(revID) {
+                                                console.log(`Fetching details for reservation ID: ${revID}`);
+                                                fetch(`../../backends/subadmin/fetch_reservation_details.php?revID=${revID}`)
+                                                    .then(response => response.json())
+                                                    .then(data => {
+                                                        console.log(data); // Log the response data
+                                                        if (data.status === 'success') {
+                                                            const reservation = data.data;
+                                                            document.querySelector('#viewroom .modal-body').innerHTML = `
+                        <p class="mt-2 fs-6 fw-bold text-center">Customer Profile</p>
+                        <ul>
+                            <li>Customer Name: ${reservation.fullname}</li>
+                            <li>Contact Number: ${reservation.regnum}</li>
+                            <li>Email: ${reservation.regemail}</li>
+                            <li>Address: ${reservation.regadd}</li>
+                        </ul>
+                        <p class="mt-2 fs-6 fw-bold text-center">Reservation Information</p>
+                        <ul>
+                            <li>Room name: ${reservation.roomName}</li>
+                            <li>Check In: ${reservation.checkin}</li>
+                            <li>Check Out: ${reservation.departure}</li>
+                        </ul>
+                        <div class="row">
+                            <div class="col-md-12 mb-2 text-center">
+                                <p>Total visitors: ${parseInt(reservation.numadult, 10) + parseInt(reservation.numchild, 10)}</p>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-md-6 mb-2">
+                                    <p>Males: ${reservation.nummale}</p>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <p>Females: ${reservation.numfemale}</p>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <p>Adults: ${reservation.numadult}</p>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <p>Children: ${reservation.numchild}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                                                        } else {
+                                                            console.error(data.message);
+                                                        }
+                                                    })
+                                                    .catch(error => console.error('Error fetching reservation details:', error));
+                                            }
+                                        </script>
 
                                         <!-- Ongoing -->
                                         <div class="tab-pane fade" id="pills-ongoing" role="tabpanel" aria-labelledby="pills-ongoing-tab" tabindex="0">
