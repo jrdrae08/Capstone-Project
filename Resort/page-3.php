@@ -325,7 +325,6 @@
                                  </div>
                              </div>
 
-
                              <script>
                                  document.addEventListener('DOMContentLoaded', function() {
                                      var roomID = <?php echo $roomID; ?>;
@@ -368,20 +367,23 @@
                                                                  display: 'background',
                                                                  backgroundColor: '#d3d3d3' // Past dates
                                                              });
-                                                         } else if (bookedDates.includes(dateStr)) {
-                                                             events.push({
-                                                                 start: dateStr,
-                                                                 end: dateStr,
-                                                                 display: 'background',
-                                                                 backgroundColor: '#ff9f89' // Booked dates
-                                                             });
                                                          } else {
-                                                             events.push({
-                                                                 start: dateStr,
-                                                                 end: dateStr,
-                                                                 display: 'background',
-                                                                 backgroundColor: '#28a745' // Available dates
-                                                             });
+                                                             var isBooked = bookedDates.some(bookedDate => bookedDate.date === dateStr && bookedDate.status === 'Accepted');
+                                                             if (isBooked) {
+                                                                 events.push({
+                                                                     start: dateStr,
+                                                                     end: dateStr,
+                                                                     display: 'background',
+                                                                     backgroundColor: '#ff9f89' // Booked dates
+                                                                 });
+                                                             } else {
+                                                                 events.push({
+                                                                     start: dateStr,
+                                                                     end: dateStr,
+                                                                     display: 'background',
+                                                                     backgroundColor: '#28a745' // Available dates
+                                                                 });
+                                                             }
                                                          }
                                                      }
                                                      calendar.removeAllEvents();
@@ -617,7 +619,9 @@
                      const today = new Date();
                      today.setHours(0, 0, 0, 0); // Set to the beginning of today
 
-                     if (date < today || bookedDates.indexOf(dateString) !== -1) {
+                     const isBooked = bookedDates.some(bookedDate => bookedDate.date === dateString && bookedDate.status === 'Accepted');
+
+                     if (date < today || isBooked) {
                          return [false, 'booked', 'Unavailable'];
                      }
                      return [true, ''];
@@ -662,7 +666,6 @@
          });
      });
  </script>
-
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>

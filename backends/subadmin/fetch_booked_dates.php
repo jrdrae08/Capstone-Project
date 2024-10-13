@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   if ($roomID > 0) {
     $stmt = $pdo->prepare("
-            SELECT checkin, departure 
+            SELECT checkin, departure, status 
             FROM reservations 
             WHERE roomID = :roomID
         ");
@@ -26,7 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       );
 
       foreach ($period as $date) {
-        $bookedDates[] = $date->format('Y-m-d');
+        $bookedDates[] = [
+          'date' => $date->format('Y-m-d'),
+          'status' => $reservation['status']
+        ];
       }
     }
 

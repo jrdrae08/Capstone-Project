@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Fetch the reservation details
     // Assuming your roominfotable table has roomID as the primary key and roomName as a column
     $stmt = $pdo->prepare("
-SELECT r.roomName, res.checkin, res.departure, res.fullname, res.regemail
+SELECT r.roomName, res.checkin, res.departure, res.fullname, res.regemail, res.referenceNum
 FROM reservations AS res
 JOIN roominfotable AS r ON res.roomID = r.roomID
 WHERE res.revID = :revID
@@ -82,11 +82,17 @@ function sendEmailNotification($reservation, $status)
         </head>
         <body>
             <p>Dear {$reservation['fullname']},</p>
-            <p>Your reservation for room <strong>{$reservation['roomName']}</strong> has been Approved</strong>.</p>
-            <p>Check-in Date: {$reservation['checkin']}</p>
-            <p>Check-out Date: {$reservation['departure']}</p>
-            <p>Make sure that you check in on time</p>
+            <p>We are pleased to inform you that your reservation for the room <strong>{$reservation['roomName']}</strong> has been <strong>{$status}</strong>.</p>
+            <p>Here are the details of your reservation:</p>
+            <ul>
+                <li><strong>Reference Number:</strong> {$reservation['referenceNum']}</li>
+                <li><strong>Check-in Date:</strong> {$reservation['checkin']}</li>
+                <li><strong>Check-out Date:</strong> {$reservation['departure']}</li>
+            </ul>
+            <p>Please ensure that you check in on time. If you have any questions or need further assistance, feel free to contact us.</p>
             <p>Thank you for choosing our service.</p>
+            <p>Best regards,</p>
+            <p>Majayjay Tourist</p>
         </body>
         </html>
     ";
