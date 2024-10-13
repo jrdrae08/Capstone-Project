@@ -318,33 +318,13 @@
                              </div>
                          </form>
                          <div>
-                             <div class="card">
-                                 <div class="card-body">
+                             <div class="shadow p-3 text-dark">
+                                 <div class="">
                                      <h5 class="card-title cormorant-text text-dark">Check Availabilities</h5>
                                      <div id="calendar"></div>
                                  </div>
                              </div>
 
-                             <style>
-                                 #calendar {
-                                     max-width: 100%;
-                                     margin: 0 auto;
-                                 }
-
-                                 .card {
-                                     margin: 20px;
-                                 }
-
-                                 @media (max-width: 768px) {
-                                     .card {
-                                         margin: 10px;
-                                     }
-
-                                     .card-body {
-                                         padding: 10px;
-                                     }
-                                 }
-                             </style>
 
                              <script>
                                  document.addEventListener('DOMContentLoaded', function() {
@@ -379,8 +359,18 @@
 
                                                      for (var d = new Date(info.start); d <= new Date(info.end); d.setDate(d.getDate() + 1)) {
                                                          var dateStr = d.toISOString().split('T')[0];
-                                                         if (isInCurrentMonth(dateStr)) {
-                                                             var dateObj = new Date(dateStr);
+                                                         var dateObj = new Date(dateStr);
+
+                                                         if (dateObj.getFullYear() >= 2025 ||
+                                                             (dateObj.getFullYear() === currentYear && (dateObj.getMonth() >= 10 || dateObj.getMonth() <= 0))) {
+                                                             // November, December, January 2025, and beyond
+                                                             events.push({
+                                                                 start: dateStr,
+                                                                 end: dateStr,
+                                                                 display: 'background',
+                                                                 backgroundColor: '#28a745' // Green for specified months and years
+                                                             });
+                                                         } else if (isInCurrentMonth(dateStr)) {
                                                              if (dateObj < today) {
                                                                  events.push({
                                                                      start: dateStr,
