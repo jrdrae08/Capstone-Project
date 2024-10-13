@@ -77,6 +77,22 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
                                                 </tbody>
                                             </table>
                                         </div>
+
+                                        <!-- view modal -->
+                                        <div class="modal fade" id="viewroom" tabindex="-1" aria-labelledby="viewroomLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="viewroomLabel">Reservation Details</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <!-- Reservation details will be populated here by JavaScript -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <script>
                                             document.addEventListener('DOMContentLoaded', function() {
                                                 fetchReservations();
@@ -94,15 +110,15 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
                                                             reservations.forEach(reservation => {
                                                                 const tr = document.createElement('tr');
                                                                 tr.innerHTML = `
-                                <td>${formatDateTime(reservation.datetime)}</td>
-                                <td>${reservation.roomName}</td>
-                                <td>${reservation.fullname}</td>
-                                <th>
-                                    <button class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#viewroom"><i class="bi bi-eye"></i></button>
-                                    <button class="btn btn-success m-1"><i class="bi bi-check-lg"></i></button>
-                                    <button class="btn btn-danger m-1"><i class="bi bi-x-lg"></i></button>
-                                </th>
-                            `;
+                        <td>${formatDateTime(reservation.datetime)}</td>
+                        <td>${reservation.roomName}</td>
+                        <td>${reservation.fullname}</td>
+                        <th>
+                            <button class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#viewroom" onclick="fetchReservationDetails(${reservation.revID})"><i class="bi bi-eye"></i></button>
+                            <button class="btn btn-success m-1"><i class="bi bi-check-lg"></i></button>
+                            <button class="btn btn-danger m-1"><i class="bi bi-x-lg"></i></button>
+                        </th>
+                    `;
                                                                 tbody.appendChild(tr);
                                                             });
                                                         } else {
@@ -110,6 +126,55 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
                                                         }
                                                     })
                                                     .catch(error => console.error('Error fetching reservations:', error));
+                                            }
+
+                                            function fetchReservationDetails(revID) {
+                                                console.log(`Fetching details for reservation ID: ${revID}`);
+                                                fetch(`../../backends/subadmin/fetch_reservation_details.php?revID=${revID}`)
+                                                    .then(response => response.json())
+                                                    .then(data => {
+                                                        console.log(data); // Log the response data
+                                                        if (data.status === 'success') {
+                                                            const reservation = data.data;
+                                                            document.querySelector('#viewroom .modal-body').innerHTML = `
+                    <p class="mt-2 fs-6 fw-bold text-center">Customer Profile</p>
+                    <ul>
+                        <li>Customer Name: ${reservation.fullname}</li>
+                        <li>Contact Number: ${reservation.regnum}</li>
+                        <li>Email: ${reservation.regemail}</li>
+                        <li>Address: ${reservation.regadd}</li>
+                    </ul>
+                    <p class="mt-2 fs-6 fw-bold text-center">Reservation Information</p>
+                    <ul>
+                        <li>Room name: ${reservation.roomName}</li>
+                        <li>Check In: ${reservation.checkin}</li>
+                        <li>Check Out: ${reservation.departure}</li>
+                    </ul>
+                    <div class="row">
+                        <div class="col-md-12 mb-2 text-center">
+                            <p>Total visitors: ${reservation.numadult + reservation.numchild}</p>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-md-6 mb-2">
+                                <p>Males: ${reservation.nummale}</p>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <p>Females: ${reservation.numfemale}</p>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <p>Adults: ${reservation.numadult}</p>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <p>Children: ${reservation.numchild}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                                                        } else {
+                                                            console.error(data.message);
+                                                        }
+                                                    })
+                                                    .catch(error => console.error('Error fetching reservation details:', error));
                                             }
 
                                             function formatDateTime(datetime) {
@@ -185,52 +250,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
                     </div>
                 </div>
 
-                <!-- view modal -->
-                <div class="modal fade" id="viewroom" tabindex="-1" aria-labelledby="viewroom" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered ">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h2 class="modal-title fs-5" id="exampleModalLabel">Customer Information</h2>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p class="mt-2 fs-6 fw-bold text-center">Customer Profile</p>
-                                <ul>
-                                    <li>Customer Name: </li>
-                                    <li>Contact Number: </li>
-                                    <li>Email: </li>
-                                    <li>Address: </li>
-                                </ul>
-                                <p class="mt-2 fs-6 fw-bold text-center">Reservation Information</p>
-                                <ul>
-                                    <li>Room name: </li>
-                                    <li>Check In: </li>
-                                    <li>Check Out: </li>
-                                </ul>
-                                <div class="row">
-                                    <div class="col-md-12 mb-2 text-center">
-                                        <p>Total visitors: </p>
-                                    </div>
-                                    <div class="row text-center">
-                                        <div class="col-md-6 mb-2">
-                                            <p>Males: </p>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <p>Females: </p>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <p>Adults: </p>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <p>Children: </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
             </main>
 
             <a href="#" class="theme-toggle">

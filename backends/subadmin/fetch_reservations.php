@@ -13,10 +13,11 @@ error_log('BusinessID: ' . $businessInfoID);
 
 try {
   $stmt = $pdo->prepare("
-        SELECT r.datetime, r.fullname, ri.roomName
+        SELECT r.revID, r.datetime, r.fullname, ri.roomName
         FROM reservations r
         JOIN roominfotable ri ON r.roomID = ri.roomID
         WHERE ri.BusinessInfoID = :businessInfoID
+        ORDER BY r.datetime DESC
     ");
   $stmt->execute(['businessInfoID' => $businessInfoID]);
   $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
