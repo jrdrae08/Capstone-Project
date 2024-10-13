@@ -21,7 +21,6 @@ $content = $stmt->fetch(PDO::FETCH_ASSOC);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,800">
-
     <link rel="stylesheet" href="../homepage/homepage.css">
 </head>
 
@@ -31,7 +30,7 @@ $content = $stmt->fetch(PDO::FETCH_ASSOC);
             <div class="container-fluid">
                 <a class="navbar-brand ms-5 text-light" href="#">
                     <img src="../img/general-img/majayjay-logo.webp" alt="Majayjay Logo" height="50">
-                    <span>Majayjay,Laguna</span>
+                    <span class="cormorant-text">Majayjay,Laguna</span>
                 </a>
                 <button class="navbar-toggler shadow" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -39,19 +38,19 @@ $content = $stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link text-light  btn btn-nav btn-success shadow" href="#">HOME</a>
+                            <a class="nav-link text-light  btn btn-nav shadow" href="#">HOME</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light btn btn-nav btn-success shadow" href="#service">SERVICES</a>
+                            <a class="nav-link text-light btn btn-nav shadow" href="#service">SERVICES</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light btn btn-nav btn-success shadow" href="#about">ABOUT</a>
+                            <a class="nav-link text-light btn btn-nav shadow" href="#about">ABOUT</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light btn btn-nav btn-success shadow" href="#contact">CONTACT</a>
+                            <a class="nav-link text-light btn btn-nav shadow" href="#contact">CONTACT</a>
                         </li>
                         <li class="nav-item">
-                            <a href="../user/user_login.php" class="btn btn-login btn-success shadow">
+                            <a href="../login.php" class="btn btn-login text-light shadow">
                                 <i class="bi bi-person-circle me-1"></i>
                                 SIGN IN
                             </a>
@@ -67,7 +66,7 @@ $content = $stmt->fetch(PDO::FETCH_ASSOC);
                     <div class="col-lg-5">
                         <div class="home-header text-center mx-4">
                             <h1 class="display-1 jaro-font">WELCOME TO <br><span class="element poetsen-one-regular"></span></h1>
-                            <p class="fs-5 montserrat-font text-light mx-3"><?= htmlspecialchars($content['description']) ?></p>
+                            <p class="fs-5 montserrat-font text-light mx-3" style=" text-align: justify;"><?= htmlspecialchars($content['description']) ?></p>
                         </div>
                     </div>
                     <div class="col-lg-6 collection m-0 p-0">
@@ -110,10 +109,10 @@ $content = $stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="row d-flex py-5">
                     <div class="col-lg-5 col-sm-12 d-flex justify-content-center align-items-center">
                         <div class="ms-auto px-5 me-0">
-                            <h4 class="text-success fw-bold">DISCOVER</h4>
+                            <h4 class="text-color-1 fw-bold">DISCOVER</h4>
                             <h1 class="text-dark">Our Tourist <br> Destinations</h1>
                             <p class="text-secondary">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla accusantium error voluptas recusandae assumenda sit, modi est amet unde fugiat?</p>
-                            <a href="../user/destination-category.php" class="btn btn-success shadow">View More</a>
+                            <a href="../Resort/page-0.php" class="btn text-light bg-color-1 shadow">View More</a>
                         </div>
 
 
@@ -170,7 +169,7 @@ $content = $stmt->fetch(PDO::FETCH_ASSOC);
                     <div class="col-lg-5 d-flex align-items-center">
                         <div class="row">
                             <div class="col-12">
-                                <h5 class="text-success fw-bold text-start mx-lg-5 mx-sm-0">ABOUT US</h5>
+                                <h5 class="text-color-1 fw-bold text-start mx-lg-5 mx-sm-0">ABOUT US</h5>
                             </div>
                             <div class="col-12">
                                 <p class="about-content text-dark mx-lg-5 mx-sm-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente,
@@ -181,7 +180,7 @@ $content = $stmt->fetch(PDO::FETCH_ASSOC);
                                     nisi sequi tempore quisquam earum architecto nobis modi officiis provident ipsam mollitia blanditiis laboriosam consectetur similique accusantium!</p>
                             </div>
                             <div class="col-12 text-center ">
-                                <a href="#contact" class="btn btn-success text-light shadow">Get in Touch</a>
+                                <a href="#contact" class="btn bg-color-1 text-light shadow">Get in Touch</a>
                             </div>
                         </div>
                     </div>
@@ -191,7 +190,7 @@ $content = $stmt->fetch(PDO::FETCH_ASSOC);
 
         <section id="service" class="service-container">
             <div class="container-fluid p-5">
-                <h5 class="text-center text-success fw-bold">OUR SERVICES</h5>
+                <h5 class="text-center text-color-1 fw-bold">OUR SERVICES</h5>
                 <div class="service-cards d-flex justify-content-center align-items-center">
                     <div class="row">
                         <div class="col-lg-6">
@@ -199,7 +198,7 @@ $content = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <div class="card mx-3 mb-3 rounded-0 shadow" style="width: 18rem;">
                                     <img src="../img/general-img/majayjay-church.jpg" class="card-img-top rounded-0 " alt="...">
                                     <div class="card-body">
-                                        <p class="text-success text-start fw-bold">Business Registration ></p>
+                                        <p class="text-color-1 text-start fw-bold">Business Registration ></p>
                                         <p class="card-text text-dark text-start">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                     </div>
                                 </div>
@@ -207,11 +206,11 @@ $content = $stmt->fetch(PDO::FETCH_ASSOC);
                         </div>
 
                         <div class="col-lg-6 mb-sm-3">
-                            <a href="" class="text-decoration-none">
+                            <a href="../Resort/page-0.php" class="text-decoration-none">
                                 <div class="card mx-3 rounded-0 shadow" style="width: 18rem;">
                                     <img src="../img/general-img/majayjay-church.jpg" class="card-img-top rounded-0 " alt="...">
                                     <div class="card-body">
-                                        <p class="text-success text-start fw-bold">Online Reservation ></p>
+                                        <p class="text-color-1 text-start fw-bold">Online Reservation ></p>
                                         <p class="card-text text-dark text-start">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                     </div>
                                 </div>
@@ -223,11 +222,11 @@ $content = $stmt->fetch(PDO::FETCH_ASSOC);
         </section>
 
         <section id="contact" class="contact-container">
-            <div class="container-fluid p-5 bg-success-subtle">
+            <div class="container-fluid p-5 bg-color-6">
                 <div class="row justify-content-evenly">
                     <div class="col-lg-4 col-sm-5 gx-5 mb-4">
                         <div class="col-12">
-                            <h5 class="text-start text-success fw-bold">CONTACT US</h5>
+                            <h5 class="text-start text-color-1 fw-bold">CONTACT US</h5>
                         </div>
                         <div class="col-12">
                             <h3 class="text-start text-dark">Get in touch with us</h3>
@@ -249,7 +248,7 @@ $content = $stmt->fetch(PDO::FETCH_ASSOC);
                             <textarea class="form-control shadow" name="" rows="3"></textarea>
                         </div>
                         <div class="col-12 mb-1 d-grid">
-                            <button class="btn btn-success shadow">Submit</button>
+                            <button class="btn bg-color-1 text-light shadow">Submit</button>
                         </div>
                     </div>
 
@@ -282,7 +281,7 @@ $content = $stmt->fetch(PDO::FETCH_ASSOC);
             </div>
         </section>
 
-        <section class="footer-container bg-success">
+        <section class="footer-container bg-color-1">
             <div class="container-fluid ">
                 <div class="row ">
                     <div class="col-6 text-start mt-2">

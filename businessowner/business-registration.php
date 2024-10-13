@@ -74,7 +74,7 @@ session_start()
                             <div class="card-body">
                                 <div class="d-flex justify-content-between my-2">
                                     <div class="code-link">
-                                        <a href="../businessowner/enter-code.php" class="btn btn-secondary">Rejected Registration</a>
+                                        <a href="../businessowner/enter-code.php" class="btn btn-secondary">Reapply</a>
                                     </div>
                                     <div>
                                         <a href="../homepage/homepage.php"><i class="bi bi-x-lg text-success btn-close"></i></a>

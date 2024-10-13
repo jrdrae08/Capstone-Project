@@ -6,9 +6,9 @@ var typed = new Typed('.element', {
 });
 
 // Change the text color
-document.querySelector('.element').style.color = '#198754';
+document.querySelector('.element').style.color = '#5A7D2C';
 
-  var swiper = new Swiper(".mySwiper", {
+var swiper = new Swiper(".mySwiper", {
     effect: "coverflow",
     grabCursor: true,
     centeredSlides: true,
@@ -29,5 +29,3 @@ document.querySelector('.element').style.color = '#198754';
     },
     loopedSlides: 3, // Ensure this matches or exceeds the number of slides you have
 });
-
-

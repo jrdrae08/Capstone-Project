@@ -303,11 +303,11 @@ body {
     padding: 70px 125px;
 }
 
-.card {
+.card-trans {
     transition: transform 1s ease;
 }
 
-.card:hover {
+.card-trans:hover {
     transform: scale(1.03);
 }
 

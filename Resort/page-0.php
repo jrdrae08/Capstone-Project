@@ -109,7 +109,7 @@ if (isset($_GET['businessInfoID'])) {
                             <?php foreach ($businesses as $business): ?>
                                 <div class="col-md-6 col-12">
                                     <a href="page-1.php?businessInfoID=<?php echo urlencode($business['BusinessInfoID']); ?>" class="text-decoration-none">
-                                        <div class="card mb-3 shadow d-flex justify-content-center">
+                                        <div class="card card-trans mb-3 shadow d-flex justify-content-center">
                                             <div class="row g-0 h-100 w-100">
                                                 <div class="col-xl-7 col-lg-12 col-md-12 col-12">
                                                     <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid img-thumbnail rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
@@ -155,7 +155,7 @@ if (isset($_GET['businessInfoID'])) {
                                 <?php foreach ($resortBusinesses as $business): ?>
                                     <div class="col-md-6 col-12">
                                         <a href="page-1.php?businessInfoID=<?php echo urlencode($business['BusinessInfoID']); ?>" class="text-decoration-none">
-                                            <div class="card mb-3 shadow d-flex justify-content-center">
+                                            <div class="card card-trans mb-3 shadow d-flex justify-content-center">
                                                 <div class="row g-0 h-100 w-100">
                                                     <div class="col-xl-7 col-lg-12 col-md-12 col-12">
                                                         <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid img-thumbnail rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
@@ -199,7 +199,7 @@ if (isset($_GET['businessInfoID'])) {
                                 <?php foreach ($farmBusinesses as $business): ?>
                                     <div class="col-md-6 col-12">
                                         <a href="page-1.php?businessInfoID=<?php echo urlencode($business['BusinessInfoID']); ?>" class="text-decoration-none">
-                                            <div class="card mb-3 shadow d-flex justify-content-center">
+                                            <div class="card card-trans mb-3 shadow d-flex justify-content-center">
                                                 <div class="row g-0 h-100 w-100">
                                                     <div class="col-xl-7 col-lg-12 col-md-12 col-12">
                                                         <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid img-thumbnail rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">
@@ -243,7 +243,7 @@ if (isset($_GET['businessInfoID'])) {
                                 <?php foreach ($fallsBusinesses as $business): ?>
                                     <div class="col-md-6 col-12">
                                         <a href="page-1.php?businessInfoID=<?php echo urlencode($business['BusinessInfoID']); ?>" class="text-decoration-none">
-                                            <div class="card mb-3 shadow d-flex justify-content-center">
+                                            <div class="card card-trans mb-3 shadow d-flex justify-content-center">
                                                 <div class="row g-0 h-100 w-100">
                                                     <div class="col-xl-7 col-lg-12 col-md-12 col-12">
                                                         <img src="../../businessowner/businessmediacategory/<?php echo htmlspecialchars($business['Thumbnail']); ?>" class="img-fluid img-thumbnail rounded-start" alt="Business Image" style="object-fit: cover; height: 290px; width: 100%;">

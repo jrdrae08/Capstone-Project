@@ -144,7 +144,7 @@ try {
                             <h1 class="text-color-1 cormorant-text fw-bold">Rooms:</h1>
                             <?php foreach ($rooms as $room): ?>
                                 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10 my-4 d-flex justify-content-center">
-                                    <div class="card shadow custom-card-height rounded-0 overflow-hidden">
+                                    <div class="card card-trans shadow custom-card-height rounded-0 overflow-hidden">
                                         <div class="img-container">
                                             <img src="<?php echo htmlspecialchars($room['image1']); ?>" class="card-img-top rounded-0" alt="Room Image">
                                         </div>
