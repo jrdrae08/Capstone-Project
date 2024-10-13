@@ -66,40 +66,59 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
                     <div class="card border-0 shadow">
                         <div class="card-header">
                             <h5 class="card-title">
-                                Basic Table
+                                Tourism Visitor Record
                             </h5>
                             <h6 class="card-subtitle text-muted">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ducimus,
-                                necessitatibus reprehenderit itaque!
+                                Current month: October
                             </h6>
                         </div>
                         <div class="card-body">
-                            <table class="table">
+                            <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
+                                        <th rowspan="3">Day</th>
+                                        <th rowspan="3">Week Day <br>(Mon-Sun) </th>
+                                        <th colspan="9" style="text-align: center;">Philippines</th>
+                                        <th colspan="3" style="text-align: center;">Foreign Country Residence</th>
+                                        <th rowspan="3" style="text-align: center;">Grand Total<br>Number of Visitors</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="3" style="text-align: center;">This City/Municipality</th>
+                                        <th colspan="3" style="text-align: center;">Other City/Municipality</th>
+                                        <th colspan="3" style="text-align: center;">Other Province</th>
+                                        <th colspan="3" style="text-align: center;">Foreign Country</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>Total</th>
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>Total</th>
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>Total</th>
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td colspan="2">Larry the Bird</td>
-                                        <td>@twitter</td>
+                                        <td>1</td>
+                                        <td>Mon</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                 </tbody>
                             </table>
