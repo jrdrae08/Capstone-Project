@@ -16,7 +16,7 @@ try {
         SELECT r.revID, r.datetime, r.fullname, r.numadult, r.numchild, ri.roomName
         FROM reservations r
         JOIN roominfotable ri ON r.roomID = ri.roomID
-        WHERE ri.BusinessInfoID = :businessInfoID
+        WHERE ri.BusinessInfoID = :businessInfoID AND r.status = 'Pending'
         ORDER BY r.datetime DESC
     ");
   $stmt->execute(['businessInfoID' => $businessInfoID]);
