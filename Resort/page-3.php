@@ -61,6 +61,10 @@
         <!-- Notyf connection -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf/notyf.min.css">
         <script src="https://cdn.jsdelivr.net/npm/notyf/notyf.min.js"></script>
+        <!-- External JS -->
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
         <link rel="stylesheet" href="../css/businessowner.css">
         <style>
             body {
@@ -73,6 +77,11 @@
                 background-position: center;
                 background-attachment: fixed;
                 background-repeat: no-repeat;
+            }
+
+            .booked {
+                background-color: green !important;
+                color: white !important;
             }
         </style>
     </head>
@@ -290,14 +299,14 @@
                                             <h5 class="card-title cormorant-text  text-light mt-3">Booking Information</h5>
                                             <div class="col-lg-6 col-sm-6">
                                                 <div class="form-floating mb-3">
-                                                    <input type="date" class="form-control shadow" name="checkin" id="floatingInput" placeholder="" required>
-                                                    <label for="floatingcin" class="fw-bold dm-sans-text">Check In</label>
+                                                    <input type="text" class="form-control shadow" name="checkin" id="checkin" placeholder="" required>
+                                                    <label for="checkin" class="fw-bold dm-sans-text">Check In</label>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6  col-sm-6">
+                                            <div class="col-lg-6 col-sm-6">
                                                 <div class="form-floating mb-3">
-                                                    <input type="date" class="form-control shadow" name="departure" id="floatinginput" placeholder="" required>
-                                                    <label for="floatingcout" class="fw-bold dm-sans-text">Departure</label>
+                                                    <input type="text" class="form-control shadow" name="departure" id="departure" placeholder="" required>
+                                                    <label for="departure" class="fw-bold dm-sans-text">Departure</label>
                                                 </div>
                                             </div>
 
@@ -501,6 +510,117 @@
                 // Close the modal
                 const reservationConfirmationModal = bootstrap.Modal.getInstance(document.getElementById('reservationConfirmationModal'));
                 reservationConfirmationModal.hide();
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const notyf = new Notyf({
+                duration: 30000,
+                position: {
+                    x: 'right',
+                    y: 'top'
+                }
+            });
+
+            const form = document.getElementById('reservationForm');
+            const confirmButton = document.getElementById('confirmReservationButton');
+
+            confirmButton.addEventListener('click', async () => {
+                const formData = new FormData(form);
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    notyf.success(`Reservation successful! Your reference number is: ${result.referenceNum}`);
+                    setTimeout(() => {
+                        location.reload();
+                    }, 3000); // Reload the page after 3 seconds
+                } else if (result.status === 'error') {
+                    notyf.error(result.message);
+                }
+
+                // Close the modal
+                const reservationConfirmationModal = bootstrap.Modal.getInstance(document.getElementById('reservationConfirmationModal'));
+                reservationConfirmationModal.hide();
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            const roomID = <?php echo $roomID; ?>;
+            const notyf = new Notyf({
+                duration: 3000,
+                position: {
+                    x: 'right',
+                    y: 'top'
+                }
+            });
+
+            function fetchBookedDates(roomID) {
+                return $.ajax({
+                    url: '../../backends/subadmin/fetch_booked_dates.php',
+                    method: 'POST',
+                    data: {
+                        roomID: roomID
+                    },
+                    dataType: 'json'
+                });
+            }
+
+            function disableBookedDates(bookedDates) {
+                $("#checkin, #departure").datepicker({
+                    dateFormat: 'yy-mm-dd',
+                    beforeShowDay: function(date) {
+                        const dateString = $.datepicker.formatDate('yy-mm-dd', date);
+                        if (bookedDates.indexOf(dateString) !== -1) {
+                            return [false, 'booked', 'Unavailable'];
+                        }
+                        return [true, ''];
+                    },
+                    onSelect: function(selectedDate) {
+                        const option = this.id === "checkin" ? "minDate" : "maxDate";
+                        const instance = $(this).data("datepicker");
+                        const date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
+                        $("#checkin, #departure").not(this).datepicker("option", option, date);
+                    }
+                });
+            }
+
+            fetchBookedDates(roomID).done(function(response) {
+                if (response.bookedDates) {
+                    disableBookedDates(response.bookedDates);
+                }
+            });
+
+            $("#reservationForm").on('submit', function(event) {
+                event.preventDefault();
+                const formData = $(this).serialize();
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            notyf.success(`Reservation successful! Your reference number is: ${response.referenceNum}`);
+                            setTimeout(() => {
+                                location.reload();
+                            }, 3000); // Reload the page after 3 seconds
+                        } else {
+                            notyf.error(response.message);
+                        }
+                    },
+                    error: function() {
+                        notyf.error('An error occurred. Please try again later.');
+                    }
+                });
             });
         });
     </script>
