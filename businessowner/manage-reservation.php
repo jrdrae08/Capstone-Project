@@ -72,21 +72,58 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
                                                         <th scope="col">Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>11:23AM 11/23/24</td>
-                                                        <td>Room 1</td>
-                                                        <td>John Angel Manalo</td>
-                                                        <th>
-                                                            <button class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#viewroom"><i class="bi bi-eye"></i></button>
-                                                            <button class="btn btn-success m-1"><i class="bi bi-check-lg"></i></button>
-                                                            <button class="btn btn-danger m-1"><i class="bi bi-x-lg"></i></button>
-                                                        </th>
-                                                    </tr>
+                                                <tbody id="upcoming-reservations">
+                                                    <!-- Data will be populated here by JavaScript -->
                                                 </tbody>
                                             </table>
                                         </div>
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function() {
+                                                fetchReservations();
+                                            });
 
+                                            function fetchReservations() {
+                                                fetch('../../backends/subadmin/fetch_reservations.php')
+                                                    .then(response => response.json())
+                                                    .then(data => {
+                                                        if (data.status === 'success') {
+                                                            const reservations = data.data;
+                                                            const tbody = document.getElementById('upcoming-reservations');
+                                                            tbody.innerHTML = '';
+
+                                                            reservations.forEach(reservation => {
+                                                                const tr = document.createElement('tr');
+                                                                tr.innerHTML = `
+                                <td>${formatDateTime(reservation.datetime)}</td>
+                                <td>${reservation.roomName}</td>
+                                <td>${reservation.fullname}</td>
+                                <th>
+                                    <button class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#viewroom"><i class="bi bi-eye"></i></button>
+                                    <button class="btn btn-success m-1"><i class="bi bi-check-lg"></i></button>
+                                    <button class="btn btn-danger m-1"><i class="bi bi-x-lg"></i></button>
+                                </th>
+                            `;
+                                                                tbody.appendChild(tr);
+                                                            });
+                                                        } else {
+                                                            console.error(data.message);
+                                                        }
+                                                    })
+                                                    .catch(error => console.error('Error fetching reservations:', error));
+                                            }
+
+                                            function formatDateTime(datetime) {
+                                                const date = new Date(datetime);
+                                                const options = {
+                                                    hour: '2-digit',
+                                                    minute: '2-digit',
+                                                    hour12: true
+                                                };
+                                                const time = date.toLocaleTimeString('en-US', options);
+                                                const formattedDate = `${time} ${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear().toString().slice(-2)}`;
+                                                return formattedDate;
+                                            }
+                                        </script>
                                         <!-- Ongoing -->
                                         <div class="tab-pane fade" id="pills-ongoing" role="tabpanel" aria-labelledby="pills-ongoing-tab" tabindex="0">
                                             <table class="table table-striped">

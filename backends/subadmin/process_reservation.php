@@ -29,6 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $departure = htmlspecialchars(trim($_POST['departure']));
   $referenceNum = generateReferenceNumber();
 
+  // Set timezone to Asia/Manila
+  date_default_timezone_set('Asia/Manila');
+  $datetime = (new DateTime())->format('Y-m-d H:i:s'); // Current timestamp in DATETIME format
+
   // Validation
   $errors = [];
 
@@ -77,9 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       } else {
         $stmt = $pdo->prepare("
                     INSERT INTO reservations (
-                        roomID, fullname, regadd, regemail, regnum, numadult, numchild, nummale, numfemale, thiscity, othercity, otherprovince, foreigncountry, checkin, departure, referenceNum
+                        roomID, fullname, regadd, regemail, regnum, numadult, numchild, nummale, numfemale, thiscity, othercity, otherprovince, foreigncountry, checkin, departure, referenceNum, datetime
                     ) VALUES (
-                        :roomID, :fullname, :regadd, :regemail, :regnum, :numadult, :numchild, :nummale, :numfemale, :thiscity, :othercity, :otherprovince, :foreigncountry, :checkin, :departure, :referenceNum
+                        :roomID, :fullname, :regadd, :regemail, :regnum, :numadult, :numchild, :nummale, :numfemale, :thiscity, :othercity, :otherprovince, :foreigncountry, :checkin, :departure, :referenceNum, :datetime
                     )
                 ");
         $stmt->execute([
@@ -98,7 +102,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           'foreigncountry' => $foreigncountry,
           'checkin' => $checkin,
           'departure' => $departure,
-          'referenceNum' => $referenceNum
+          'referenceNum' => $referenceNum,
+          'datetime' => $datetime
         ]);
         $response = [
           'status' => 'success',
