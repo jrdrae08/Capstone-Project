@@ -12,7 +12,7 @@
     try {
         // Query to fetch room information based on roomID
         $stmt = $pdo->prepare("
-        SELECT roomID, roomName, roomPrice, RoomDescriptions, image1, image2, image3, image4, image5, image6, BusinessInfoID
+        SELECT roomID, roomName, roomPrice, adultMax, ChildrenMax, RoomDescriptions, image1, image2, image3, image4, image5, image6, BusinessInfoID
         FROM roominfotable
         WHERE roomID = :roomID
     ");
@@ -58,6 +58,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,800">
         <link rel="stylesheet" href="../../resort/new-resort-ui.css">
+        <!-- Notyf connection -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf/notyf.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/notyf/notyf.min.js"></script>
+        <link rel="stylesheet" href="../css/businessowner.css">
         <style>
             body {
                 overflow-x: hidden;
@@ -194,120 +198,117 @@
                         </div>
 
                         <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-8 my-3">
-                            <div class="card bg-color-1 shadow">
-                                <div class="card-body">
-                                    <div class="row m-1 d-flex justify-content-center">
-                                        <h3 class="card-title cormorant-text fs-2 text-light my-3">Your Reservation</h3>
+                            <form id="reservationForm" action="../../backends/subadmin/process_reservation.php" method="POST">
+                                <input type="hidden" name="roomID" value="<?php echo $roomID; ?>">
+                                <div class="card bg-color-1 shadow">
+                                    <div class="card-body">
+                                        <div class="row m-1 d-flex justify-content-center">
+                                            <h3 class="card-title cormorant-text fs-2 text-light my-3">Your Reservation</h3>
 
-                                        <h5 class="card-title cormorant-text  text-light my-3">Personal Information</h5>
-                                        <div class="col-lg-12">
-                                            <div class="form-floating mb-3">
-                                                <input type="text" class="form-control shadow" name=" " placeholder=" " required>
-                                                <label for=" " class="dm-sans-text">Full Name</label>
+                                            <h5 class="card-title cormorant-text  text-light my-3">Personal Information</h5>
+                                            <div class="col-lg-12">
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control shadow" name="fullname" placeholder=" " required>
+                                                    <label for="" class="dm-sans-text">Full Name</label>
+                                                </div>
+
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control shadow" name="regadd" placeholder=" " required>
+                                                    <label for="" class="dm-sans-text">Address (Registrant Address)</label>
+                                                </div>
                                             </div>
 
-                                            <div class="form-floating mb-3">
-                                                <input type="text" class="form-control shadow" name="" placeholder=" " required>
-                                                <label for="" class="dm-sans-text">Address (Registrant Address)</label>
+                                            <div class="col-lg-6 col-sm-6">
+                                                <div class="form-floating mb-3">
+                                                    <input type="email" class="form-control shadow" name="regemail" placeholder=" " required>
+                                                    <label for="" class="dm-sans-text">Email Address</label>
+                                                </div>
                                             </div>
-                                        </div>
+                                            <div class="col-lg-6 col-sm-6">
+                                                <div class="form-floating mb-3">
+                                                    <input type="number" class="form-control shadow" name="regnum" placeholder=" " required>
+                                                    <label for="" class="dm-sans-text">Contact Number</label>
+                                                </div>
+                                            </div>
 
-                                        <div class="col-lg-6 col-sm-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="email" class="form-control shadow" name="" placeholder=" " required>
-                                                <label for="" class="dm-sans-text">Email Address</label>
+                                            <h5 class="card-title cormorant-text  text-light mt-3">Companions' Information</h5>
+                                            <div class="col-6">
+                                                <p class="card-title cormorant-text text-light">Maximum of: <span class="cormorant-text text-light fs-4"><?php echo htmlspecialchars($room['adultMax']); ?></span></p>
+                                                <div class="form-floating mb-3">
+                                                    <input type="number" class="form-control shadow" name="numadult" id="floatinginput" placeholder="">
+                                                    <label for="floatingcout" class="dm-sans-text">No. of Adults</label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6 col-sm-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="number" class="form-control shadow" name="" placeholder=" " required>
-                                                <label for="" class="dm-sans-text">Contact Number</label>
+                                            <div class="col-6">
+                                                <p class="card-title cormorant-text text-light">Maximum of: <span class="cormorant-text text-light fs-4"><?php echo htmlspecialchars($room['ChildrenMax']); ?></span></p>
+                                                <div class="form-floating mb-3">
+                                                    <input type="number" class="form-control shadow" name="numchild" id="floatinginput" placeholder="">
+                                                    <label for="floatingcout" class="dm-sans-text">No. of Children</label>
+                                                </div>
                                             </div>
-                                        </div>
+                                            <div class="col-6">
+                                                <div class="form-floating mb-3">
+                                                    <input type="number" class="form-control shadow" name="nummale" id="floatinginput" placeholder="">
+                                                    <label for="floatingcout" class="dm-sans-text">No. of Males</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-floating mb-3">
+                                                    <input type="number" class="form-control shadow" name="numfemale" id="floatinginput" placeholder="">
+                                                    <label for="floatingcout" class="dm-sans-text">No. of Females</label>
+                                                </div>
+                                            </div>
 
-                                        <h5 class="card-title cormorant-text  text-light mt-3">Companions' Information</h5>
-                                        <div class="col-6">
-                                            <p class="card-title cormorant-text text-light">Maximum of:</p>
-                                            <div class="form-floating mb-3">
-                                                <input type="number" class="form-control shadow" name="" id="floatinginput" placeholder="" required>
-                                                <label for="floatingcout" class="dm-sans-text">No. of Adults</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <p class="card-title cormorant-text text-light">Maximum of:</p>
-                                            <div class="form-floating mb-3">
-                                                <input type="number" class="form-control shadow" name="" id="floatinginput" placeholder="" required>
-                                                <label for="floatingcout" class="dm-sans-text">No. of Children</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="number" class="form-control shadow" name="" id="floatinginput" placeholder="" required>
-                                                <label for="floatingcout" class="dm-sans-text">No. of Males</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="number" class="form-control shadow" name="" id="floatinginput" placeholder="" required>
-                                                <label for="floatingcout" class="dm-sans-text">No. of Females</label>
-                                            </div>
-                                        </div>
 
-                                        <div class="col-lg-12">
-                                            <div class="form-floating mb-3">
-                                                <input type="number" class="form-control shadow" id="floatinginput" placeholder="" required>
-                                                <label for="floatingcout" class="dm-sans-text">Total No. of Visitors/Companions</label>
+                                            <h5 class="card-title cormorant-text  text-light mt-3">Companions' Addresses</h5>
+                                            <p class="card-title cormorant-text text-light">Note: Type the number of citizen(including the registrant) reciding in this: </p>
+                                            <div class="col-6">
+                                                <div class="form-floating mb-3">
+                                                    <input type="number" class="form-control shadow" name="thiscity" id="floatinginput" placeholder="">
+                                                    <label for="floatingcout" class="dm-sans-text">This City/Municipality</label>
+                                                </div>
                                             </div>
-                                        </div>
+                                            <div class="col-6">
+                                                <div class="form-floating mb-3">
+                                                    <input type="number" class="form-control shadow" name="othercity" id="floatinginput" placeholder="">
+                                                    <label for="floatingcout" class="dm-sans-text">Other City/Municipality</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-floating mb-3">
+                                                    <input type="number" class="form-control shadow" name="otherprovince" id="floatinginput" placeholder="">
+                                                    <label for="floatingcout" class="dm-sans-text">Other Province</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-floating mb-3">
+                                                    <input type="number" class="form-control shadow" name="foreigncountry" id="floatinginput" placeholder="">
+                                                    <label for="floatingcout" class="dm-sans-text">Foreign Country</label>
+                                                </div>
+                                            </div>
 
-                                        <h5 class="card-title cormorant-text  text-light mt-3">Companions' Addresses</h5>
-                                        <p class="card-title cormorant-text text-light">Note: Type the number of citizen reciding in this: </p>
-                                        <div class="col-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="number" class="form-control shadow" name="" id="floatinginput" placeholder="" required>
-                                                <label for="floatingcout" class="dm-sans-text">This City/Municipality</label>
+                                            <h5 class="card-title cormorant-text  text-light mt-3">Booking Information</h5>
+                                            <div class="col-lg-6 col-sm-6">
+                                                <div class="form-floating mb-3">
+                                                    <input type="date" class="form-control shadow" name="checkin" id="floatingInput" placeholder="" required>
+                                                    <label for="floatingcin" class="fw-bold dm-sans-text">Check In</label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="number" class="form-control shadow" name="" id="floatinginput" placeholder="" required>
-                                                <label for="floatingcout" class="dm-sans-text">Other City/Municipality</label>
+                                            <div class="col-lg-6  col-sm-6">
+                                                <div class="form-floating mb-3">
+                                                    <input type="date" class="form-control shadow" name="departure" id="floatinginput" placeholder="" required>
+                                                    <label for="floatingcout" class="fw-bold dm-sans-text">Departure</label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="number" class="form-control shadow" name="" id="floatinginput" placeholder="" required>
-                                                <label for="floatingcout" class="dm-sans-text">Other Province</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="number" class="form-control shadow" name="" id="floatinginput" placeholder="" required>
-                                                <label for="floatingcout" class="dm-sans-text">Foreign Country</label>
-                                            </div>
-                                        </div>
 
-                                        <h5 class="card-title cormorant-text  text-light mt-3">Booking Information</h5>
-                                        <div class="col-lg-6 col-sm-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="date" class="form-control shadow" id="floatingInput" placeholder="" required>
-                                                <label for="floatingcin" class="fw-bold dm-sans-text">Check In</label>
+                                            <div class="col-lg-12 d-grid my-4">
+                                                <h5 class="text-light dm-sans-text fw-bold">Price:<span class="text-ligth"> &#8369 <?php echo number_format(htmlspecialchars($room['roomPrice']), 2, '.', ','); ?></span> /night</h5>
+                                                <button type="button" class="btn btn-success shadow dm-sans-text fw-bold" data-bs-toggle="modal" data-bs-target="#reservationConfirmationModal">BOOK NOW!</button>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6  col-sm-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="date" class="form-control shadow" id="floatinginput" placeholder="" required>
-                                                <label for="floatingcout" class="fw-bold dm-sans-text">Check Out</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-12 d-grid my-4">
-                                            <h5 class="text-light dm-sans-text fw-bold">Price:<span class="text-ligth"> &#8369 <?php echo number_format(htmlspecialchars($room['roomPrice']), 2, '.', ','); ?></span> /night</h5>
-                                            <button class="btn btn-success shadow dm-sans-text fw-bold">BOOK NOW!</button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
 
                             <div class="resort-quick-information mt-5">
                                 <h3 class="cormorant-text fw-bold text-color-1">Resort Information</h3>
@@ -447,7 +448,62 @@
 
         </main>
     </body>
+    <!-- Reservation Confirmation Modal -->
+    <div class="modal fade" id="reservationConfirmationModal" tabindex="-1" aria-labelledby="reservationConfirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reservationConfirmationModalLabel">Confirm Reservation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to book this room?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmReservationButton">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const notyf = new Notyf({
+                duration: 30000,
+                position: {
+                    x: 'right',
+                    y: 'top'
+                }
+            });
+
+            const form = document.getElementById('reservationForm');
+            const confirmButton = document.getElementById('confirmReservationButton');
+
+            confirmButton.addEventListener('click', async () => {
+                const formData = new FormData(form);
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    notyf.success(`Reservation successful! Your reference number is: ${result.referenceNum}`);
+                    setTimeout(() => {
+                        location.reload();
+                    }, 3000); // Reload the page after 3 seconds
+                } else if (result.status === 'error') {
+                    notyf.error(result.message);
+                }
+
+                // Close the modal
+                const reservationConfirmationModal = bootstrap.Modal.getInstance(document.getElementById('reservationConfirmationModal'));
+                reservationConfirmationModal.hide();
+            });
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
