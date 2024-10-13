@@ -635,7 +635,10 @@
                  dateFormat: 'yy-mm-dd',
                  beforeShowDay: function(date) {
                      const dateString = $.datepicker.formatDate('yy-mm-dd', date);
-                     if (bookedDates.indexOf(dateString) !== -1) {
+                     const today = new Date();
+                     today.setHours(0, 0, 0, 0); // Set to the beginning of today
+
+                     if (date < today || bookedDates.indexOf(dateString) !== -1) {
                          return [false, 'booked', 'Unavailable'];
                      }
                      return [true, ''];
