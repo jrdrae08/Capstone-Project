@@ -13,7 +13,7 @@ error_log('BusinessID: ' . $businessInfoID);
 
 try {
   $stmt = $pdo->prepare("
-        SELECT r.revID, r.datetime, r.fullname, ri.roomName
+        SELECT r.revID, r.datetime, r.fullname, r.numadult, r.numchild, ri.roomName
         FROM reservations r
         JOIN roominfotable ri ON r.roomID = ri.roomID
         WHERE ri.BusinessInfoID = :businessInfoID

@@ -152,7 +152,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'businessowner') {
                     </ul>
                     <div class="row">
                         <div class="col-md-12 mb-2 text-center">
-                            <p>Total visitors: ${reservation.numadult + reservation.numchild}</p>
+                            <p>Total visitors: ${parseInt(reservation.numadult, 10) + parseInt(reservation.numchild, 10)}</p>
                         </div>
                         <div class="row text-center">
                             <div class="col-md-6 mb-2">
