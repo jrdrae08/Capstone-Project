@@ -65,7 +65,7 @@ if (isset($_GET['message']) && $_GET['message'] == 'success') {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="../css/login.css">
     <title>Change Password</title>
     <?php if (isset($_GET['message']) && $_GET['message'] == 'success') : ?>
         <script>
@@ -83,17 +83,16 @@ if (isset($_GET['message']) && $_GET['message'] == 'success') {
 </head>
 
 <body>
-
     <main>
         <div class="container d-flex justify-content-lg-center align-items-center" style="height: 100vh;">
-            <div class="card text-center shadow" style="width: 700px;">
-                <div class="card-body mx-2">
-                    <div class="row">
-                        <div class="col-lg-6 justify-content-center">
-                            <img src="/image/majayjay-logo.webp" class="mt-4" alt="" height="250" width="250">
+            <div class="card text-center m-2" style="width: 750px;">
+                <div class="card-body">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-lg-6 d-flex justify-content-center align-items-center">
+                            <img src="../img/admin-img/majayjay-logo.webp" class="" alt="" height="250" width="250">
                         </div>
                         <div class="col-lg-6">
-                            <h4 class="my-3">Reset your password</h4>
+                            <h4 class="mt-2 mb-4">Reset your password</h4>
                             <?php if (!empty($message)) : ?>
                                 <div class="alert alert-<?= htmlspecialchars($message_type) ?> alert-dismissible fade show" role="alert">
                                     <?= htmlspecialchars($message) ?>
@@ -101,16 +100,17 @@ if (isset($_GET['message']) && $_GET['message'] == 'success') {
                                 </div>
                             <?php endif; ?>
                             <form action="changepass.php" method="POST">
-                                Password Should be at least 8 characters long and must contain at least one uppercase letter, one lowercase letter, one number, and one special character.
-                                <div class="form-floating mt-4">
-                                    <input type="password" class="form-control shadow border-secondary" id="floatingPassword" name="new_password" placeholder="Password" autocomplete="off" required>
+                                <div class="form-floating my-3">
+                                    <input type="password" class="form-control shadow" id="floatingPassword" name="new_password" placeholder="Password" autocomplete="off" required>
                                     <label for="floatingPassword">New Password</label>
                                 </div>
-                                <div class="form-floating my-3">
-                                    <input type="password" class="form-control shadow border-secondary" id="floatingConfirmPassword" name="confirm_password" placeholder="Confirm Password" autocomplete="off" required>
+                                <div class="form-floating mt-3">
+                                    <input type="password" class="form-control shadow " id="floatingConfirmPassword" name="confirm_password" placeholder="Confirm Password" autocomplete="off" required>
                                     <label for="floatingConfirmPassword">Confirm Password</label>
                                 </div>
-                                <div class="d-grid gap-1 my-4">
+                                <p class="text-secondary mt-2 mx-2" style="text-align:justify; font-size: 13px"> Password Should be at least 8 characters long and must contain at least one uppercase letter, one lowercase letter, one number, and one special character.
+                                </p>
+                                <div class="d-grid gap-1 my-3">
                                     <button type="submit" class="btn btn-success">Confirm</button>
                                 </div>
                             </form>
