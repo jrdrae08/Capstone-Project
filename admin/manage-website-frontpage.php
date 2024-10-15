@@ -119,7 +119,7 @@
                   </div>
                   <div class="col-lg-12 mb-3">
                     <button type="button" class="btn btn-success px-4 me-2" onclick="showSaveModal()" disabled>SAVE</button>
-                    <a href="../businessowner/manage-rooms.php" class="btn btn-secondary">CANCEL</a>
+                    <a href="../admin/dashboard.php" class="btn btn-secondary">CANCEL</a>
                   </div>
                 </div>
               </div>

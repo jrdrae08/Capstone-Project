@@ -35,18 +35,14 @@ function validate_image($file)
   return true;
 }
 
-function validate_content_length($content, $requiredWords, $context)
+function validate_content_length($content, $minWords, $maxWords, $context)
 {
   $wordCount = str_word_count($content);
-  if ($wordCount < $requiredWords) {
-    if ($context == "Description") {
-      throw new Exception("Description content must be at least $requiredWords words.");
-    } else {
-      throw new Exception("$context must be at least $requiredWords words.");
-    }
+  if ($wordCount < $minWords) {
+    throw new Exception("$context must be at least $minWords words.");
   }
-  if ($wordCount > $requiredWords) {
-    throw new Exception("$context must not exceed $requiredWords words.");
+  if ($wordCount > $maxWords) {
+    throw new Exception("$context must not exceed $maxWords words.");
   }
 }
 
@@ -61,10 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sliderTitle3 = validate_input($_POST['slider_title_3']);
     $sliderContent3 = validate_input($_POST['slider_content_3']);
 
-    validate_content_length($description, 50, "Description");
-    validate_content_length($sliderContent1, 25, "Content in Slider 1");
-    validate_content_length($sliderContent2, 25, "Content in Slider 2");
-    validate_content_length($sliderContent3, 25, "Content in Slider 3");
+    validate_content_length($description, 0, 50, "Description");
+    validate_content_length($sliderContent1, 0, 25, "Content in Slider 1");
+    validate_content_length($sliderContent2, 0, 25, "Content in Slider 2");
+    validate_content_length($sliderContent3, 0, 25, "Content in Slider 3");
 
     $sliderImage1 = $_FILES['sliderimage1']['name'] ?? null;
     $sliderImage2 = $_FILES['sliderimage2']['name'] ?? null;

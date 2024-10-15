@@ -201,14 +201,13 @@ try {
                         <script>
                             function myMap() {
                                 var mapProp = {
-                                    center: new google.maps.LatLng(14.1591, 121.4709),
-                                    zoom: 5,
+                                    center: new google.maps.LatLng(14.1591, 121.4709), // Majayjay, Laguna coordinates
+                                    zoom: 12, // Adjust zoom level as needed
                                 };
                                 var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
                             }
                         </script>
-
-                        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
+                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOVYRIgupAurZup5y1PRh8Ismb1A3lLao&callback=myMap"></script>
                         <!-- <img src="../homepage/majayjaymap.PNG" class="mt-4 w-100 h-50 shadow" alt="" style="object-fit: cover;"> -->
                         <div class="row">
                             <div class="col-12">

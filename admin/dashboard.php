@@ -40,89 +40,94 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
             <main class="content px-3 py-2">
                 <div class="container-fluid">
                     <div class="mb-3">
-                        <h4>Admin Dashboard</h4>
+                        <h3>Dashboard</h3>
                     </div>
                     <div class="row">
-                        <div class="col-12 col-md-6 d-flex">
-                            <div class="card flex-fill border-0 illustration shadow">
-                                <div class="card-body p-0 d-flex flex-fill">
-                                    <div class="row g-0 w-100">
-                                        <div class="col-6">
-                                            <div class="p-3 m-1">
-                                                <h4>Welcome Back, Admin</h4>
-                                                <p class="mb-0">Admin Dashboard</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 align-self-end text-end">
-                                            <img src="/image/customer-support.jpg" class="img-fluid illustration-img" alt="">
-                                        </div>
-                                    </div>
+                        <h5>Tourist Reservation</h5>
+                        <div class="col-12 col-md-4 d-flex">
+                            <div class="card flex-fill border-0 new shadow">
+                                <div class="card-body text-center">
+                                    <h5>New</h5>
+                                    <h4> 2</h4>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6 d-flex">
-                            <div class="card flex-fill border-0 shadow">
-                                <div class="card-body py-4">
-                                    <div class="d-flex align-items-start">
-                                        <div class="flex-grow-1">
-                                            <h4 class="mb-2">
-                                                $ 78.00
-                                            </h4>
-                                            <p class="mb-2">
-                                                Total Earnings
-                                            </p>
-                                            <div class="mb-0">
-                                                <span class="badge text-success me-2">
-                                                    +9.0%
-                                                </span>
-                                                <span class="text-muted">
-                                                    Since Last Month
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="col-12 col-md-4 d-flex">
+                            <div class="card flex-fill border-0 ongoing shadow">
+                                <div class="card-body text-center">
+                                    <h5>Ongoing</h5>
+                                    <h4> 6</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 d-flex s">
+                            <div class="card flex-fill border-0 available shadow">
+                                <div class="card-body text-center">
+                                    <h5> Available Rooms</h5>
+                                    <h4>5</h4>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <hr>
                     <!-- Table Element -->
-                    <div class="card shadow border-0 mt-3">
+                    <div class="card border-0 shadow">
                         <div class="card-header">
                             <h5 class="card-title">
-                                Basic Table
+                                Tourism Visitor Record
                             </h5>
                             <h6 class="card-subtitle text-muted">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ducimus,
-                                necessitatibus reprehenderit itaque!
+                                Current month: October
                             </h6>
                         </div>
                         <div class="card-body">
-                            <table class="table">
+                            <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
+                                        <th rowspan="3">Day</th>
+                                        <th rowspan="3">Week Day <br>(Mon-Sun) </th>
+                                        <th colspan="9" style="text-align: center;">Philippines</th>
+                                        <th colspan="3" style="text-align: center;">Foreign Country Residence</th>
+                                        <th rowspan="3" style="text-align: center;">Grand Total<br>Number of Visitors</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="3" style="text-align: center;">This City/Municipality</th>
+                                        <th colspan="3" style="text-align: center;">Other City/Municipality</th>
+                                        <th colspan="3" style="text-align: center;">Other Province</th>
+                                        <th colspan="3" style="text-align: center;">Foreign Country</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>Total</th>
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>Total</th>
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>Total</th>
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td colspan="2">Larry the Bird</td>
-                                        <td>@twitter</td>
+                                        <td>1</td>
+                                        <td>Mon</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                 </tbody>
                             </table>
